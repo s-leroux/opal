@@ -10,6 +10,27 @@ class Array < `Array`
   `Opal.defineProperty(self.$$prototype, '$$is_array', true)`
 
   %x{
+    function spliceGen (list, start, deleteCount) {
+      if (deleteCount <= 0) {
+        return []
+      }
+      var length = list.length
+
+      var deleted = []
+      var lastDeleteIndex = start + deleteCount
+      for (var j = start; j < lastDeleteIndex && j < length; j += 1) {
+        deleted.push(list[j])
+      }
+
+      var i = start
+      for (var k = i + deleteCount, n = length; k < n; i += 1, k += 1) {
+        list[i] = list[k]
+      }
+
+      list.length = i
+      return deleted
+    }
+
     function toArraySubclass(obj, klass) {
       if (klass.$$name === Opal.Array) {
         return obj;
@@ -1533,10 +1554,10 @@ class Array < `Array`
 
     return [] if `self.length === 0`
 
-    if `count > self.length`
-      `self.splice(0, self.length)`
+    if `count >= self.length`
+      `spliceGen(self, 0, self.length)`
     else
-      `self.splice(self.length - count, self.length)`
+      `spliceGen(self, self.length - count, self.length)`
     end
   end
 
