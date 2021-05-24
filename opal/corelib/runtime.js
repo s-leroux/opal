@@ -95,6 +95,7 @@
     '$$is_singleton',
     '$$singleton_of',
     '$$iclass',
+    '$$module',
   ];
 
   Opal.propertySymbols = {};
@@ -1041,7 +1042,7 @@
       var proto = includer.$$prototype, parent = proto, module_iclass = Object.getPrototypeOf(parent);
 
       while (module_iclass != null) {
-        if (isRoot(module_iclass) && module_iclass.$$module === module) {
+        if (isRoot(module_iclass) && module_iclass[Opal.$$module_s] === module) {
           break;
         }
 
@@ -1197,7 +1198,7 @@
     }
 
     $defineProperty(iclass, Opal.$$iclass_s, true);
-    $defineProperty(iclass, '$$module', module);
+    $defineProperty(iclass, Opal.$$module_s, module);
 
     return iclass;
   }
@@ -1273,7 +1274,7 @@
     if (proto.hasOwnProperty('$$dummy')) {
       return;
     } else if (proto.hasOwnProperty(Opal.$$iclass_s)) {
-      return proto.$$module;
+      return proto[Opal.$$module_s];
     } else if (proto.hasOwnProperty('$$class')) {
       return proto.$$class;
     }
