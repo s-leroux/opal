@@ -49,7 +49,7 @@ class Class
     %x{
       var singleton_of = self.$$singleton_of;
 
-      if (singleton_of && singleton_of.$$is_a_module) {
+      if (singleton_of && singleton_of[Opal.$$is_a_module_s]) {
         return #{"#<Class:#{`singleton_of`.name}>"};
       }
       else if (singleton_of) {
