@@ -104,6 +104,7 @@
     '$$cast',
     '$$const',
     '$$included',
+    '$$prepended',
   ];
 
   Opal.propertySymbols = {};
@@ -1103,7 +1104,7 @@
 
     for (var i = 0, length = module_ancestors.length; i < length; i++) {
       var ancestor = module_ancestors[i], iclass = create_iclass(ancestor);
-      $defineProperty(iclass, '$$prepended', true);
+      $defineProperty(iclass, Opal.$$prepended_s, true);
       iclasses.push(iclass);
     }
 
