@@ -281,7 +281,7 @@ class Module
         modules = modules.concat(Opal.ancestors(self));
 
         // Add Object's ancestors if it's a module – modules have no ancestors otherwise
-        if (self.$$is_module) {
+        if (self[Opal.$$is_module_s]) {
           modules = modules.concat([Opal.Object]).concat(Opal.ancestors(Opal.Object));
         }
       }
@@ -409,7 +409,7 @@ class Module
       for (var i = mods.length - 1; i >= 0; i--) {
         var mod = mods[i];
 
-        if (!mod.$$is_module) {
+        if (!mod[Opal.$$is_module_s]) {
           #{raise TypeError, "wrong argument type #{`mod`.class} (expected Module)"};
         }
 
@@ -427,7 +427,7 @@ class Module
 
   def include?(mod)
     %x{
-      if (!mod.$$is_module) {
+      if (!mod[Opal.$$is_module_s]) {
         #{raise TypeError, "wrong argument type #{`mod`.class} (expected Module)"};
       }
 
@@ -600,7 +600,7 @@ class Module
       for (var i = mods.length - 1; i >= 0; i--) {
         var mod = mods[i];
 
-        if (!mod.$$is_module) {
+        if (!mod[Opal.$$is_module_s]) {
           #{raise TypeError, "wrong argument type #{`mod`.class} (expected Module)"};
         }
 
@@ -614,7 +614,7 @@ class Module
 
   def prepend_features(prepender)
     %x{
-      if (!self.$$is_module) {
+      if (!self[Opal.$$is_module_s]) {
         #{raise TypeError, "wrong argument type #{self.class} (expected Module)"};
       }
 
@@ -631,7 +631,7 @@ class Module
   end
 
   def to_s
-    `Opal.Module.$name.call(self)` || "#<#{`self.$$is_module ? 'Module' : 'Class'`}:0x#{__id__.to_s(16)}>"
+    `Opal.Module.$name.call(self)` || "#<#{`self[Opal.$$is_module_s] ? 'Module' : 'Class'`}:0x#{__id__.to_s(16)}>"
   end
 
   def undef_method(*names)

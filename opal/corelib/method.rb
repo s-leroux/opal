@@ -82,7 +82,7 @@ class UnboundMethod
 
   def bind(object)
     %x{
-      if (#{@owner}.$$is_module || Opal.is_a(#{object}, #{@owner})) {
+      if (#{@owner}[Opal.$$is_module_s] || Opal.is_a(#{object}, #{@owner})) {
         return #{Method.new(object, @owner, @method, @name)};
       }
       else {

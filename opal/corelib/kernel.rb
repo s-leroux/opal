@@ -217,7 +217,7 @@ module Kernel
       for (var i = mods.length - 1; i >= 0; i--) {
         var mod = mods[i];
 
-        if (!mod.$$is_module) {
+        if (!mod[Opal.$$is_module_s]) {
           #{raise TypeError, "wrong argument type #{`mod`.class} (expected Module)"};
         }
 
@@ -243,7 +243,7 @@ module Kernel
 
   def instance_of?(klass)
     %x{
-      if (!klass[Opal.$$is_class_s] && !klass.$$is_module) {
+      if (!klass[Opal.$$is_class_s] && !klass[Opal.$$is_module_s]) {
         #{raise TypeError, 'class or module required'};
       }
 
@@ -433,7 +433,7 @@ module Kernel
 
   def is_a?(klass)
     %x{
-      if (!klass[Opal.$$is_class_s] && !klass.$$is_module) {
+      if (!klass[Opal.$$is_class_s] && !klass[Opal.$$is_module_s]) {
         #{raise TypeError, 'class or module required'};
       }
 
