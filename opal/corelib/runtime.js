@@ -91,6 +91,7 @@
     '$$own_included_modules',
     '$$own_prepended_modules',
     '$$iclasses',
+    '$$meta',
   ];
 
   Opal.propertySymbols = {};
@@ -536,7 +537,7 @@
     if (superclass != null) {
       $set_proto(klass.$$prototype, superclass.$$prototype);
 
-      if (superclass.$$meta) {
+      if (superclass[Opal.$$meta_s]) {
         // If superclass has metaclass then we have explicitely inherit it.
         Opal.build_class_singleton_class(klass);
       }
@@ -713,8 +714,8 @@
   // @param object [Object] the ruby object
   // @return [Class] the singleton class for object
   Opal.get_singleton_class = function(object) {
-    if (object.$$meta) {
-      return object.$$meta;
+    if (object[Opal.$$meta_s]) {
+      return object[Opal.$$meta_s];
     }
 
     if (object.hasOwnProperty(Opal.$$is_class_s)) {
@@ -738,8 +739,8 @@
   Opal.build_class_singleton_class = function(klass) {
     var superclass, meta;
 
-    if (klass.$$meta) {
-      return klass.$$meta;
+    if (klass[Opal.$$meta_s]) {
+      return klass[Opal.$$meta_s];
     }
 
     // The singleton_class superclass is the singleton_class of its superclass;
@@ -751,7 +752,7 @@
 
     $defineProperty(meta, '$$is_singleton', true);
     $defineProperty(meta, '$$singleton_of', klass);
-    $defineProperty(klass, '$$meta', meta);
+    $defineProperty(klass, Opal.$$meta_s, meta);
     $set_proto(klass, meta.$$prototype);
     // Restoring ClassName.class
     $defineProperty(klass, '$$class', Opal.Class);
@@ -760,15 +761,15 @@
   };
 
   Opal.build_module_singleton_class = function(mod) {
-    if (mod.$$meta) {
-      return mod.$$meta;
+    if (mod[Opal.$$meta_s]) {
+      return mod[Opal.$$meta_s];
     }
 
     var meta = Opal.allocate_class(null, Opal.Module, function(){});
 
     $defineProperty(meta, '$$is_singleton', true);
     $defineProperty(meta, '$$singleton_of', mod);
-    $defineProperty(mod, '$$meta', meta);
+    $defineProperty(mod, Opal.$$meta_s, meta);
     $set_proto(mod, meta.$$prototype);
     // Restoring ModuleName.class
     $defineProperty(mod, '$$class', Opal.Module);
@@ -789,9 +790,9 @@
 
     delete klass.$$prototype.$$class;
 
-    $defineProperty(object, '$$meta', klass);
+    $defineProperty(object, Opal.$$meta_s, klass);
 
-    $set_proto(object, object.$$meta.$$prototype);
+    $set_proto(object, object[Opal.$$meta_s].$$prototype);
 
     return klass;
   };
@@ -1439,8 +1440,8 @@
   Opal.find_super_dispatcher = function(obj, mid, current_func, defcheck, allow_stubs) {
     var jsid = '$' + mid, ancestors, super_method;
 
-    if (obj.hasOwnProperty('$$meta')) {
-      ancestors = Opal.ancestors(obj.$$meta);
+    if (obj.hasOwnProperty(Opal.$$meta_s)) {
+      ancestors = Opal.ancestors(obj[Opal.$$meta_s]);
     } else {
       ancestors = Opal.ancestors(obj.$$class);
     }
@@ -1580,7 +1581,7 @@
   };
 
   Opal.is_a = function(object, klass) {
-    if (klass != null && object.$$meta === klass || object.$$class === klass) {
+    if (klass != null && object[Opal.$$meta_s] === klass || object.$$class === klass) {
       return true;
     }
 
@@ -1588,7 +1589,7 @@
       return (klass[Opal.$$is_integer_class_s]) ? (object % 1) === 0 : true;
     }
 
-    var i, length, ancestors = Opal.ancestors(object[Opal.$$is_class_s] ? Opal.get_singleton_class(object) : (object.$$meta || object.$$class));
+    var i, length, ancestors = Opal.ancestors(object[Opal.$$is_class_s] ? Opal.get_singleton_class(object) : (object[Opal.$$meta_s] || object.$$class));
 
     for (i = 0, length = ancestors.length; i < length; i++) {
       if (ancestors[i] === klass) {

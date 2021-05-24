@@ -1,5 +1,5 @@
 class NilClass
-  `self.$$prototype.$$meta = #{self}`
+  `self.$$prototype[Opal.$$meta_s] = #{self}`
 
   class << self
     def allocate
