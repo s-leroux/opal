@@ -221,7 +221,7 @@ class Hash
 
   def clone
     %x{
-      var hash = new self.$$class();
+      var hash = new self[Opal.$$class_s]();
 
       Opal.hash_init(hash);
       Opal.hash_clone(self, hash);
@@ -1048,7 +1048,7 @@ class Hash
 
   def to_h
     %x{
-      if (self.$$class === Opal.Hash) {
+      if (self[Opal.$$class_s] === Opal.Hash) {
         return self;
       }
 

@@ -102,7 +102,7 @@ module Kernel
   end
 
   def class
-    `self.$$class`
+    `self[Opal.$$class_s]`
   end
 
   def copy_instance_variables(other)
@@ -247,7 +247,7 @@ module Kernel
         #{raise TypeError, 'class or module required'};
       }
 
-      return self.$$class === klass;
+      return self[Opal.$$class_s] === klass;
     }
   end
 
