@@ -103,6 +103,7 @@
     '$$class',
     '$$cast',
     '$$const',
+    '$$included',
   ];
 
   Opal.propertySymbols = {};
@@ -1005,7 +1006,7 @@
 
     for (var i = 0, length = module_ancestors.length; i < length; i++) {
       var ancestor = module_ancestors[i], iclass = create_iclass(ancestor);
-      $defineProperty(iclass, '$$included', true);
+      $defineProperty(iclass, Opal.$$included_s, true);
       iclasses.push(iclass);
     }
     var includer_ancestors = Opal.ancestors(includer),
@@ -1322,7 +1323,7 @@
 
     for (; proto && Object.getPrototypeOf(proto); proto = Object.getPrototypeOf(proto)) {
       mod = protoToModule(proto);
-      if (mod && mod[Opal.$$is_module_s] && proto[Opal.$$iclass_s] && proto.$$included) {
+      if (mod && mod[Opal.$$is_module_s] && proto[Opal.$$iclass_s] && proto[Opal.$$included_s]) {
         result.push(mod);
       }
     }
