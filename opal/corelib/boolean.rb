@@ -1,5 +1,5 @@
 class Boolean < `Boolean`
-  `Opal.defineProperty(self.$$prototype, '$$is_boolean', true)`
+  `Opal.defineProperty(self.$$prototype, Opal.$$is_boolean_s, true)`
   `Opal.defineProperty(self.$$prototype, '$$meta', #{self})`
 
   class << self

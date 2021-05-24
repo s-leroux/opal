@@ -77,10 +77,14 @@
   var $$is_string_s = Symbol('$$is_string')
   Opal.$$is_string_s = $$is_string_s
 
+  var $$is_boolean_s = Symbol('$$is_boolean')
+  Opal.$$is_boolean_s = $$is_boolean_s
+
   Opal.propertySymbols = {
     '$$id': $$id_s,
     '$$is_number': $$is_number_s,
     '$$is_string': $$is_string_s,
+    '$$is_boolean': $$is_boolean_s,
   }
 
   // Minify common function calls
@@ -174,11 +178,11 @@
   // -----
 
   Opal.truthy = function(val) {
-    return (val !== nil && val != null && (!val.$$is_boolean || val == true));
+    return (val !== nil && val != null && (!val[Opal.$$is_boolean_s] || val == true));
   };
 
   Opal.falsy = function(val) {
-    return (val === nil || val == null || (val.$$is_boolean && val == false))
+    return (val === nil || val == null || (val[Opal.$$is_boolean_s] && val == false))
   };
 
   Opal.type_error = function(object, type, method, coerced) {

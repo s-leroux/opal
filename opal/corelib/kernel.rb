@@ -199,7 +199,7 @@ module Kernel
     end
 
     %x{
-      if (status.$$is_boolean) {
+      if (status[Opal.$$is_boolean_s]) {
         status = status ? 0 : 1;
       } else {
         status = $coerce_to(status, #{Integer}, 'to_int')
