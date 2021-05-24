@@ -41,7 +41,7 @@ class Regexp < `RegExp`
           return parts[0];
         }
         // cover the 2 arrays passed as arguments case
-        is_first_part_array = parts[0].$$is_array;
+        is_first_part_array = parts[0][Opal.$$is_array_s];
         if (parts.length > 1 && is_first_part_array) {
           #{raise TypeError, 'no implicit conversion of Array into String'}
         }

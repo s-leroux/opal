@@ -35,7 +35,7 @@ module JSON
         case 'object':
           if (!value) return nil;
 
-          if (value.$$is_array) {
+          if (value[Opal.$$is_array_s]) {
             arr = #{`options.array_class`.new};
 
             for (i = 0, ii = value.length; i < ii; i++) {

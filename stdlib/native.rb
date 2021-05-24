@@ -548,7 +548,7 @@ class Hash
                (value.constructor === undefined ||
                  value.constructor === Object)) {
             smap[key] = #{Hash.new(`value`)};
-          } else if (value && value.$$is_array) {
+          } else if (value && value[Opal.$$is_array_s]) {
             value = value.map(function(item) {
               if (item &&
                    (item.constructor === undefined ||

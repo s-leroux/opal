@@ -52,7 +52,7 @@ module Opal
       if (args.length == 1) {
         return args[0];
       }
-      else if (args.$$is_array) {
+      else if (args[Opal.$$is_array_s]) {
         return args;
       }
       else {

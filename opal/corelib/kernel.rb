@@ -72,7 +72,7 @@ module Kernel
         return [];
       }
 
-      if (object.$$is_array) {
+      if (object[Opal.$$is_array_s]) {
         return object;
       }
 

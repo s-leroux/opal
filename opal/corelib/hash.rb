@@ -33,7 +33,7 @@ class Hash
         hash = #{allocate};
 
         for (i = 0; i < argc; i++) {
-          if (!argv[i].$$is_array) continue;
+          if (!argv[i][Opal.$$is_array_s]) continue;
           switch(argv[i].length) {
           case 1:
             hash.$store(argv[i][0], nil);
@@ -518,7 +518,7 @@ class Hash
 
         result.push(key);
 
-        if (value.$$is_array) {
+        if (value[Opal.$$is_array_s]) {
           if (level === 1) {
             result.push(value);
             continue;

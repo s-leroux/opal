@@ -87,7 +87,7 @@ class Exception < `Error`
         self.backtrace = [backtrace];
         self.stack = backtrace;
       } else {
-        if (backtrace.$$is_array) {
+        if (backtrace[Opal.$$is_array_s]) {
           for (i = 0, ii = backtrace.length; i < ii; i++) {
             if (!backtrace[i][Opal.$$is_string_s]) {
               valid = false;

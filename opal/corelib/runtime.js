@@ -80,11 +80,15 @@
   var $$is_boolean_s = Symbol('$$is_boolean')
   Opal.$$is_boolean_s = $$is_boolean_s
 
+  var $$is_array_s = Symbol('$$is_array')
+  Opal.$$is_array_s = $$is_array_s
+
   Opal.propertySymbols = {
     '$$id': $$id_s,
     '$$is_number': $$is_number_s,
     '$$is_string': $$is_string_s,
     '$$is_boolean': $$is_boolean_s,
+    '$$is_array': $$is_array_s,
   }
 
   // Minify common function calls
@@ -1507,7 +1511,7 @@
       arg = Opal.to_ary(arg);
     }
 
-    if ((block.length > 1 || (has_trailing_comma && block.length === 1)) && arg.$$is_array) {
+    if ((block.length > 1 || (has_trailing_comma && block.length === 1)) && arg[Opal.$$is_array_s]) {
       return block.apply(null, arg);
     }
     else {
@@ -1522,12 +1526,12 @@
     }
 
     if (block.length > 1 && args.length === 1) {
-      if (args[0].$$is_array) {
+      if (args[0][Opal.$$is_array_s]) {
         return block.apply(null, args[0]);
       }
     }
 
-    if (!args.$$is_array) {
+    if (!args[Opal.$$is_array_s]) {
       var args_ary = new Array(args.length);
       for(var i = 0, l = args_ary.length; i < l; i++) { args_ary[i] = args[i]; }
 
@@ -1543,7 +1547,7 @@
     for (var i = 0; i < candidates.length; i++) {
       var candidate = candidates[i];
 
-      if (candidate.$$is_array) {
+      if (candidate[Opal.$$is_array_s]) {
         var result = Opal.rescue(exception, candidate);
 
         if (result) {
@@ -1609,7 +1613,7 @@
 
   // Used for: a, b = something (no splat)
   Opal.to_ary = function(value) {
-    if (value.$$is_array) {
+    if (value[Opal.$$is_array_s]) {
       return value;
     }
     else if (value['$respond_to?']('to_ary', true)) {
@@ -1617,7 +1621,7 @@
       if (ary === nil) {
         return [value];
       }
-      else if (ary.$$is_array) {
+      else if (ary[Opal.$$is_array_s]) {
         return ary;
       }
       else {
@@ -1632,7 +1636,7 @@
 
   // Used for: a, b = *something (with splat)
   Opal.to_a = function(value) {
-    if (value.$$is_array) {
+    if (value[Opal.$$is_array_s]) {
       // A splatted array must be copied
       return value.slice();
     }
@@ -1641,7 +1645,7 @@
       if (ary === nil) {
         return [value];
       }
-      else if (ary.$$is_array) {
+      else if (ary[Opal.$$is_array_s]) {
         return ary;
       }
       else {
@@ -2187,7 +2191,7 @@
     hash = new Opal.Hash();
     Opal.hash_init(hash);
 
-    if (arguments_length === 1 && arguments[0].$$is_array) {
+    if (arguments_length === 1 && arguments[0][Opal.$$is_array_s]) {
       args = arguments[0];
       length = args.length;
 

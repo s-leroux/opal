@@ -7,7 +7,7 @@ class Array < `Array`
   include Enumerable
 
   # Mark all javascript arrays as being valid ruby arrays
-  `Opal.defineProperty(self.$$prototype, '$$is_array', true)`
+  `Opal.defineProperty(self.$$prototype, Opal.$$is_array_s, true)`
 
   %x{
     // Recent versions of V8 (> 7.1) only use an optimized implementation when Array.prototype is unmodified.
@@ -94,7 +94,7 @@ class Array < `Array`
       }
 
       if (arguments.length === 1) {
-        if (size.$$is_array) {
+        if (size[Opal.$$is_array_s]) {
           #{replace(size.to_a)}
           return self;
         } else if (#{size.respond_to? :to_ary}) {
@@ -282,7 +282,7 @@ class Array < `Array`
         if (array === other)
           return true;
 
-        if (!other.$$is_array) {
+        if (!other[Opal.$$is_array_s]) {
           if ($respond_to(other, '$to_ary')) {
             return #{`other` == `array`};
           } else {
@@ -304,8 +304,8 @@ class Array < `Array`
         for (i = 0, length = array.length; i < length; i++) {
           a = array[i];
           b = other[i];
-          if (a.$$is_array) {
-            if (b.$$is_array && b.length !== a.length) {
+          if (a[Opal.$$is_array_s]) {
+            if (b[Opal.$$is_array_s] && b.length !== a.length) {
               return false;
             }
             if (!recursed.hasOwnProperty(#{`a`.object_id})) {
@@ -957,7 +957,7 @@ class Array < `Array`
       function _eql(array, other) {
         var i, length, a, b;
 
-        if (!other.$$is_array) {
+        if (!other[Opal.$$is_array_s]) {
           return false;
         }
 
@@ -972,8 +972,8 @@ class Array < `Array`
         for (i = 0, length = array.length; i < length; i++) {
           a = array[i];
           b = other[i];
-          if (a.$$is_array) {
-            if (b.$$is_array && b.length !== a.length) {
+          if (a[Opal.$$is_array_s]) {
+            if (b[Opal.$$is_array_s] && b.length !== a.length) {
               return false;
             }
             if (!recursed.hasOwnProperty(#{`a`.object_id})) {
@@ -1152,7 +1152,7 @@ class Array < `Array`
             continue;
           }
 
-          if (!ary.$$is_array) {
+          if (!ary[Opal.$$is_array_s]) {
             #{raise TypeError};
           }
 
@@ -2169,7 +2169,7 @@ class Array < `Array`
 
       for (i = 0; i < len; i++) {
         ary = #{Opal.coerce_to?(`self[i]`, Array, :to_ary)};
-        if (!ary.$$is_array) {
+        if (!ary[Opal.$$is_array_s]) {
           #{raise TypeError, "wrong element type #{`ary`.class} at #{`i`} (expected array)"}
         }
         if (ary.length !== 2) {
@@ -2317,7 +2317,7 @@ class Array < `Array`
 
       for (j = 0, jj = others.length; j < jj; j++) {
         o = others[j];
-        if (o.$$is_array) {
+        if (o[Opal.$$is_array_s]) {
           continue;
         }
         if (o.$$is_enumerator) {
