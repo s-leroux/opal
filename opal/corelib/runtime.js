@@ -68,63 +68,30 @@
     enable_stack_trace: true                  // true, false
   };
 
-  var $$id_s = Symbol('$$id')
-  Opal.$$id_s = $$id_s
+  //  Define properties as Symbol (#2145)
+  var properties = [
+    '$$id',
+    '$$is_number',
+    '$$is_string',
+    '$$is_boolean',
+    '$$is_array',
+    '$$is_hash',
+    '$$is_range',
+    '$$is_integer_class',
+    '$$is_number_class',
+    '$$is_class',
+    '$$is_module',
+    '$$is_a_module',
+    '$$constructor',
+    '$$name',
+  ];
 
-  var $$is_number_s = Symbol('$$is_number')
-  Opal.$$is_number_s = $$is_number_s
+  Opal.propertySymbols = {};
+  var property;
+  for(property of properties) {
+    var symbol_name = property + "_s";
 
-  var $$is_string_s = Symbol('$$is_string')
-  Opal.$$is_string_s = $$is_string_s
-
-  var $$is_boolean_s = Symbol('$$is_boolean')
-  Opal.$$is_boolean_s = $$is_boolean_s
-
-  var $$is_array_s = Symbol('$$is_array')
-  Opal.$$is_array_s = $$is_array_s
-
-  var $$is_hash_s = Symbol('$$is_hash')
-  Opal.$$is_hash_s = $$is_hash_s
-
-  var $$is_range_s = Symbol('$$is_range')
-  Opal.$$is_range_s = $$is_range_s
-
-  var $$is_integer_class_s = Symbol('$$is_integer_class')
-  Opal.$$is_integer_class_s = $$is_integer_class_s
-
-  var $$is_number_class_s = Symbol('$$is_number_class')
-  Opal.$$is_number_class_s = $$is_number_class_s
-
-  var $$is_class_s = Symbol('$$is_class')
-  Opal.$$is_class_s = $$is_class_s
-
-  var $$is_module_s = Symbol('$$is_module')
-  Opal.$$is_module_s = $$is_module_s
-
-  var $$is_a_module_s = Symbol('$$is_a_module')
-  Opal.$$is_a_module_s = $$is_a_module_s
-
-  var $$constructor_s = Symbol('$$constructor')
-  Opal.$$constructor_s = $$constructor_s
-
-  var $$name_s = Symbol('$$name')
-  Opal.$$name_s = $$name_s
-
-  Opal.propertySymbols = {
-    '$$id': $$id_s,
-    '$$is_number': $$is_number_s,
-    '$$is_string': $$is_string_s,
-    '$$is_boolean': $$is_boolean_s,
-    '$$is_array': $$is_array_s,
-    '$$is_hash': $$is_hash_s,
-    '$$is_range': $$is_range_s,
-    '$$is_integer_class': $$is_integer_class_s,
-    '$$is_number_class': $$is_number_class_s,
-    '$$is_class': $$is_class_s,
-    '$$is_module': $$is_module_s,
-    '$$is_a_module': $$is_a_module_s,
-    '$$constructor': $$constructor_s,
-    '$$name': $$name_s,
+    Opal.propertySymbols[property] = Opal[symbol_name] = Symbol(property);
   }
 
   // Minify common function calls
@@ -150,11 +117,11 @@
   // Retrieve or assign the id of an object
   Opal.id = function(obj) {
     if (obj[Opal.$$is_number_s]) return (obj * 2)+1;
-    if (obj[$$id_s] != null) {
-      return obj[$$id_s];
+    if (obj[Opal.$$id_s] != null) {
+      return obj[Opal.$$id_s];
     }
-    $defineProperty(obj, $$id_s, Opal.uid());
-    return obj[$$id_s];
+    $defineProperty(obj, Opal.$$id_s, Opal.uid());
+    return obj[Opal.$$id_s];
   };
 
   // Globals table
