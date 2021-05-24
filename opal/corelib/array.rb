@@ -400,7 +400,7 @@ class Array < `Array`
 
   def [](index, length = undefined)
     %x{
-      if (index.$$is_range) {
+      if (index[Opal.$$is_range_s]) {
         return $array_slice_range(self, index);
       }
       else {

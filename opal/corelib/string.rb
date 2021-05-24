@@ -143,7 +143,7 @@ class String < `String`
     %x{
       var size = self.length, exclude;
 
-      if (index.$$is_range) {
+      if (index[Opal.$$is_range_s]) {
         exclude = index.excl;
         length  = $coerce_to(index.end, #{Integer}, 'to_int');
         index   = $coerce_to(index.begin, #{Integer}, 'to_int');

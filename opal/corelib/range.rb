@@ -3,7 +3,7 @@ require 'corelib/enumerable'
 class Range
   include Enumerable
 
-  `self.$$prototype.$$is_range = true`
+  `self.$$prototype[Opal.$$is_range_s] = true`
 
   attr_reader :begin, :end
 

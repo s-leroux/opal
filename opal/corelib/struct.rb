@@ -277,7 +277,7 @@ class Struct
   end
 
   def values_at(*args)
-    args = args.map { |arg| `arg.$$is_range ? #{arg.to_a} : arg` }.flatten
+    args = args.map { |arg| `arg[Opal.$$is_range_s] ? #{arg.to_a} : arg` }.flatten
     %x{
       var result = [];
       for (var i = 0, len = args.length; i < len; i++) {

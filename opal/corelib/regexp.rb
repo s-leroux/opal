@@ -382,7 +382,7 @@ class MatchData
 
       for (i = 0; i < args.length; i++) {
 
-        if (args[i].$$is_range) {
+        if (args[i][Opal.$$is_range_s]) {
           a = #{`args[i]`.to_a};
           a.unshift(i, 1);
           Array.prototype.splice.apply(args, a);

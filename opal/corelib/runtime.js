@@ -86,6 +86,9 @@
   var $$is_hash_s = Symbol('$$is_hash')
   Opal.$$is_hash_s = $$is_hash_s
 
+  var $$is_range_s = Symbol('$$is_range')
+  Opal.$$is_range_s = $$is_range_s
+
   Opal.propertySymbols = {
     '$$id': $$id_s,
     '$$is_number': $$is_number_s,
@@ -93,6 +96,7 @@
     '$$is_boolean': $$is_boolean_s,
     '$$is_array': $$is_array_s,
     '$$is_hash': $$is_hash_s,
+    '$$is_range': $$is_range_s,
   }
 
   // Minify common function calls
