@@ -101,6 +101,9 @@
   var $$is_module_s = Symbol('$$is_module')
   Opal.$$is_module_s = $$is_module_s
 
+  var $$is_a_module_s = Symbol('$$is_a_module')
+  Opal.$$is_a_module_s = $$is_a_module_s
+
   Opal.propertySymbols = {
     '$$id': $$id_s,
     '$$is_number': $$is_number_s,
@@ -113,6 +116,7 @@
     '$$is_number_class': $$is_number_class_s,
     '$$is_class': $$is_class_s,
     '$$is_module': $$is_module_s,
+    '$$is_a_module': $$is_a_module_s,
   }
 
   // Minify common function calls
@@ -397,7 +401,7 @@
   Opal.const_set = function(cref, name, value) {
     if (cref == null || cref === '::') cref = _Object;
 
-    if (value.$$is_a_module) {
+    if (value[Opal.$$is_a_module_s]) {
       if (value.$$name == null || value.$$name === nil) value.$$name = name;
       if (value.$$base_module == null) value.$$base_module = cref;
     }
@@ -525,7 +529,7 @@
     $defineProperty(klass, '$$prototype', constructor.prototype);
     $defineProperty(klass, '$$const', {});
     $defineProperty(klass, Opal.$$is_class_s, true);
-    $defineProperty(klass, '$$is_a_module', true);
+    $defineProperty(klass, Opal.$$is_a_module_s, true);
     $defineProperty(klass, '$$super', superclass);
     $defineProperty(klass, '$$cvars', {});
     $defineProperty(klass, '$$own_included_modules', []);
@@ -661,7 +665,7 @@
     $defineProperty(module, '$$prototype', constructor.prototype);
     $defineProperty(module, '$$const', {});
     $defineProperty(module, Opal.$$is_module_s, true);
-    $defineProperty(module, '$$is_a_module', true);
+    $defineProperty(module, Opal.$$is_a_module_s, true);
     $defineProperty(module, '$$cvars', {});
     $defineProperty(module, '$$iclasses', []);
     $defineProperty(module, '$$own_included_modules', []);
@@ -1422,7 +1426,7 @@
   // @raise [ArgumentError]
   Opal.ac = function(actual, expected, object, meth) {
     var inspect = '';
-    if (object.$$is_a_module) {
+    if (object[Opal.$$is_a_module_s]) {
       inspect += object.$$name + '.';
     }
     else {
@@ -1824,7 +1828,7 @@
       Opal.defn(Opal.Object, jsid, body)
     }
     // if instance_eval is invoked on a module/class, it sets inst_eval_mod
-    else if (!obj.$$eval && obj.$$is_a_module) {
+    else if (!obj.$$eval && obj[Opal.$$is_a_module_s]) {
       Opal.defn(obj, jsid, body);
     }
     else {
