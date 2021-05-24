@@ -37,7 +37,7 @@ class Range
     %x{
       var i, limit;
 
-      if (#{@begin}.$$is_number && #{@end}.$$is_number) {
+      if (#{@begin}[Opal.$$is_number_s] && #{@end}[Opal.$$is_number_s]) {
         if (#{@begin} % 1 !== 0 || #{@end} % 1 !== 0) {
           #{raise TypeError, "can't iterate from Float"}
         }
@@ -142,7 +142,7 @@ class Range
   def step(n = 1)
     %x{
       function coerceStepSize() {
-        if (!n.$$is_number) {
+        if (!n[Opal.$$is_number_s]) {
           n = #{Opal.coerce_to!(n, Integer, :to_int)}
         }
 
@@ -200,7 +200,7 @@ class Range
 
     `coerceStepSize()`
 
-    if `self.begin.$$is_number && self.end.$$is_number`
+    if `self.begin[Opal.$$is_number_s] && self.end[Opal.$$is_number_s]`
       i = 0
       loop do
         current = @begin + i * n
@@ -228,7 +228,7 @@ class Range
   def bsearch(&block)
     return enum_for(:bsearch) unless block_given?
 
-    unless `self.begin.$$is_number && self.end.$$is_number`
+    unless `self.begin[Opal.$$is_number_s] && self.end[Opal.$$is_number_s]`
       raise TypeError, "can't do binary search for #{@begin.class}"
     end
 

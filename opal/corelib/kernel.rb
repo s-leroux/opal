@@ -319,7 +319,7 @@ module Kernel
         if (value === nil) {
           #{raise TypeError, "can't convert nil into Integer"}
         }
-        if (value.$$is_number) {
+        if (value[Opal.$$is_number_s]) {
           if (value === Infinity || value === -Infinity || isNaN(value)) {
             #{raise FloatDomainError, value}
           }
@@ -559,7 +559,7 @@ module Kernel
         return #{Random::DEFAULT.rand};
       }
 
-      if (max.$$is_number) {
+      if (max[Opal.$$is_number_s]) {
         if (max < 0) {
           max = Math.abs(max);
         }
@@ -640,7 +640,7 @@ module Kernel
       if (seconds === nil) {
         #{raise TypeError, "can't convert NilClass into time interval"}
       }
-      if (!seconds.$$is_number) {
+      if (!seconds[Opal.$$is_number_s]) {
         #{raise TypeError, "can't convert #{seconds.class} into time interval"}
       }
       if (seconds < 0) {

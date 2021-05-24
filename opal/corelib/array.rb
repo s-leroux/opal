@@ -569,7 +569,7 @@ class Array < `Array`
         else if (ret === false || ret === nil) {
           smaller = false;
         }
-        else if (ret.$$is_number) {
+        else if (ret[Opal.$$is_number_s]) {
           if (ret === 0) { return mid; }
           smaller = (ret < 0);
         }
@@ -590,7 +590,7 @@ class Array < `Array`
     index = bsearch_index(&block)
 
     %x{
-      if (index != null && index.$$is_number) {
+      if (index != null && index[Opal.$$is_number_s]) {
         return self[index];
       } else {
         return index;

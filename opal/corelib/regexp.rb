@@ -89,7 +89,7 @@ class Regexp < `RegExp`
           return new RegExp(regexp);
         }
 
-        if (options.$$is_number) {
+        if (options[Opal.$$is_number_s]) {
           var temp = '';
           if (#{IGNORECASE} & options) { temp += 'i'; }
           if (#{MULTILINE}  & options) { temp += 'm'; }

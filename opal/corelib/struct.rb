@@ -281,7 +281,7 @@ class Struct
     %x{
       var result = [];
       for (var i = 0, len = args.length; i < len; i++) {
-        if (!args[i].$$is_number) {
+        if (!args[i][Opal.$$is_number_s]) {
           #{raise TypeError, "no implicit conversion of #{`args[i]`.class} into Integer"}
         }
         result.push(#{self[`args[i]`]});

@@ -70,8 +70,13 @@
 
   var $$id_s = Symbol('$$id')
   Opal.$$id_s = $$id_s
+
+  var $$is_number_s = Symbol('$$is_number')
+  Opal.$$is_number_s = $$is_number_s
+
   Opal.propertySymbols = {
-    '$$id': $$id_s
+    '$$id': $$id_s,
+    '$$is_number': $$is_number_s,
   }
 
   // Minify common function calls
@@ -96,7 +101,7 @@
 
   // Retrieve or assign the id of an object
   Opal.id = function(obj) {
-    if (obj.$$is_number) return (obj * 2)+1;
+    if (obj[Opal.$$is_number_s]) return (obj * 2)+1;
     if (obj[$$id_s] != null) {
       return obj[$$id_s];
     }
@@ -1553,7 +1558,7 @@
       return true;
     }
 
-    if (object.$$is_number && klass.$$is_number_class) {
+    if (object[Opal.$$is_number_s] && klass.$$is_number_class) {
       return (klass.$$is_integer_class) ? (object % 1) === 0 : true;
     }
 
@@ -1824,7 +1829,7 @@
 
   // Define a singleton method on the given object (see Opal.def).
   Opal.defs = function(obj, jsid, body) {
-    if (obj.$$is_string || obj.$$is_number) {
+    if (obj.$$is_string || obj[Opal.$$is_number]) {
       throw Opal.TypeError.$new("can't define singleton");
     }
     Opal.defn(Opal.get_singleton_class(obj), jsid, body)
