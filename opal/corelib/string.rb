@@ -7,9 +7,9 @@ class String < `String`
   include Comparable
 
   %x{
-    Opal.defineProperty(#{self}.$$prototype, Opal.$$is_string_s, true);
+    Opal.defineProperty(#{self}[Opal.$$prototype_s], Opal.$$is_string_s, true);
 
-    Opal.defineProperty(#{self}.$$prototype, '$$cast', function(string) {
+    Opal.defineProperty(#{self}[Opal.$$prototype_s], '$$cast', function(string) {
       var klass = this.$$class;
       if (klass[Opal.$$constructor_s] === String) {
         return string;

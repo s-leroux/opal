@@ -12,7 +12,7 @@ class Hash
   include Enumerable
 
   # Mark all hash instances as valid hashes (used to check keyword args, etc)
-  `self.$$prototype[Opal.$$is_hash_s] = true`
+  `self[Opal.$$prototype_s][Opal.$$is_hash_s] = true`
 
   def self.[](*argv)
     %x{

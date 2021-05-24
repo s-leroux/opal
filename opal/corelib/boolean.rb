@@ -1,6 +1,6 @@
 class Boolean < `Boolean`
-  `Opal.defineProperty(self.$$prototype, Opal.$$is_boolean_s, true)`
-  `Opal.defineProperty(self.$$prototype, Opal.$$meta_s, #{self})`
+  `Opal.defineProperty(self[Opal.$$prototype_s], Opal.$$is_boolean_s, true)`
+  `Opal.defineProperty(self[Opal.$$prototype_s], Opal.$$meta_s, #{self})`
 
   class << self
     def allocate

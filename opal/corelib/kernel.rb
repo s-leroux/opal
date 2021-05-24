@@ -124,19 +124,19 @@ module Kernel
       if (other.hasOwnProperty(Opal.$$meta_s)) {
         var other_singleton_class = Opal.get_singleton_class(other);
         var self_singleton_class = Opal.get_singleton_class(self);
-        names = Object.getOwnPropertyNames(other_singleton_class.$$prototype);
+        names = Object.getOwnPropertyNames(other_singleton_class[Opal.$$prototype_s]);
 
         for (i = 0, length = names.length; i < length; i++) {
           name = names[i];
           if (Opal.is_method(name)) {
-            self_singleton_class.$$prototype[name] = other_singleton_class.$$prototype[name];
+            self_singleton_class[Opal.$$prototype_s][name] = other_singleton_class[Opal.$$prototype_s][name];
           }
         }
 
         self_singleton_class.$$const = Object.assign({}, other_singleton_class.$$const);
         Object.setPrototypeOf(
-          self_singleton_class.$$prototype,
-          Object.getPrototypeOf(other_singleton_class.$$prototype)
+          self_singleton_class[Opal.$$prototype_s],
+          Object.getPrototypeOf(other_singleton_class[Opal.$$prototype_s])
         );
       }
 
