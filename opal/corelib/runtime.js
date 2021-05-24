@@ -94,6 +94,7 @@
     '$$meta',
     '$$is_singleton',
     '$$singleton_of',
+    '$$iclass',
   ];
 
   Opal.propertySymbols = {};
@@ -925,7 +926,7 @@
   };
 
   function isRoot(proto) {
-    return proto.hasOwnProperty('$$iclass') && proto.hasOwnProperty('$$root');
+    return proto.hasOwnProperty(Opal.$$iclass_s) && proto.hasOwnProperty('$$root');
   }
 
   function own_included_modules(module) {
@@ -1051,7 +1052,7 @@
       var next_ancestor = Object.getPrototypeOf(module_iclass);
 
       // skip non-root iclasses (that were recursively included)
-      while (next_ancestor.hasOwnProperty('$$iclass') && !isRoot(next_ancestor)) {
+      while (next_ancestor.hasOwnProperty(Opal.$$iclass_s) && !isRoot(next_ancestor)) {
         next_ancestor = Object.getPrototypeOf(next_ancestor);
       }
 
@@ -1136,7 +1137,7 @@
         if (
           end_chain_on.hasOwnProperty('$$root') ||
           end_chain_on === prepender_iclass ||
-          !end_chain_on.hasOwnProperty('$$iclass')
+          !end_chain_on.hasOwnProperty(Opal.$$iclass_s)
         ) {
           break;
         }
@@ -1195,7 +1196,7 @@
       $defineProperty(iclass, prop, proto[prop]);
     }
 
-    $defineProperty(iclass, '$$iclass', true);
+    $defineProperty(iclass, Opal.$$iclass_s, true);
     $defineProperty(iclass, '$$module', module);
 
     return iclass;
@@ -1271,7 +1272,7 @@
   function protoToModule(proto) {
     if (proto.hasOwnProperty('$$dummy')) {
       return;
-    } else if (proto.hasOwnProperty('$$iclass')) {
+    } else if (proto.hasOwnProperty(Opal.$$iclass_s)) {
       return proto.$$module;
     } else if (proto.hasOwnProperty('$$class')) {
       return proto.$$class;
@@ -1313,7 +1314,7 @@
 
     for (; proto && Object.getPrototypeOf(proto); proto = Object.getPrototypeOf(proto)) {
       mod = protoToModule(proto);
-      if (mod && mod[Opal.$$is_module_s] && proto.$$iclass && proto.$$included) {
+      if (mod && mod[Opal.$$is_module_s] && proto[Opal.$$iclass_s] && proto.$$included) {
         result.push(mod);
       }
     }
