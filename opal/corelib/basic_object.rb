@@ -135,14 +135,14 @@ class BasicObject
   end
 
   def class
-    `self.$$class`
+    `self[Opal.$$class_s]`
   end
 
   def method_missing(symbol, *args, &block)
     message = if `self.$inspect && !self.$inspect.$$stub`
-                "undefined method `#{symbol}' for #{inspect}:#{`self.$$class`}"
+                "undefined method `#{symbol}' for #{inspect}:#{`self[Opal.$$class_s]`}"
               else
-                "undefined method `#{symbol}' for #{`self.$$class`}"
+                "undefined method `#{symbol}' for #{`self[Opal.$$class_s]`}"
               end
 
     ::Kernel.raise ::NoMethodError.new(message, symbol)

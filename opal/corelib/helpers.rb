@@ -66,7 +66,7 @@ module Opal
 
   def self.respond_to?(obj, method, include_all = false)
     %x{
-      if (obj == null || !obj.$$class) {
+      if (obj == null || !obj[Opal.$$class_s]) {
         return false;
       }
     }

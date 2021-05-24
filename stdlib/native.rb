@@ -213,7 +213,7 @@ end
 
 module Kernel
   def native?(value)
-    `value == null || !value.$$class`
+    `value == null || !value[Opal.$$class_s]`
   end
 
   # Wraps a native JavaScript with `Native::Object.new`
@@ -344,11 +344,11 @@ class Native::Object < BasicObject
   alias kind_of? is_a?
 
   def instance_of?(klass)
-    `self.$$class === klass`
+    `self[Opal.$$class_s] === klass`
   end
 
   def class
-    `self.$$class`
+    `self[Opal.$$class_s]`
   end
 
   def to_a(options = {}, &block)
