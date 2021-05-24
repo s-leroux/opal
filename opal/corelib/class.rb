@@ -3,7 +3,7 @@ require 'corelib/module'
 class Class
   def self.new(superclass = Object, &block)
     %x{
-      if (!superclass.$$is_class) {
+      if (!superclass[Opal.$$is_class_s]) {
         throw Opal.TypeError.$new("superclass must be a Class");
       }
 

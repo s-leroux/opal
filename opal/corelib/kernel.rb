@@ -243,7 +243,7 @@ module Kernel
 
   def instance_of?(klass)
     %x{
-      if (!klass.$$is_class && !klass.$$is_module) {
+      if (!klass[Opal.$$is_class_s] && !klass.$$is_module) {
         #{raise TypeError, 'class or module required'};
       }
 
@@ -433,7 +433,7 @@ module Kernel
 
   def is_a?(klass)
     %x{
-      if (!klass.$$is_class && !klass.$$is_module) {
+      if (!klass[Opal.$$is_class_s] && !klass.$$is_module) {
         #{raise TypeError, 'class or module required'};
       }
 
@@ -531,7 +531,7 @@ module Kernel
         exception = #{RuntimeError.new exception};
       }
       // using respond_to? and not an undefined check to avoid method_missing matching as true
-      else if (exception.$$is_class && #{exception.respond_to?(:exception)}) {
+      else if (exception[Opal.$$is_class_s] && #{exception.respond_to?(:exception)}) {
         exception = #{exception.exception string};
       }
       else if (#{exception.is_a?(Exception)}) {

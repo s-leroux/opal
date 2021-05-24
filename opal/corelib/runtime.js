@@ -95,6 +95,9 @@
   var $$is_number_class_s = Symbol('$$is_number_class')
   Opal.$$is_number_class_s = $$is_number_class_s
 
+  var $$is_class_s = Symbol('$$is_class')
+  Opal.$$is_class_s = $$is_class_s
+
   Opal.propertySymbols = {
     '$$id': $$id_s,
     '$$is_number': $$is_number_s,
@@ -105,6 +108,7 @@
     '$$is_range': $$is_range_s,
     '$$is_integer_class': $$is_integer_class_s,
     '$$is_number_class': $$is_number_class_s,
+    '$$is_class': $$is_class_s,
   }
 
   // Minify common function calls
@@ -318,7 +322,7 @@
 
     if (cref === '::') cref = _Object;
 
-    if (!cref.$$is_module && !cref.$$is_class) {
+    if (!cref.$$is_module && !cref[Opal.$$is_class_s]) {
       throw new Opal.TypeError(cref.toString() + " is not a class/module");
     }
 
@@ -335,7 +339,7 @@
 
     if (cref === '::') cref = _Object;
 
-    if (!cref.$$is_module && !cref.$$is_class) {
+    if (!cref.$$is_module && !cref[Opal.$$is_class_s]) {
       throw new Opal.TypeError(cref.toString() + " is not a class/module");
     }
 
@@ -516,7 +520,7 @@
     $defineProperty(klass, '$$constructor', constructor);
     $defineProperty(klass, '$$prototype', constructor.prototype);
     $defineProperty(klass, '$$const', {});
-    $defineProperty(klass, '$$is_class', true);
+    $defineProperty(klass, Opal.$$is_class_s, true);
     $defineProperty(klass, '$$is_a_module', true);
     $defineProperty(klass, '$$super', superclass);
     $defineProperty(klass, '$$cvars', {});
@@ -555,7 +559,7 @@
     // If the class exists in the scope, then we must use that
     if (klass) {
       // Make sure the existing constant is a class, or raise error
-      if (!klass.$$is_class) {
+      if (!klass[Opal.$$is_class_s]) {
         throw Opal.TypeError.$new(name + " is not a class");
       }
 
@@ -575,13 +579,13 @@
     if (scope == null) {
       // Global scope
       scope = _Object;
-    } else if (!scope.$$is_class && !scope.$$is_module) {
+    } else if (!scope[Opal.$$is_class_s] && !scope.$$is_module) {
       // Scope is an object, use its class
       scope = scope.$$class;
     }
 
     // If the superclass is not an Opal-generated class then we're bridging a native JS class
-    if (superclass != null && !superclass.hasOwnProperty('$$is_class')) {
+    if (superclass != null && !superclass.hasOwnProperty(Opal.$$is_class_s)) {
       bridged = superclass;
       superclass = _Object;
     }
@@ -685,7 +689,7 @@
     if (scope == null) {
       // Global scope
       scope = _Object;
-    } else if (!scope.$$is_class && !scope.$$is_module) {
+    } else if (!scope[Opal.$$is_class_s] && !scope.$$is_module) {
       // Scope is an object, use its class
       scope = scope.$$class;
     }
@@ -719,7 +723,7 @@
       return object.$$meta;
     }
 
-    if (object.hasOwnProperty('$$is_class')) {
+    if (object.hasOwnProperty(Opal.$$is_class_s)) {
       return Opal.build_class_singleton_class(object);
     } else if (object.hasOwnProperty('$$is_module')) {
       return Opal.build_module_singleton_class(object);
@@ -1590,7 +1594,7 @@
       return (klass[Opal.$$is_integer_class_s]) ? (object % 1) === 0 : true;
     }
 
-    var i, length, ancestors = Opal.ancestors(object.$$is_class ? Opal.get_singleton_class(object) : (object.$$meta || object.$$class));
+    var i, length, ancestors = Opal.ancestors(object[Opal.$$is_class_s] ? Opal.get_singleton_class(object) : (object.$$meta || object.$$class));
 
     for (i = 0, length = ancestors.length; i < length; i++) {
       if (ancestors[i] === klass) {
