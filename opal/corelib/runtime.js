@@ -89,6 +89,7 @@
     '$$ancestors_cache_version',
     '$$ancestors',
     '$$own_included_modules',
+    '$$own_prepended_modules',
   ];
 
   Opal.propertySymbols = {};
@@ -517,7 +518,7 @@
     $defineProperty(klass, Opal.$$super_s, superclass);
     $defineProperty(klass, Opal.$$cvars_s, {});
     $defineProperty(klass, Opal.$$own_included_modules_s, []);
-    $defineProperty(klass, '$$own_prepended_modules', []);
+    $defineProperty(klass, Opal.$$own_prepended_modules_s, []);
     $defineProperty(klass, Opal.$$ancestors_s, []);
     $defineProperty(klass, Opal.$$ancestors_cache_version_s, null);
 
@@ -653,7 +654,7 @@
     $defineProperty(module, Opal.$$cvars_s, {});
     $defineProperty(module, '$$iclasses', []);
     $defineProperty(module, Opal.$$own_included_modules_s, []);
-    $defineProperty(module, '$$own_prepended_modules', []);
+    $defineProperty(module, Opal.$$own_prepended_modules_s, []);
     $defineProperty(module, Opal.$$ancestors_s, [module]);
     $defineProperty(module, Opal.$$ancestors_cache_version_s, null);
 
@@ -1146,7 +1147,7 @@
     $set_proto(chain.last, end_chain_on);
 
     // recalculate own_prepended_modules cache
-    prepender.$$own_prepended_modules = own_prepended_modules(prepender);
+    prepender[Opal.$$own_prepended_modules_s] = own_prepended_modules(prepender);
 
     Opal.const_cache_version++;
   };
@@ -1274,7 +1275,7 @@
   }
 
   function own_ancestors(module) {
-    return module.$$own_prepended_modules.concat([module]).concat(module[Opal.$$own_included_modules_s]);
+    return module[Opal.$$own_prepended_modules_s].concat([module]).concat(module[Opal.$$own_included_modules_s]);
   }
 
   // The Array of ancestors for a given module/class
