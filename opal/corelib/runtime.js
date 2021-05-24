@@ -105,6 +105,7 @@
     '$$const',
     '$$included',
     '$$prepended',
+    '$$bridge',
   ];
 
   Opal.propertySymbols = {};
@@ -503,7 +504,7 @@
   Opal.allocate_class = function(name, superclass) {
     var klass, constructor;
 
-    if (superclass != null && superclass.$$bridge) {
+    if (superclass != null && superclass[Opal.$$bridge_s]) {
       // Inheritance from bridged classes requires
       // calling original JS constructors
       constructor = function() {
@@ -1251,7 +1252,7 @@
   // @return [Class] returns the passed Ruby class
   //
   Opal.bridge = function(native_klass, klass) {
-    if (native_klass.hasOwnProperty('$$bridge')) {
+    if (native_klass.hasOwnProperty(Opal.$$bridge_s)) {
       throw Opal.ArgumentError.$new("already bridged");
     }
 
@@ -1270,13 +1271,13 @@
     //         - super (window.Object)
     //           - null
     //
-    $defineProperty(native_klass, '$$bridge', klass);
+    $defineProperty(native_klass, Opal.$$bridge_s, klass);
     $set_proto(native_klass.prototype, (klass[Opal.$$super_s] || Opal.Object)[Opal.$$prototype_s]);
     $defineProperty(klass, Opal.$$prototype_s, native_klass.prototype);
 
     $defineProperty(klass[Opal.$$prototype_s], Opal.$$class_s, klass);
     $defineProperty(klass, Opal.$$constructor_s, native_klass);
-    $defineProperty(klass, '$$bridge', true);
+    $defineProperty(klass, Opal.$$bridge_s, true);
   };
 
   function protoToModule(proto) {
