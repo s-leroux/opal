@@ -16,7 +16,7 @@ class Class
 
   def allocate
     %x{
-      var obj = new self.$$constructor();
+      var obj = new self[Opal.$$constructor_s]();
       obj[Opal.$$id_s] = Opal.uid();
       return obj;
     }

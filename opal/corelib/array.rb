@@ -290,9 +290,9 @@ class Array < `Array`
           }
         }
 
-        if (array.$$constructor !== Array)
+        if (array[Opal.$$constructor_s] !== Array)
           array = #{`array`.to_a};
-        if (other.$$constructor !== Array)
+        if (other[Opal.$$constructor_s] !== Array)
           other = #{`other`.to_a};
 
         if (array.length !== other.length) {

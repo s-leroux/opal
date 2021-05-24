@@ -11,10 +11,10 @@ class String < `String`
 
     Opal.defineProperty(#{self}.$$prototype, '$$cast', function(string) {
       var klass = this.$$class;
-      if (klass.$$constructor === String) {
+      if (klass[Opal.$$constructor_s] === String) {
         return string;
       } else {
-        return new klass.$$constructor(string);
+        return new klass[Opal.$$constructor_s](string);
       }
     });
   }
@@ -31,7 +31,7 @@ class String < `String`
 
   def self.new(str = '')
     str = `$coerce_to(str, #{String}, 'to_str')`
-    `new self.$$constructor(str)`
+    `new self[Opal.$$constructor_s](str)`
   end
 
   def initialize(str = undefined)

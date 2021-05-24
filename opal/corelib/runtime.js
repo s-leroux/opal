@@ -104,6 +104,9 @@
   var $$is_a_module_s = Symbol('$$is_a_module')
   Opal.$$is_a_module_s = $$is_a_module_s
 
+  var $$constructor_s = Symbol('$$constructor')
+  Opal.$$constructor_s = $$constructor_s
+
   Opal.propertySymbols = {
     '$$id': $$id_s,
     '$$is_number': $$is_number_s,
@@ -117,6 +120,7 @@
     '$$is_class': $$is_class_s,
     '$$is_module': $$is_module_s,
     '$$is_a_module': $$is_a_module_s,
+    '$$constructor': $$constructor_s,
   }
 
   // Minify common function calls
@@ -512,7 +516,7 @@
       // calling original JS constructors
       constructor = function() {
         var args = $slice.call(arguments),
-            self = new ($bind.apply(superclass.$$constructor, [null].concat(args)))();
+            self = new ($bind.apply(superclass[Opal.$$constructor_s], [null].concat(args)))();
 
         // and replacing a __proto__ manually
         $set_proto(self, klass.$$prototype);
@@ -529,7 +533,7 @@
     klass = constructor;
 
     $defineProperty(klass, '$$name', name);
-    $defineProperty(klass, '$$constructor', constructor);
+    $defineProperty(klass, Opal.$$constructor_s, constructor);
     $defineProperty(klass, '$$prototype', constructor.prototype);
     $defineProperty(klass, '$$const', {});
     $defineProperty(klass, Opal.$$is_class_s, true);
@@ -657,7 +661,7 @@
   Opal.allocate_module = function(name) {
     var constructor = function(){};
     if (name) {
-      $defineProperty(constructor, 'displayName', name+'.$$constructor');
+      $defineProperty(constructor, 'displayName', name+'[$$constructor_s]');
     }
 
     var module = constructor;
@@ -1279,7 +1283,7 @@
     $defineProperty(klass, '$$prototype', native_klass.prototype);
 
     $defineProperty(klass.$$prototype, '$$class', klass);
-    $defineProperty(klass, '$$constructor', native_klass);
+    $defineProperty(klass, Opal.$$constructor_s, native_klass);
     $defineProperty(klass, '$$bridge', true);
   };
 
