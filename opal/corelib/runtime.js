@@ -92,6 +92,7 @@
     '$$own_prepended_modules',
     '$$iclasses',
     '$$meta',
+    '$$is_singleton',
   ];
 
   Opal.propertySymbols = {};
@@ -750,7 +751,7 @@
 
     meta = Opal.allocate_class(null, superclass, function(){});
 
-    $defineProperty(meta, '$$is_singleton', true);
+    $defineProperty(meta, Opal.$$is_singleton_s, true);
     $defineProperty(meta, '$$singleton_of', klass);
     $defineProperty(klass, Opal.$$meta_s, meta);
     $set_proto(klass, meta.$$prototype);
@@ -767,7 +768,7 @@
 
     var meta = Opal.allocate_class(null, Opal.Module, function(){});
 
-    $defineProperty(meta, '$$is_singleton', true);
+    $defineProperty(meta, Opal.$$is_singleton_s, true);
     $defineProperty(meta, '$$singleton_of', mod);
     $defineProperty(mod, Opal.$$meta_s, meta);
     $set_proto(mod, meta.$$prototype);
@@ -785,7 +786,7 @@
     var superclass = object.$$class,
         klass = Opal.allocate_class(nil, superclass, function(){});
 
-    $defineProperty(klass, '$$is_singleton', true);
+    $defineProperty(klass, Opal.$$is_singleton_s, true);
     $defineProperty(klass, '$$singleton_of', object);
 
     delete klass.$$prototype.$$class;
@@ -1870,7 +1871,7 @@
 
     delete obj.$$prototype[jsid];
 
-    if (obj.$$is_singleton) {
+    if (obj[Opal.$$is_singleton_s]) {
       if (obj.$$prototype.$singleton_method_removed && !obj.$$prototype.$singleton_method_removed.$$stub) {
         obj.$$prototype.$singleton_method_removed(jsid.substr(1));
       }
@@ -1890,7 +1891,7 @@
 
     Opal.add_stub_for(obj.$$prototype, jsid);
 
-    if (obj.$$is_singleton) {
+    if (obj[Opal.$$is_singleton_s]) {
       if (obj.$$prototype.$singleton_method_undefined && !obj.$$prototype.$singleton_method_undefined.$$stub) {
         obj.$$prototype.$singleton_method_undefined(jsid.substr(1));
       }

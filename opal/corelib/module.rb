@@ -401,7 +401,7 @@ class Module
   end
 
   def singleton_class?
-    `!!self.$$is_singleton`
+    `!!self[Opal.$$is_singleton_s]`
   end
 
   def include(*mods)
