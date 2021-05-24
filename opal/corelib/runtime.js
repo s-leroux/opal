@@ -84,6 +84,7 @@
     '$$is_a_module',
     '$$constructor',
     '$$name',
+    '$$super',
   ];
 
   Opal.propertySymbols = {};
@@ -509,7 +510,7 @@
     $defineProperty(klass, '$$const', {});
     $defineProperty(klass, Opal.$$is_class_s, true);
     $defineProperty(klass, Opal.$$is_a_module_s, true);
-    $defineProperty(klass, '$$super', superclass);
+    $defineProperty(klass, Opal.$$super_s, superclass);
     $defineProperty(klass, '$$cvars', {});
     $defineProperty(klass, '$$own_included_modules', []);
     $defineProperty(klass, '$$own_prepended_modules', []);
@@ -555,7 +556,7 @@
   }
 
   function ensureSuperclassMatch(klass, superclass) {
-    if (klass.$$super !== superclass) {
+    if (klass[Opal.$$super_s] !== superclass) {
       throw Opal.TypeError.$new("superclass mismatch for class " + klass[Opal.$$name_s]);
     }
   }
@@ -738,7 +739,7 @@
     // The singleton_class superclass is the singleton_class of its superclass;
     // but BasicObject has no superclass (its `$$super` is null), thus we
     // fallback on `Class`.
-    superclass = klass === BasicObject ? Class : Opal.get_singleton_class(klass.$$super);
+    superclass = klass === BasicObject ? Class : Opal.get_singleton_class(klass[Opal.$$super_s]);
 
     meta = Opal.allocate_class(null, superclass, function(){});
 
@@ -864,7 +865,7 @@
   Opal.receiver_methods = function(obj) {
     var mod = Opal.get_singleton_class(obj);
     var singleton_methods = Opal.own_instance_methods(mod);
-    var instance_methods = Opal.own_instance_methods(mod.$$super);
+    var instance_methods = Opal.own_instance_methods(mod[Opal.$$super_s]);
     return singleton_methods.concat(instance_methods);
   };
 
@@ -1250,7 +1251,7 @@
     //           - null
     //
     $defineProperty(native_klass, '$$bridge', klass);
-    $set_proto(native_klass.prototype, (klass.$$super || Opal.Object).$$prototype);
+    $set_proto(native_klass.prototype, (klass[Opal.$$super_s] || Opal.Object).$$prototype);
     $defineProperty(klass, '$$prototype', native_klass.prototype);
 
     $defineProperty(klass.$$prototype, '$$class', klass);
@@ -1286,8 +1287,8 @@
       result.push(mods[i]);
     }
 
-    if (module.$$super) {
-      for (i = 0, mods = Opal.ancestors(module.$$super), length = mods.length; i < length; i++) {
+    if (module[Opal.$$super_s]) {
+      for (i = 0, mods = Opal.ancestors(module[Opal.$$super_s]), length = mods.length; i < length; i++) {
         result.push(mods[i]);
       }
     }
@@ -1910,11 +1911,11 @@
     }
 
     if (!is_method_body(body)) {
-      var ancestor = obj.$$super;
+      var ancestor = obj[Opal.$$super_s];
 
       while (typeof(body) !== "function" && ancestor) {
         body     = ancestor[old_id];
-        ancestor = ancestor.$$super;
+        ancestor = ancestor[Opal.$$super_s];
       }
 
       if (!is_method_body(body) && obj[Opal.$$is_module_s]) {
@@ -2561,5 +2562,5 @@
   // Errors
   Opal.breaker  = new Error('unexpected break (old)');
   Opal.returner = new Error('unexpected return');
-  TypeError.$$super = Error;
+  TypeError[Opal.$$super_s] = Error;
 }).call(this);

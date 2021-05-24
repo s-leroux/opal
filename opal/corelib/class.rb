@@ -42,7 +42,7 @@ class Class
   end
 
   def superclass
-    `self.$$super || nil`
+    `self[Opal.$$super_s] || nil`
   end
 
   def to_s
