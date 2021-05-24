@@ -1010,7 +1010,7 @@ Fixnum = Number
 
 class Integer < Numeric
   `self.$$is_number_class = true`
-  `self.$$is_integer_class = true`
+  `self[Opal.$$is_integer_class_s] = true`
 
   class << self
     def allocate

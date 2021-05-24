@@ -89,6 +89,9 @@
   var $$is_range_s = Symbol('$$is_range')
   Opal.$$is_range_s = $$is_range_s
 
+  var $$is_integer_class_s = Symbol('$$is_integer_class')
+  Opal.$$is_integer_class_s = $$is_integer_class_s
+
   Opal.propertySymbols = {
     '$$id': $$id_s,
     '$$is_number': $$is_number_s,
@@ -97,6 +100,7 @@
     '$$is_array': $$is_array_s,
     '$$is_hash': $$is_hash_s,
     '$$is_range': $$is_range_s,
+    '$$is_integer_class': $$is_integer_class_s,
   }
 
   // Minify common function calls
@@ -1579,7 +1583,7 @@
     }
 
     if (object[Opal.$$is_number_s] && klass.$$is_number_class) {
-      return (klass.$$is_integer_class) ? (object % 1) === 0 : true;
+      return (klass[Opal.$$is_integer_class_s]) ? (object % 1) === 0 : true;
     }
 
     var i, length, ancestors = Opal.ancestors(object.$$is_class ? Opal.get_singleton_class(object) : (object.$$meta || object.$$class));
