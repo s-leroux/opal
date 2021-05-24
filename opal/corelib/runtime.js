@@ -74,9 +74,13 @@
   var $$is_number_s = Symbol('$$is_number')
   Opal.$$is_number_s = $$is_number_s
 
+  var $$is_lambda_s = Symbol('$$is_lambda')
+  Opal.$$is_lambda_s = $$is_lambda_s
+
   Opal.propertySymbols = {
     '$$id': $$id_s,
     '$$is_number': $$is_number_s,
+    '$$is_lambda': $$is_lambda_s,
   }
 
   // Minify common function calls
@@ -1741,7 +1745,7 @@
   };
 
   Opal.lambda = function(block) {
-    block.$$is_lambda = true;
+    block[Opal.$$is_lambda_s] = true;
     return block;
   };
 
