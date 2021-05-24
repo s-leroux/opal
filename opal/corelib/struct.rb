@@ -291,7 +291,7 @@ class Struct
   end
 
   def dig(key, *keys)
-    item = if `key.$$is_string && self.$$data.hasOwnProperty(key)`
+    item = if `key[Opal.$$is_string_s] && self.$$data.hasOwnProperty(key)`
              `self.$$data[key] || nil`
            end
 

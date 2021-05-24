@@ -53,7 +53,7 @@ class Regexp < `RegExp`
         quoted_validated = [];
         for (var i=0; i < parts.length; i++) {
           part = parts[i];
-          if (part.$$is_string) {
+          if (part[Opal.$$is_string_s]) {
             quoted_validated.push(#{escape(`part`)});
           }
           else if (part.$$is_regexp) {

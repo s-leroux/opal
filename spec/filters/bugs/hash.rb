@@ -7,7 +7,7 @@ opal_filter "Hash" do
   fails "Hash#[] does not create copies of the immediate default value" # spec uses mutable string
   fails "Hash#[]= keeps the existing String key in the hash if there is a matching one" # Expected "foo" not to be identical to "foo"
   fails "Hash#compare_by_identity gives different identity for string literals" # Expected [2] to equal [1, 2]
-  fails "Hash#delete allows removing a key while iterating" # Exception: Cannot read property '$$is_string' of undefined
+  fails "Hash#delete allows removing a key while iterating" # Exception: Cannot read property '$$is_string_s' of undefined
   fails "Hash#each yields 2 values and not an Array of 2 elements when given a callable of arity 2" # ArgumentError: [Object#foo] wrong number of arguments(1 for 2)
   fails "Hash#each_pair yields 2 values and not an Array of 2 elements when given a callable of arity 2" # ArgumentError: [Object#foo] wrong number of arguments(1 for 2)
   fails "Hash#eql? compares keys with eql? semantics" # spec relies on integer and float being different
@@ -19,7 +19,7 @@ opal_filter "Hash" do
   fails "Hash#inspect does not call #to_str on the object returned from #to_s when it is not a String" # Exception: Cannot convert object to primitive value
   fails "Hash#invert compares new keys with eql? semantics" # spec relies on integer and float being different
   fails "Hash#rehash removes duplicate keys" # Expected 2 to equal 1
-  fails "Hash#shift allows shifting entries while iterating" # Exception: Cannot read property '$$is_string' of undefined
+  fails "Hash#shift allows shifting entries while iterating" # Exception: Cannot read property '$$is_string_s' of undefined
   fails "Hash#store keeps the existing String key in the hash if there is a matching one" # Expected "foo" not to be identical to "foo"
   fails "Hash#to_s calls #to_s on the object returned from #inspect if the Object isn't a String" # Expected "{\"a\"=>abc}" to equal "{:a=>abc}"
   fails "Hash#to_s does not call #to_s on a String returned from #inspect" # Expected "{\"a\"=>\"abc\"}" to equal "{:a=>\"abc\"}"

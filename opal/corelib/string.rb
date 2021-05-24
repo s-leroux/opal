@@ -7,7 +7,7 @@ class String < `String`
   include Comparable
 
   %x{
-    Opal.defineProperty(#{self}.$$prototype, '$$is_string', true);
+    Opal.defineProperty(#{self}.$$prototype, Opal.$$is_string_s, true);
 
     Opal.defineProperty(#{self}.$$prototype, '$$cast', function(string) {
       var klass = this.$$class;
@@ -116,7 +116,7 @@ class String < `String`
 
   def ==(other)
     %x{
-      if (other.$$is_string) {
+      if (other[Opal.$$is_string_s]) {
         return self.toString() === other.toString();
       }
       if ($respond_to(other, '$to_str')) {
@@ -131,7 +131,7 @@ class String < `String`
 
   def =~(other)
     %x{
-      if (other.$$is_string) {
+      if (other[Opal.$$is_string_s]) {
         #{raise TypeError, 'type mismatch: String given'};
       }
 
@@ -174,7 +174,7 @@ class String < `String`
       }
 
 
-      if (index.$$is_string) {
+      if (index[Opal.$$is_string_s]) {
         if (length != null) {
           #{raise TypeError}
         }
@@ -386,7 +386,7 @@ class String < `String`
 
   def delete_prefix(prefix)
     %x{
-      if (!prefix.$$is_string) {
+      if (!prefix[Opal.$$is_string_s]) {
         prefix = $coerce_to(prefix, #{String}, 'to_str');
       }
 
@@ -400,7 +400,7 @@ class String < `String`
 
   def delete_suffix(suffix)
     %x{
-      if (!suffix.$$is_string) {
+      if (!suffix[Opal.$$is_string_s]) {
         suffix = $coerce_to(suffix, #{String}, 'to_str');
       }
 
@@ -527,7 +527,7 @@ class String < `String`
           _replacement = #{`replacement`[`match[0]`].to_s};
         }
         else {
-          if (!replacement.$$is_string) {
+          if (!replacement[Opal.$$is_string_s]) {
             replacement = $coerce_to(replacement, #{String}, 'to_str');
           }
           _replacement = replacement.replace(/([\\]+)([0-9+&`'])/g, function (original, slashes, command) {
@@ -575,7 +575,7 @@ class String < `String`
 
   def include?(other)
     %x{
-      if (!other.$$is_string) {
+      if (!other[Opal.$$is_string_s]) {
         other = $coerce_to(other, #{String}, 'to_str');
       }
       return self.indexOf(other) !== -1;

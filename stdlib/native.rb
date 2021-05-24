@@ -585,7 +585,7 @@ class Hash
       for (var i = 0, length = keys.length; i < length; i++) {
         key = keys[i];
 
-        if (key.$$is_string) {
+        if (key[Opal.$$is_string_s]) {
           value = smap[key];
         } else {
           key = key.key;

@@ -312,7 +312,7 @@ module Kernel
     %x{
       var i, str, base_digits;
 
-      if (!value.$$is_string) {
+      if (!value[Opal.$$is_string_s]) {
         if (base !== undefined) {
           #{raise ArgumentError, 'base specified for non string value'}
         }
@@ -404,7 +404,7 @@ module Kernel
         #{raise TypeError, "can't convert nil into Float"}
       }
 
-      if (value.$$is_string) {
+      if (value[Opal.$$is_string_s]) {
         str = value.toString();
 
         str = str.replace(/(\d)_(?=\d)/g, '$1');
@@ -527,7 +527,7 @@ module Kernel
       if (exception == null) {
         exception = #{RuntimeError.new};
       }
-      else if (exception.$$is_string) {
+      else if (exception[Opal.$$is_string_s]) {
         exception = #{RuntimeError.new exception};
       }
       // using respond_to? and not an undefined check to avoid method_missing matching as true

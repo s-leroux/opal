@@ -83,13 +83,13 @@ class Exception < `Error`
       if (backtrace === nil) {
         self.backtrace = nil;
         self.stack = '';
-      } else if (backtrace.$$is_string) {
+      } else if (backtrace[Opal.$$is_string_s]) {
         self.backtrace = [backtrace];
         self.stack = backtrace;
       } else {
         if (backtrace.$$is_array) {
           for (i = 0, ii = backtrace.length; i < ii; i++) {
-            if (!backtrace[i].$$is_string) {
+            if (!backtrace[i][Opal.$$is_string_s]) {
               valid = false;
               break;
             }

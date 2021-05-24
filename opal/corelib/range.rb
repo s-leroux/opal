@@ -49,7 +49,7 @@ class Range
         return self;
       }
 
-      if (#{@begin}.$$is_string && #{@end}.$$is_string) {
+      if (#{@begin}[Opal.$$is_string_s] && #{@end}[Opal.$$is_string_s]) {
         #{@begin.upto(@end, @excl, &block)}
         return self;
       }
@@ -158,7 +158,7 @@ class Range
           return nil;
         }
 
-        if (#{@begin}.$$is_string && #{@end}.$$is_string) {
+        if (#{@begin}[Opal.$$is_string_s] && #{@end}[Opal.$$is_string_s]) {
           return nil;
         }
 
@@ -214,7 +214,7 @@ class Range
       end
     else
       %x{
-        if (#{@begin}.$$is_string && #{@end}.$$is_string && n % 1 !== 0) {
+        if (#{@begin}[Opal.$$is_string_s] && #{@end}[Opal.$$is_string_s] && n % 1 !== 0) {
           #{raise TypeError, 'no implicit conversion to float from string'}
         }
       }

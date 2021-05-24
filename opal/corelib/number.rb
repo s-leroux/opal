@@ -18,7 +18,7 @@ class Number < Numeric
       if (other === nil) {
         #{raise TypeError, "can't convert #{other.class} into Float"};
       }
-      else if (other.$$is_string) {
+      else if (other[Opal.$$is_string_s]) {
         return [#{Float(other)}, self];
       }
       else if (#{other.respond_to?(:to_f)}) {

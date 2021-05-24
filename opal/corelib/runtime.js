@@ -74,9 +74,13 @@
   var $$is_number_s = Symbol('$$is_number')
   Opal.$$is_number_s = $$is_number_s
 
+  var $$is_string_s = Symbol('$$is_string')
+  Opal.$$is_string_s = $$is_string_s
+
   Opal.propertySymbols = {
     '$$id': $$id_s,
     '$$is_number': $$is_number_s,
+    '$$is_string': $$is_string_s,
   }
 
   // Minify common function calls
@@ -1829,7 +1833,7 @@
 
   // Define a singleton method on the given object (see Opal.def).
   Opal.defs = function(obj, jsid, body) {
-    if (obj.$$is_string || obj[Opal.$$is_number]) {
+    if (obj[Opal.$$is_string_s] || obj[Opal.$$is_number]) {
       throw Opal.TypeError.$new("can't define singleton");
     }
     Opal.defn(Opal.get_singleton_class(obj), jsid, body)
@@ -1975,7 +1979,7 @@
     for (var i = 0, keys = from_hash.$$keys, smap = from_hash.$$smap, len = keys.length, key, value; i < len; i++) {
       key = keys[i];
 
-      if (key.$$is_string) {
+      if (key[Opal.$$is_string_s]) {
         value = smap[key];
       } else {
         value = key.value;
@@ -1987,7 +1991,7 @@
   };
 
   Opal.hash_put = function(hash, key, value) {
-    if (key.$$is_string) {
+    if (key[Opal.$$is_string_s]) {
       if (!$has_own.call(hash.$$smap, key)) {
         hash.$$keys.push(key);
       }
@@ -2025,7 +2029,7 @@
   };
 
   Opal.hash_get = function(hash, key) {
-    if (key.$$is_string) {
+    if (key[Opal.$$is_string_s]) {
       if ($has_own.call(hash.$$smap, key)) {
         return hash.$$smap[key];
       }
@@ -2050,7 +2054,7 @@
   Opal.hash_delete = function(hash, key) {
     var i, keys = hash.$$keys, length = keys.length, value;
 
-    if (key.$$is_string) {
+    if (key[Opal.$$is_string_s]) {
       if (typeof key !== "string") key = key.valueOf();
 
       if (!$has_own.call(hash.$$smap, key)) {
@@ -2111,7 +2115,7 @@
   Opal.hash_rehash = function(hash) {
     for (var i = 0, length = hash.$$keys.length, key_hash, bucket, last_bucket; i < length; i++) {
 
-      if (hash.$$keys[i].$$is_string) {
+      if (hash.$$keys[i][Opal.$$is_string_s]) {
         continue;
       }
 
@@ -2505,7 +2509,7 @@
   // Forward .toString() to #to_s
   $defineProperty(_Object.$$prototype, 'toString', function() {
     var to_s = this.$to_s();
-    if (to_s.$$is_string && typeof(to_s) === 'object') {
+    if (to_s[Opal.$$is_string_s] && typeof(to_s) === 'object') {
       // a string created using new String('string')
       return to_s.valueOf();
     } else {
