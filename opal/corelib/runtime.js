@@ -85,6 +85,7 @@
     '$$constructor',
     '$$name',
     '$$super',
+    '$$cvars',
   ];
 
   Opal.propertySymbols = {};
@@ -511,7 +512,7 @@
     $defineProperty(klass, Opal.$$is_class_s, true);
     $defineProperty(klass, Opal.$$is_a_module_s, true);
     $defineProperty(klass, Opal.$$super_s, superclass);
-    $defineProperty(klass, '$$cvars', {});
+    $defineProperty(klass, Opal.$$cvars_s, {});
     $defineProperty(klass, '$$own_included_modules', []);
     $defineProperty(klass, '$$own_prepended_modules', []);
     $defineProperty(klass, '$$ancestors', []);
@@ -646,7 +647,7 @@
     $defineProperty(module, '$$const', {});
     $defineProperty(module, Opal.$$is_module_s, true);
     $defineProperty(module, Opal.$$is_a_module_s, true);
-    $defineProperty(module, '$$cvars', {});
+    $defineProperty(module, Opal.$$cvars_s, {});
     $defineProperty(module, '$$iclasses', []);
     $defineProperty(module, '$$own_included_modules', []);
     $defineProperty(module, '$$own_prepended_modules', []);
@@ -883,8 +884,8 @@
     for (i = length - 1; i >= 0; i--) {
       var ancestor = ancestors[i];
 
-      for (var cvar in ancestor.$$cvars) {
-        result[cvar] = ancestor.$$cvars[cvar];
+      for (var cvar in ancestor[Opal.$$cvars_s]) {
+        result[cvar] = ancestor[Opal.$$cvars_s][cvar];
       }
     }
 
@@ -904,13 +905,13 @@
     for (i = length - 2; i >= 0; i--) {
       var ancestor = ancestors[i];
 
-      if ($has_own.call(ancestor.$$cvars, name)) {
-        ancestor.$$cvars[name] = value;
+      if ($has_own.call(ancestor[Opal.$$cvars_s], name)) {
+        ancestor[Opal.$$cvars_s][name] = value;
         return value;
       }
     }
 
-    module.$$cvars[name] = value;
+    module[Opal.$$cvars_s][name] = value;
 
     return value;
   };

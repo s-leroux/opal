@@ -229,9 +229,9 @@ class Module
     name = Opal.class_variable_name!(name)
 
     %x{
-      if (Opal.hasOwnProperty.call(self.$$cvars, name)) {
-        var value = self.$$cvars[name];
-        delete self.$$cvars[name];
+      if (Opal.hasOwnProperty.call(self[Opal.$$cvars_s], name)) {
+        var value = self[Opal.$$cvars_s][name];
+        delete self[Opal.$$cvars_s][name];
         return value;
       } else {
         #{raise NameError, "cannot remove #{name} for #{self}"}
@@ -668,8 +668,8 @@ class Module
 
   def copy_class_variables(other)
     %x{
-      for (var name in other.$$cvars) {
-        self.$$cvars[name] = other.$$cvars[name];
+      for (var name in other[Opal.$$cvars_s]) {
+        self[Opal.$$cvars_s][name] = other[Opal.$$cvars_s][name];
       }
     }
   end
