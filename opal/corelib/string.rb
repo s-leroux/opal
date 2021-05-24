@@ -182,7 +182,7 @@ class String < `String`
       }
 
 
-      if (index.$$is_regexp) {
+      if (index[Opal.$$is_regexp_s]) {
         var match = self.match(index);
 
         if (match === null) {
@@ -499,7 +499,7 @@ class String < `String`
 
       var result = '', match_data = nil, index = 0, match, _replacement;
 
-      if (pattern.$$is_regexp) {
+      if (pattern[Opal.$$is_regexp_s]) {
         pattern = Opal.global_multiline_regexp(pattern);
       } else {
         pattern = $coerce_to(pattern, #{String}, 'to_str');
@@ -600,7 +600,7 @@ class String < `String`
         }
       }
 
-      if (search.$$is_regexp) {
+      if (search[Opal.$$is_regexp_s]) {
         regex = Opal.global_multiline_regexp(search);
         while (true) {
           match = regex.exec(self);
@@ -852,7 +852,7 @@ class String < `String`
     %x{
       var i, m;
 
-      if (sep.$$is_regexp) {
+      if (sep[Opal.$$is_regexp_s]) {
         m = sep.exec(self);
         if (m === null) {
           i = -1;
@@ -898,7 +898,7 @@ class String < `String`
         }
       }
 
-      if (search.$$is_regexp) {
+      if (search[Opal.$$is_regexp_s]) {
         m = null;
         r = Opal.global_multiline_regexp(search);
         while (true) {
@@ -949,7 +949,7 @@ class String < `String`
     %x{
       var i, m, r, _m;
 
-      if (sep.$$is_regexp) {
+      if (sep[Opal.$$is_regexp_s]) {
         m = null;
         r = Opal.global_multiline_regexp(sep);
 
@@ -997,7 +997,7 @@ class String < `String`
           match_data = nil,
           match;
 
-      if (pattern.$$is_regexp) {
+      if (pattern[Opal.$$is_regexp_s]) {
         pattern = Opal.global_multiline_regexp(pattern);
       } else {
         pattern = $coerce_to(pattern, #{String}, 'to_str');
@@ -1051,7 +1051,7 @@ class String < `String`
           match,
           i, ii;
 
-      if (pattern.$$is_regexp) {
+      if (pattern[Opal.$$is_regexp_s]) {
         pattern = Opal.global_multiline_regexp(pattern);
       } else {
         pattern = $coerce_to(pattern, #{String}, 'to_str').$to_s();
@@ -1158,7 +1158,7 @@ class String < `String`
 
   def sub(pattern, replacement = undefined, &block)
     %x{
-      if (!pattern.$$is_regexp) {
+      if (!pattern[Opal.$$is_regexp_s]) {
         pattern = $coerce_to(pattern, #{String}, 'to_str');
         pattern = new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
       }

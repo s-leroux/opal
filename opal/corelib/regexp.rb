@@ -7,7 +7,7 @@ class Regexp < `RegExp`
   EXTENDED = 2
   MULTILINE = 4
 
-  `Opal.defineProperty(self[Opal.$$prototype_s], '$$is_regexp', true)`
+  `Opal.defineProperty(self[Opal.$$prototype_s], Opal.$$is_regexp_s, true)`
 
   class << self
     def allocate
@@ -37,7 +37,7 @@ class Regexp < `RegExp`
           return /(?!)/;
         }
         // return fast if there's only one element
-        if (parts.length == 1 && parts[0].$$is_regexp) {
+        if (parts.length == 1 && parts[0][Opal.$$is_regexp_s]) {
           return parts[0];
         }
         // cover the 2 arrays passed as arguments case
@@ -56,7 +56,7 @@ class Regexp < `RegExp`
           if (part[Opal.$$is_string_s]) {
             quoted_validated.push(#{escape(`part`)});
           }
-          else if (part.$$is_regexp) {
+          else if (part[Opal.$$is_regexp_s]) {
             each_part_options = #{`part`.options};
             if (options != undefined && options != each_part_options) {
               #{raise TypeError, 'All expressions must use the same options'}
@@ -75,7 +75,7 @@ class Regexp < `RegExp`
 
     def new(regexp, options = undefined)
       %x{
-        if (regexp.$$is_regexp) {
+        if (regexp[Opal.$$is_regexp_s]) {
           return new RegExp(regexp);
         }
 

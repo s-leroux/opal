@@ -98,6 +98,7 @@
     '$$module',
     '$$root',
     '$$prototype',
+    '$$is_regexp',
   ];
 
   Opal.propertySymbols = {};
