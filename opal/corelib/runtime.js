@@ -101,6 +101,7 @@
     '$$is_regexp',
     '$$const_cache',
     '$$class',
+    '$$cast',
   ];
 
   Opal.propertySymbols = {};
