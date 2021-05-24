@@ -529,7 +529,7 @@
     $defineProperty(klass, '$$prototype', constructor.prototype);
     $defineProperty(klass, '$$const', {});
     $defineProperty(klass, Opal.$$is_class_s, true);
-    $defineProperty(klass, Opal.$$is_a_module, true);
+    $defineProperty(klass, Opal.$$is_a_module_s, true);
     $defineProperty(klass, '$$super', superclass);
     $defineProperty(klass, '$$cvars', {});
     $defineProperty(klass, '$$own_included_modules', []);
@@ -665,7 +665,7 @@
     $defineProperty(module, '$$prototype', constructor.prototype);
     $defineProperty(module, '$$const', {});
     $defineProperty(module, Opal.$$is_module_s, true);
-    $defineProperty(module, Opal.$$is_a_module, true);
+    $defineProperty(module, Opal.$$is_a_module_s, true);
     $defineProperty(module, '$$cvars', {});
     $defineProperty(module, '$$iclasses', []);
     $defineProperty(module, '$$own_included_modules', []);
