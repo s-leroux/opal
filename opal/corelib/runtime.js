@@ -99,6 +99,7 @@
     '$$root',
     '$$prototype',
     '$$is_regexp',
+    '$$const_cache',
   ];
 
   Opal.propertySymbols = {};
@@ -345,9 +346,9 @@
       throw new Opal.TypeError(cref.toString() + " is not a class/module");
     }
 
-    if ((cache = cref.$$const_cache) == null) {
-      $defineProperty(cref, '$$const_cache', Object.create(null));
-      cache = cref.$$const_cache;
+    if ((cache = cref[Opal.$$const_cache_s]) == null) {
+      $defineProperty(cref, Opal.$$const_cache_s, Object.create(null));
+      cache = cref[Opal.$$const_cache_s];
     }
     cached = cache[name];
 
@@ -370,9 +371,9 @@
   Opal.const_get_relative = function(nesting, name, skip_missing) {
     var cref = nesting[0], result, current_version = Opal.const_cache_version, cache, cached;
 
-    if ((cache = nesting.$$const_cache) == null) {
-      $defineProperty(nesting, '$$const_cache', Object.create(null));
-      cache = nesting.$$const_cache;
+    if ((cache = nesting[Opal.$$const_cache_s]) == null) {
+      $defineProperty(nesting, Opal.$$const_cache_s, Object.create(null));
+      cache = nesting[Opal.$$const_cache_s];
     }
     cached = cache[name];
 
