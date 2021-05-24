@@ -87,6 +87,7 @@
     '$$super',
     '$$cvars',
     '$$ancestors_cache_version',
+    '$$ancestors',
   ];
 
   Opal.propertySymbols = {};
@@ -516,7 +517,7 @@
     $defineProperty(klass, Opal.$$cvars_s, {});
     $defineProperty(klass, '$$own_included_modules', []);
     $defineProperty(klass, '$$own_prepended_modules', []);
-    $defineProperty(klass, '$$ancestors', []);
+    $defineProperty(klass, Opal.$$ancestors_s, []);
     $defineProperty(klass, Opal.$$ancestors_cache_version_s, null);
 
     $defineProperty(klass.$$prototype, '$$class', klass);
@@ -652,7 +653,7 @@
     $defineProperty(module, '$$iclasses', []);
     $defineProperty(module, '$$own_included_modules', []);
     $defineProperty(module, '$$own_prepended_modules', []);
-    $defineProperty(module, '$$ancestors', [module]);
+    $defineProperty(module, Opal.$$ancestors_s, [module]);
     $defineProperty(module, Opal.$$ancestors_cache_version_s, null);
 
     $set_proto(module, Opal.Module.prototype);
@@ -1280,7 +1281,7 @@
     if (!module) { return []; }
 
     if (module[Opal.$$ancestors_cache_version_s] === Opal.const_cache_version) {
-      return module.$$ancestors;
+      return module[Opal.$$ancestors_s];
     }
 
     var result = [], i, mods, length;
@@ -1296,7 +1297,7 @@
     }
 
     module[Opal.$$ancestors_cache_version_s] = Opal.const_cache_version;
-    module.$$ancestors = result;
+    module[Opal.$$ancestors_s] = result;
 
     return result;
   };
