@@ -96,6 +96,7 @@
     '$$singleton_of',
     '$$iclass',
     '$$module',
+    '$$root',
   ];
 
   Opal.propertySymbols = {};
@@ -927,7 +928,7 @@
   };
 
   function isRoot(proto) {
-    return proto.hasOwnProperty(Opal.$$iclass_s) && proto.hasOwnProperty('$$root');
+    return proto.hasOwnProperty(Opal.$$iclass_s) && proto.hasOwnProperty(Opal.$$root_s);
   }
 
   function own_included_modules(module) {
@@ -1136,7 +1137,7 @@
       end_chain_on = Object.getPrototypeOf(dummy_prepender);
       while (end_chain_on != null) {
         if (
-          end_chain_on.hasOwnProperty('$$root') ||
+          end_chain_on.hasOwnProperty(Opal.$$root_s) ||
           end_chain_on === prepender_iclass ||
           !end_chain_on.hasOwnProperty(Opal.$$iclass_s)
         ) {
@@ -1206,7 +1207,7 @@
   function chain_iclasses(iclasses) {
     var length = iclasses.length, first = iclasses[0];
 
-    $defineProperty(first, '$$root', true);
+    $defineProperty(first, Opal.$$root_s, true);
 
     if (length === 1) {
       return { first: first, last: first };
