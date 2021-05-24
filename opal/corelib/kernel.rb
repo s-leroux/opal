@@ -133,7 +133,7 @@ module Kernel
           }
         }
 
-        self_singleton_class.$$const = Object.assign({}, other_singleton_class.$$const);
+        self_singleton_class[Opal.$$const_s] = Object.assign({}, other_singleton_class[Opal.$$const_s]);
         Object.setPrototypeOf(
           self_singleton_class[Opal.$$prototype_s],
           Object.getPrototypeOf(other_singleton_class[Opal.$$prototype_s])

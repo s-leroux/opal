@@ -251,7 +251,7 @@ class Module
             i, ii;
 
         for(i = 0, ii = nesting.length; i < ii; i++) {
-          for (constant in nesting[i].$$const) {
+          for (constant in nesting[i][Opal.$$const_s]) {
             constants[constant] = true;
           }
         }
@@ -288,7 +288,7 @@ class Module
 
       for (i = 0, ii = modules.length; i < ii; i++) {
         module = modules[i];
-        if (module.$$const[name] != null) {
+        if (module[Opal.$$const_s][name] != null) {
           return true;
         }
       }
@@ -676,7 +676,7 @@ class Module
 
   def copy_constants(other)
     %x{
-      var name, other_constants = other.$$const;
+      var name, other_constants = other[Opal.$$const_s];
 
       for (name in other_constants) {
         Opal.const_set(self, name, other_constants[name]);

@@ -102,6 +102,7 @@
     '$$const_cache',
     '$$class',
     '$$cast',
+    '$$const',
   ];
 
   Opal.propertySymbols = {};
@@ -272,7 +273,7 @@
 
   // Get the constant in the scope of the current cref
   function const_get_name(cref, name) {
-    if (cref) return cref.$$const[name];
+    if (cref) return cref[Opal.$$const_s][name];
   }
 
   // Walk up the nesting array looking for the constant
@@ -284,7 +285,7 @@
     // If the nesting is not empty the constant is looked up in its elements
     // and in order. The ancestors of those elements are ignored.
     for (i = 0, ii = nesting.length; i < ii; i++) {
-      constant = nesting[i].$$const[name];
+      constant = nesting[i][Opal.$$const_s][name];
       if (constant != null) return constant;
     }
   }
@@ -298,8 +299,8 @@
     ancestors = Opal.ancestors(cref);
 
     for (i = 0, ii = ancestors.length; i < ii; i++) {
-      if (ancestors[i].$$const && $has_own.call(ancestors[i].$$const, name)) {
-        return ancestors[i].$$const[name];
+      if (ancestors[i][Opal.$$const_s] && $has_own.call(ancestors[i][Opal.$$const_s], name)) {
+        return ancestors[i][Opal.$$const_s][name];
       }
     }
   }
@@ -403,13 +404,13 @@
       if (value.$$base_module == null) value.$$base_module = cref;
     }
 
-    cref.$$const = (cref.$$const || Object.create(null));
-    cref.$$const[name] = value;
+    cref[Opal.$$const_s] = (cref[Opal.$$const_s] || Object.create(null));
+    cref[Opal.$$const_s][name] = value;
 
     // Add a short helper to navigate constants manually.
     // @example
     //   Opal.$$.Regexp.$$.IGNORECASE
-    cref.$$ = cref.$$const;
+    cref.$$ = cref[Opal.$$const_s];
 
     Opal.const_cache_version++;
 
@@ -438,7 +439,7 @@
       // Do not show Objects constants unless we're querying Object itself
       if (cref !== _Object && module == _Object) break;
 
-      for (constant in module.$$const) {
+      for (constant in module[Opal.$$const_s]) {
         constants[constant] = true;
       }
     }
@@ -450,9 +451,9 @@
   Opal.const_remove = function(cref, name) {
     Opal.const_cache_version++;
 
-    if (cref.$$const[name] != null) {
-      var old = cref.$$const[name];
-      delete cref.$$const[name];
+    if (cref[Opal.$$const_s][name] != null) {
+      var old = cref[Opal.$$const_s][name];
+      delete cref[Opal.$$const_s][name];
       return old;
     }
 
@@ -524,7 +525,7 @@
     $defineProperty(klass, Opal.$$name_s, name);
     $defineProperty(klass, Opal.$$constructor_s, constructor);
     $defineProperty(klass, Opal.$$prototype_s, constructor.prototype);
-    $defineProperty(klass, '$$const', {});
+    $defineProperty(klass, Opal.$$const_s, {});
     $defineProperty(klass, Opal.$$is_class_s, true);
     $defineProperty(klass, Opal.$$is_a_module_s, true);
     $defineProperty(klass, Opal.$$super_s, superclass);
@@ -660,7 +661,7 @@
 
     $defineProperty(module, Opal.$$name_s, name);
     $defineProperty(module, Opal.$$prototype_s, constructor.prototype);
-    $defineProperty(module, '$$const', {});
+    $defineProperty(module, Opal.$$const_s, {});
     $defineProperty(module, Opal.$$is_module_s, true);
     $defineProperty(module, Opal.$$is_a_module_s, true);
     $defineProperty(module, Opal.$$cvars_s, {});
@@ -2525,7 +2526,7 @@
   $set_proto(Opal.Class, Opal.Class[Opal.$$prototype_s]);
 
   // BasicObject can reach itself, avoid const_set to skip the $$base_module logic
-  BasicObject.$$const["BasicObject"] = BasicObject;
+  BasicObject[Opal.$$const_s]["BasicObject"] = BasicObject;
 
   // Assign basic constants
   Opal.const_set(_Object, "BasicObject",  BasicObject);
