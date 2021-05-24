@@ -572,9 +572,9 @@ class Module
 
       while (base) {
         // Give up if any of the ancestors is unnamed
-        if (base.$$name === nil || base.$$name == null) return nil;
+        if (base[Opal.$$name_s] === nil || base[Opal.$$name_s] == null) return nil;
 
-        result.unshift(base.$$name);
+        result.unshift(base[Opal.$$name_s]);
 
         base = base.$$base_module;
 

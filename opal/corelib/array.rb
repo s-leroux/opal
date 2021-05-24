@@ -34,7 +34,7 @@ class Array < `Array`
     }
 
     function toArraySubclass(obj, klass) {
-      if (klass.$$name === Opal.Array) {
+      if (klass[Opal.$$name_s] === Opal.Array) {
         return obj;
       } else {
         return klass.$allocate().$replace(#{`obj`.to_a});

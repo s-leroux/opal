@@ -107,6 +107,9 @@
   var $$constructor_s = Symbol('$$constructor')
   Opal.$$constructor_s = $$constructor_s
 
+  var $$name_s = Symbol('$$name')
+  Opal.$$name_s = $$name_s
+
   Opal.propertySymbols = {
     '$$id': $$id_s,
     '$$is_number': $$is_number_s,
@@ -121,6 +124,7 @@
     '$$is_module': $$is_module_s,
     '$$is_a_module': $$is_a_module_s,
     '$$constructor': $$constructor_s,
+    '$$name': $$name_s,
   }
 
   // Minify common function calls
@@ -410,7 +414,7 @@
     if (cref == null || cref === '::') cref = _Object;
 
     if (value[Opal.$$is_a_module_s]) {
-      if (value.$$name == null || value.$$name === nil) value.$$name = name;
+      if (value[Opal.$$name_s] == null || value[Opal.$$name_s] === nil) value[Opal.$$name_s] = name;
       if (value.$$base_module == null) value.$$base_module = cref;
     }
 
@@ -532,7 +536,7 @@
 
     klass = constructor;
 
-    $defineProperty(klass, '$$name', name);
+    $defineProperty(klass, Opal.$$name_s, name);
     $defineProperty(klass, Opal.$$constructor_s, constructor);
     $defineProperty(klass, '$$prototype', constructor.prototype);
     $defineProperty(klass, '$$const', {});
@@ -585,7 +589,7 @@
 
   function ensureSuperclassMatch(klass, superclass) {
     if (klass.$$super !== superclass) {
-      throw Opal.TypeError.$new("superclass mismatch for class " + klass.$$name);
+      throw Opal.TypeError.$new("superclass mismatch for class " + klass[Opal.$$name_s]);
     }
   }
 
@@ -669,7 +673,7 @@
     if (name)
       $defineProperty(constructor, 'displayName', name+'.constructor');
 
-    $defineProperty(module, '$$name', name);
+    $defineProperty(module, Opal.$$name_s, name);
     $defineProperty(module, '$$prototype', constructor.prototype);
     $defineProperty(module, '$$const', {});
     $defineProperty(module, Opal.$$is_module_s, true);
@@ -1435,10 +1439,10 @@
   Opal.ac = function(actual, expected, object, meth) {
     var inspect = '';
     if (object[Opal.$$is_a_module_s]) {
-      inspect += object.$$name + '.';
+      inspect += object[Opal.$$name_s] + '.';
     }
     else {
-      inspect += object.$$class.$$name + '#';
+      inspect += object.$$class[Opal.$$name_s] + '#';
     }
     inspect += meth;
 

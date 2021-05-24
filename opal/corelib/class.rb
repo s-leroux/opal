@@ -28,7 +28,7 @@ class Class
   def initialize_dup(original)
     initialize_copy(original)
     %x{
-      self.$$name = null;
+      self[Opal.$$name_s] = null;
       self.$$full_name = null;
     }
   end

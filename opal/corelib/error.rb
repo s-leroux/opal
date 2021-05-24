@@ -6,7 +6,7 @@ class Exception < `Error`
     %x{
       var message   = (args.length > 0) ? args[0] : nil;
       var error     = new self[Opal.$$constructor_s](message);
-      error.name    = self.$$name;
+      error.name    = self[Opal.$$name_s];
       error.message = message;
       Opal.send(error, error.$initialize, args);
 
