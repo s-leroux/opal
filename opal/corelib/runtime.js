@@ -93,6 +93,7 @@
     '$$iclasses',
     '$$meta',
     '$$is_singleton',
+    '$$singleton_of',
   ];
 
   Opal.propertySymbols = {};
@@ -752,7 +753,7 @@
     meta = Opal.allocate_class(null, superclass, function(){});
 
     $defineProperty(meta, Opal.$$is_singleton_s, true);
-    $defineProperty(meta, '$$singleton_of', klass);
+    $defineProperty(meta, Opal.$$singleton_of_s, klass);
     $defineProperty(klass, Opal.$$meta_s, meta);
     $set_proto(klass, meta.$$prototype);
     // Restoring ClassName.class
@@ -769,7 +770,7 @@
     var meta = Opal.allocate_class(null, Opal.Module, function(){});
 
     $defineProperty(meta, Opal.$$is_singleton_s, true);
-    $defineProperty(meta, '$$singleton_of', mod);
+    $defineProperty(meta, Opal.$$singleton_of_s, mod);
     $defineProperty(mod, Opal.$$meta_s, meta);
     $set_proto(mod, meta.$$prototype);
     // Restoring ModuleName.class
@@ -787,7 +788,7 @@
         klass = Opal.allocate_class(nil, superclass, function(){});
 
     $defineProperty(klass, Opal.$$is_singleton_s, true);
-    $defineProperty(klass, '$$singleton_of', object);
+    $defineProperty(klass, Opal.$$singleton_of_s, object);
 
     delete klass.$$prototype.$$class;
 
@@ -1846,7 +1847,7 @@
       }
     }
 
-    var singleton_of = module.$$singleton_of;
+    var singleton_of = module[Opal.$$singleton_of_s];
     if (module.$method_added && !module.$method_added.$$stub && !singleton_of) {
       module.$method_added(jsid.substr(1));
     }

@@ -47,7 +47,7 @@ class Class
 
   def to_s
     %x{
-      var singleton_of = self.$$singleton_of;
+      var singleton_of = self[Opal.$$singleton_of_s];
 
       if (singleton_of && singleton_of[Opal.$$is_a_module_s]) {
         return #{"#<Class:#{`singleton_of`.name}>"};
