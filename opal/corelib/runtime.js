@@ -92,6 +92,9 @@
   var $$is_integer_class_s = Symbol('$$is_integer_class')
   Opal.$$is_integer_class_s = $$is_integer_class_s
 
+  var $$is_number_class_s = Symbol('$$is_number_class')
+  Opal.$$is_number_class_s = $$is_number_class_s
+
   Opal.propertySymbols = {
     '$$id': $$id_s,
     '$$is_number': $$is_number_s,
@@ -101,6 +104,7 @@
     '$$is_hash': $$is_hash_s,
     '$$is_range': $$is_range_s,
     '$$is_integer_class': $$is_integer_class_s,
+    '$$is_number_class': $$is_number_class_s,
   }
 
   // Minify common function calls
@@ -1582,7 +1586,7 @@
       return true;
     }
 
-    if (object[Opal.$$is_number_s] && klass.$$is_number_class) {
+    if (object[Opal.$$is_number_s] && klass[Opal.$$is_number_class_s]) {
       return (klass[Opal.$$is_integer_class_s]) ? (object % 1) === 0 : true;
     }
 
