@@ -12,7 +12,7 @@ class Hash
   include Enumerable
 
   # Mark all hash instances as valid hashes (used to check keyword args, etc)
-  `self.$$prototype.$$is_hash = true`
+  `self.$$prototype[Opal.$$is_hash_s] = true`
 
   def self.[](*argv)
     %x{
@@ -98,7 +98,7 @@ class Hash
         return true;
       }
 
-      if (!other.$$is_hash) {
+      if (!other[Opal.$$is_hash_s]) {
         return false;
       }
 
@@ -768,7 +768,7 @@ class Hash
 
   def merge!(other, &block)
     %x{
-      if (!other.$$is_hash) {
+      if (!other[Opal.$$is_hash_s]) {
         other = #{Opal.coerce_to!(other, Hash, :to_hash)};
       }
 

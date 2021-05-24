@@ -83,12 +83,16 @@
   var $$is_array_s = Symbol('$$is_array')
   Opal.$$is_array_s = $$is_array_s
 
+  var $$is_hash_s = Symbol('$$is_hash')
+  Opal.$$is_hash_s = $$is_hash_s
+
   Opal.propertySymbols = {
     '$$id': $$id_s,
     '$$is_number': $$is_number_s,
     '$$is_string': $$is_string_s,
     '$$is_boolean': $$is_boolean_s,
     '$$is_array': $$is_array_s,
+    '$$is_hash': $$is_hash_s,
   }
 
   // Minify common function calls
@@ -1588,12 +1592,12 @@
   // Helpers for extracting kwsplats
   // Used for: { **h }
   Opal.to_hash = function(value) {
-    if (value.$$is_hash) {
+    if (value[Opal.$$is_hash_s]) {
       return value;
     }
     else if (value['$respond_to?']('to_hash', true)) {
       var hash = value.$to_hash();
-      if (hash.$$is_hash) {
+      if (hash[Opal.$$is_hash_s]) {
         return hash;
       }
       else {
@@ -2184,7 +2188,7 @@
   Opal.hash = function() {
     var arguments_length = arguments.length, args, hash, i, length, key, value;
 
-    if (arguments_length === 1 && arguments[0].$$is_hash) {
+    if (arguments_length === 1 && arguments[0][Opal.$$is_hash_s]) {
       return arguments[0];
     }
 

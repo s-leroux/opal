@@ -523,7 +523,7 @@ class String < `String`
           _replacement = block(match[0]);
           pattern.lastIndex = lastIndex; // save and restore lastIndex
         }
-        else if (replacement.$$is_hash) {
+        else if (replacement[Opal.$$is_hash_s]) {
           _replacement = #{`replacement`[`match[0]`].to_s};
         }
         else {
@@ -1178,7 +1178,7 @@ class String < `String`
           }
           result = self.slice(0, match.index) + block(match[0]) + self.slice(match.index + match[0].length);
 
-        } else if (replacement.$$is_hash) {
+        } else if (replacement[Opal.$$is_hash_s]) {
 
           result = self.slice(0, match.index) + #{`replacement`[`match[0]`].to_s} + self.slice(match.index + match[0].length);
 
