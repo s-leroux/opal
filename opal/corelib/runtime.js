@@ -182,6 +182,10 @@
   };
 
   function $defineProperty(object, name, initialValue) {
+    if (typeof(name) === "undefined") {
+      throw new Opal.TypeError("'undefined' is not a valid property name");
+    }
+
     if (typeof(object) === "string") {
       // Special case for:
       //   s = "string"
