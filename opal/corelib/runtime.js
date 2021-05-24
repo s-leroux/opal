@@ -90,6 +90,7 @@
     '$$ancestors',
     '$$own_included_modules',
     '$$own_prepended_modules',
+    '$$iclasses',
   ];
 
   Opal.propertySymbols = {};
@@ -652,7 +653,7 @@
     $defineProperty(module, Opal.$$is_module_s, true);
     $defineProperty(module, Opal.$$is_a_module_s, true);
     $defineProperty(module, Opal.$$cvars_s, {});
-    $defineProperty(module, '$$iclasses', []);
+    $defineProperty(module, Opal.$$iclasses_s, []);
     $defineProperty(module, Opal.$$own_included_modules_s, []);
     $defineProperty(module, Opal.$$own_prepended_modules_s, []);
     $defineProperty(module, Opal.$$ancestors_s, [module]);
@@ -1168,7 +1169,7 @@
     var iclass = create_dummy_iclass(module);
 
     if (module[Opal.$$is_module_s]) {
-      module.$$iclasses.push(iclass);
+      module[Opal.$$iclasses_s].push(iclass);
     }
 
     return iclass;
@@ -1837,7 +1838,7 @@
         Opal.defs(module, jsid, body)
       }
 
-      for (var i = 0, iclasses = module.$$iclasses, length = iclasses.length; i < length; i++) {
+      for (var i = 0, iclasses = module[Opal.$$iclasses_s], length = iclasses.length; i < length; i++) {
         var iclass = iclasses[i];
         $defineProperty(iclass, jsid, body);
       }
