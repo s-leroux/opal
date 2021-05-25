@@ -489,7 +489,7 @@ module Kernel
       raise ArgumentError, 'tried to create Proc object without a block'
     end
 
-    `block.$$is_lambda = false`
+    `block[Opal.$$is_lambda_s] = false`
     block
   end
 

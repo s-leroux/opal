@@ -109,6 +109,7 @@
     '$$dummy',
     '$$define_methods_on',
     '$$is_proc',
+    '$$is_lambda',
   ];
 
   Opal.propertySymbols = {};
@@ -1785,7 +1786,7 @@
   };
 
   Opal.lambda = function(block) {
-    block.$$is_lambda = true;
+    block[Opal.$$is_lambda_s] = true;
     return block;
   };
 

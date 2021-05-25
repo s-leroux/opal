@@ -42,7 +42,7 @@ class Method
     %x{
       var proc = self.$call.bind(self);
       proc.$$unbound = #{@method};
-      proc.$$is_lambda = true;
+      proc[Opal.$$is_lambda_s] = true;
       proc.$$arity = #{@method}.$$arity;
       proc.$$parameters = #{@method}.$$parameters;
       return proc;
