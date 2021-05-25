@@ -34,11 +34,11 @@ describe 'Opal.is_a' do
     end
 
     it 'can rely on Number subclasses having $$is_integer_class_s on their prototype' do
-      `!!#{Numeric}[Opal.$$is_integer_class_s].should == false
-      `!!#{Number}[Opal.$$is_integer_class_s].should == false
-      `!!#{Fixnum}[Opal.$$is_integer_class_s].should == false
-      `!!#{Integer}[Opal.$$is_integer_class_s].should == true
-      `!!#{Float}[Opal.$$is_integer_class_s].should == false
+      `!!#{Numeric}[Opal.$$is_integer_class_s]`.should == false
+      `!!#{Number}[Opal.$$is_integer_class_s]`.should == false
+      `!!#{Fixnum}[Opal.$$is_integer_class_s]`.should == false
+      `!!#{Integer}[Opal.$$is_integer_class_s]`.should == true
+      `!!#{Float}[Opal.$$is_integer_class_s]`.should == false
     end
 
     it 'works for non-Opal objects' do
