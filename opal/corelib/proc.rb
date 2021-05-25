@@ -1,7 +1,7 @@
 # helpers: slice
 
 class Proc < `Function`
-  `Opal.defineProperty(self[Opal.$$prototype_s], '$$is_proc', true)`
+  `Opal.defineProperty(self[Opal.$$prototype_s], Opal.$$is_proc_s, true)`
   `Opal.defineProperty(self[Opal.$$prototype_s], '$$is_lambda', false)`
 
   def self.new(&block)

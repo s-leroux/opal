@@ -108,6 +108,7 @@
     '$$bridge',
     '$$dummy',
     '$$define_methods_on',
+    '$$is_proc',
   ];
 
   Opal.propertySymbols = {};
