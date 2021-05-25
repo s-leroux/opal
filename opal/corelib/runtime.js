@@ -107,6 +107,7 @@
     '$$prepended',
     '$$bridge',
     '$$dummy',
+    '$$define_methods_on',
   ];
 
   Opal.propertySymbols = {};
@@ -824,7 +825,7 @@
           proto = ancestor[Opal.$$prototype_s];
 
       if (proto.hasOwnProperty(Opal.$$dummy_s)) {
-        proto = proto.$$define_methods_on;
+        proto = proto[Opal.$$define_methods_on_s];
       }
 
       var props = Object.getOwnPropertyNames(proto);
@@ -855,7 +856,7 @@
         proto = mod[Opal.$$prototype_s];
 
     if (proto.hasOwnProperty(Opal.$$dummy_s)) {
-      proto = proto.$$define_methods_on;
+      proto = proto[Opal.$$define_methods_on_s];
     }
 
     var props = Object.getOwnPropertyNames(proto);
@@ -964,7 +965,7 @@
 
     if (module[Opal.$$prototype_s].hasOwnProperty(Opal.$$dummy_s)) {
       while (proto) {
-        if (proto === module[Opal.$$prototype_s].$$define_methods_on) {
+        if (proto === module[Opal.$$prototype_s][Opal.$$define_methods_on_s]) {
           break;
         }
 
@@ -1120,13 +1121,13 @@
     if (dummy_prepender.hasOwnProperty(Opal.$$dummy_s)) {
       // The module already has some prepended modules
       // which means that we don't need to make it "dummy"
-      prepender_iclass = dummy_prepender.$$define_methods_on;
+      prepender_iclass = dummy_prepender[Opal.$$define_methods_on_s];
     } else {
       // Making the module "dummy"
       prepender_iclass = create_dummy_iclass(prepender);
       flush_methods_in(prepender);
       $defineProperty(dummy_prepender, Opal.$$dummy_s, true);
-      $defineProperty(dummy_prepender, '$$define_methods_on', prepender_iclass);
+      $defineProperty(dummy_prepender, Opal.$$define_methods_on_s, prepender_iclass);
 
       // Converting
       //   dummy(prepender) -> previous_parent
@@ -1197,7 +1198,7 @@
         proto = module[Opal.$$prototype_s];
 
     if (proto.hasOwnProperty(Opal.$$dummy_s)) {
-      proto = proto.$$define_methods_on;
+      proto = proto[Opal.$$define_methods_on_s];
     }
 
     var props = Object.getOwnPropertyNames(proto),
@@ -1468,7 +1469,7 @@
           proto = ancestor[Opal.$$prototype_s];
 
       if (proto.hasOwnProperty(Opal.$$dummy_s)) {
-        proto = proto.$$define_methods_on;
+        proto = proto[Opal.$$define_methods_on_s];
       }
 
       if (proto.hasOwnProperty(jsid)) {
@@ -1845,7 +1846,7 @@
 
     var proto = module[Opal.$$prototype_s];
     if (proto.hasOwnProperty(Opal.$$dummy_s)) {
-      proto = proto.$$define_methods_on;
+      proto = proto[Opal.$$define_methods_on_s];
     }
     $defineProperty(proto, jsid, body);
 
