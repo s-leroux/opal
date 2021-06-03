@@ -150,7 +150,7 @@ class Module
         Opal.defineProperty(proto, ivar, nil);
 
         body.$$parameters = [];
-        body.$$arity = 0;
+        body[Opal.s.$$arity] = 0;
 
         Opal.defn(self, id, body);
       }
@@ -177,7 +177,7 @@ class Module
         })(ivar);
 
         body.$$parameters = [['req']];
-        body.$$arity = 1;
+        body[Opal.s.$$arity] = 1;
 
         // initialize the instance variable as nil
         Opal.defineProperty(proto, ivar, nil);

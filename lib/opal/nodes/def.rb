@@ -64,7 +64,7 @@ module Opal
         unshift "#{scope_name} = " if scope_name
         line '}'
 
-        push ", #{scope_name}.$$arity = #{arity}"
+        push ", #{scope_name}[Opal.s.$$arity] = #{arity}"
 
         if compiler.arity_check?
           push ", #{scope_name}.$$parameters = #{parameters_code}"

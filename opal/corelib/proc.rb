@@ -83,7 +83,7 @@ class Proc < `Function`
       if (self.$$is_curried) {
         return -1;
       } else {
-        return self.$$arity;
+        return self[Opal.s.$$arity];
       }
     }
   end

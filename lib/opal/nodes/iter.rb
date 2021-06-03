@@ -34,7 +34,7 @@ module Opal
         unshift "(#{identity} = function(", inline_params, '){'
         push "}, #{identity}.$$s = self,"
         push " #{identity}.$$brk = $brk," if contains_break?
-        push " #{identity}.$$arity = #{arity},"
+        push " #{identity}[Opal.s.$$arity] = #{arity},"
 
         if compiler.arity_check?
           push " #{identity}.$$parameters = #{parameters_code},"

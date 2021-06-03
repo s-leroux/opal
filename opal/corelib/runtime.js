@@ -85,6 +85,7 @@
   Opal.s('$$alias_of');
   Opal.s('$$ancestors');
   Opal.s('$$ancestors_cache_version');
+  Opal.s('$$arity');
   Opal.s('$$autoload');
   Opal.s('$$base_module');
   Opal.s('$$bridge');
@@ -2159,7 +2160,7 @@
     // Try to make the browser pick the right name
     alias.displayName       = name;
 
-    alias.$$arity           = body.$$arity;
+    alias[Opal.s.$$arity]           = body[Opal.s.$$arity];
     alias.$$parameters      = body.$$parameters;
     alias.$$source_location = body.$$source_location;
     alias[Opal.s.$$alias_of]        = body;

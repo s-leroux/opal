@@ -51,7 +51,7 @@ class Method
       var proc = self.$call.bind(self);
       proc.$$unbound = #{@method};
       proc[Opal.s.$$is_lambda] = true;
-      proc.$$arity = #{@method}.$$arity;
+      proc[Opal.s.$$arity] = #{@method}[Opal.s.$$arity];
       proc.$$parameters = #{@method}.$$parameters;
       return proc;
     }
