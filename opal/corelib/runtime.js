@@ -154,6 +154,7 @@
   Opal.s('$singleton_method_undefined');
   Opal.s('$pristine');
   Opal.s('$require');
+  Opal.s('$to_ary');
   Opal.s('$to_hash');
   Opal.s('$v');
   Opal.s('$$respond_to?');
@@ -1812,7 +1813,7 @@
       return value;
     }
     else if (value[Opal.s['$respond_to?']]('to_ary', true)) {
-      var ary = value.$to_ary();
+      var ary = value[Opal.s.$to_ary]();
       if (ary === nil) {
         return [value];
       }
