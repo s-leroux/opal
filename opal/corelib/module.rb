@@ -631,7 +631,7 @@ class Module
   end
 
   def to_s
-    `Opal.Module.$name.call(self)` || "#<#{`self[Opal.s.$$is_module] ? 'Module' : 'Class'`}:0x#{__id__.to_s(16)}>"
+    `Opal.Module[Opal.s.$name].call(self)` || "#<#{`self[Opal.s.$$is_module] ? 'Module' : 'Class'`}:0x#{__id__.to_s(16)}>"
   end
 
   def undef_method(*names)

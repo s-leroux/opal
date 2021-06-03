@@ -592,7 +592,7 @@
       return nil;
     }
 
-    throw Opal.NameError.$new("constant "+cref+"::"+cref.$name()+" not defined");
+    throw Opal.NameError.$new("constant "+cref+"::"+cref[Opal.s.$name]()+" not defined");
   };
 
   // Setup some shortcuts to reduce compiled size
@@ -2027,7 +2027,7 @@
     trace(obj, jsid);
 
     if (!$has_own.call(obj[Opal.s.$$prototype], jsid)) {
-      throw Opal.NameError.$new("method '" + jsid.substr(1) + "' not defined in " + obj.$name());
+      throw Opal.NameError.$new("method '" + jsid.substr(1) + "' not defined in " + obj[Opal.s.$name]());
     }
 
     delete obj[Opal.s.$$prototype][jsid];
@@ -2051,7 +2051,7 @@
     expectSymbol(jsid);
 
     if (!obj[Opal.s.$$prototype][jsid] || obj[Opal.s.$$prototype][jsid].$$stub) {
-      throw Opal.NameError.$new("method '" + jsid.substr(1) + "' not defined in " + obj.$name());
+      throw Opal.NameError.$new("method '" + jsid.substr(1) + "' not defined in " + obj[Opal.s.$name]());
     }
 
     Opal.add_stub_for(obj[Opal.s.$$prototype], jsid);
@@ -2102,7 +2102,7 @@
       }
 
       if (!is_method_body(body)) {
-        throw Opal.NameError.$new("undefined method `" + old + "' for class `" + obj.$name() + "'")
+        throw Opal.NameError.$new("undefined method `" + old + "' for class `" + obj[Opal.s.$name]() + "'")
       }
     }
 
@@ -2154,7 +2154,7 @@
         body = obj[Opal.s.$$prototype][native_name];
 
     if (typeof(body) !== "function" || body.$$stub) {
-      throw Opal.NameError.$new("undefined native method `" + native_name + "' for class `" + obj.$name() + "'")
+      throw Opal.NameError.$new("undefined native method `" + native_name + "' for class `" + obj[Opal.s.$name]() + "'")
     }
 
     Opal.defn(obj, id, body);
