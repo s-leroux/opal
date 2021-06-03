@@ -133,6 +133,7 @@
   Opal.s('$$module');
   Opal.s('$$module_function');
   Opal.s('$$name');
+  Opal.s('$$nesting');
   Opal.s('$$none');
   Opal.s('$$owner');
   Opal.s('$$own_included_modules');

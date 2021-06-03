@@ -246,7 +246,7 @@ class Module
   def self.constants(inherit = undefined)
     %x{
       if (inherit == null) {
-        var nesting = (self.$$nesting || []).concat(Opal.Object),
+        var nesting = (self[Opal.s.$$nesting] || []).concat(Opal.Object),
             constant, constants = {},
             i, ii;
 
@@ -263,7 +263,7 @@ class Module
   end
 
   def self.nesting
-    `self.$$nesting || []`
+    `self[Opal.s.$$nesting] || []`
   end
 
   # check for constant within current scope

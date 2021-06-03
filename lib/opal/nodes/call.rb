@@ -283,14 +283,14 @@ module Opal
 
       add_special :nesting do |compile_default|
         push_nesting = push_nesting?
-        push '(Opal.Module.$$nesting = $nesting, ' if push_nesting
+        push '(Opal.Module[Opal.s.$$nesting] = $nesting, ' if push_nesting
         compile_default.call
         push ')' if push_nesting
       end
 
       add_special :constants do |compile_default|
         push_nesting = push_nesting?
-        push '(Opal.Module.$$nesting = $nesting, ' if push_nesting
+        push '(Opal.Module[Opal.s.$$nesting] = $nesting, ' if push_nesting
         compile_default.call
         push ')' if push_nesting
       end
