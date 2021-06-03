@@ -382,7 +382,7 @@ class Module
       block.$$jsid        = name;
       block.$$s           = null;
       block.$$def         = block;
-      block.$$define_meth = true;
+      block[Opal.s.$$define_meth] = true;
 
       Opal.defn(self, id, block);
 

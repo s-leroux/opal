@@ -93,6 +93,7 @@
   Opal.s('$$const_cache');
   Opal.s('$$constructor');
   Opal.s('$$cvars');
+  Opal.s('$$define_meth');
   Opal.s('$$define_methods_on');
   Opal.s('$$dummy');
   Opal.s('$$eval');
@@ -1638,7 +1639,7 @@
       throw Opal.RuntimeError.$new("super called outside of method");
     }
 
-    if (implicit && current_func.$$define_meth) {
+    if (implicit && current_func[Opal.s.$$define_meth]) {
       throw Opal.RuntimeError.$new("implicit argument passing of super from method defined by define_method() is not supported. Specify all arguments explicitly");
     }
 
