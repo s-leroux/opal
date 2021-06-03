@@ -327,7 +327,7 @@ class Module
         var file = self.$$autoload[name];
 
         if (file) {
-          self.$require(file);
+          self[Opal.s.$require](file);
 
           return #{const_get name};
         }

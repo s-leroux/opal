@@ -11,7 +11,7 @@ RSpec.describe Opal::Compiler do
 
   describe 'requiring' do
     it 'calls #require' do
-      expect_compiled("require 'pippo'").to include('self.$require("pippo")')
+      expect_compiled("require 'pippo'").to include('self[Opal.s.$require]("pippo")')
     end
   end
 

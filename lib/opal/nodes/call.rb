@@ -225,7 +225,7 @@ module Opal
           dir = File.dirname(file)
           compiler.requires << Pathname(dir).join(arg.children[0]).cleanpath.to_s
         end
-        push fragment("self.$require(#{file.inspect}+ '/../' + ")
+        push fragment("self[Opal.s.$require](#{file.inspect}+ '/../' + ")
         push process(arglist)
         push fragment(')')
       end

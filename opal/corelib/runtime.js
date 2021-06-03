@@ -123,6 +123,8 @@
   Opal.s('$$singleton_of');
   Opal.s('$$super');
 
+  Opal.s('$require');
+
   // Minify common function calls
   var $has_own   = Object.hasOwnProperty;
   var $bind      = Function.prototype.bind;
@@ -2721,7 +2723,7 @@
 
   // Make Kernel#require immediately available as it's needed to require all the
   // other corelib files.
-  $defineProperty(_Object[Opal.s.$$prototype], '$require', Opal.require);
+  $defineProperty(_Object[Opal.s.$$prototype], Opal.s.$require, Opal.require);
 
   // Instantiate the main object
   Opal.top = new _Object();
