@@ -22,7 +22,7 @@ class Exception < `Error`
       return error;
     }
   end
-  `stack_trace_limit = self.$new`
+  `stack_trace_limit = self[Opal.s.$new]`
 
   def self.exception(*args)
     new(*args)

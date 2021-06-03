@@ -101,7 +101,7 @@ module Opal
       # Any special __END__ content in code
       def compile_end_construct
         if content = compiler.eof_content
-          line 'var $__END__ = Opal.Object.$new();'
+          line 'var $__END__ = Opal.Object[Opal.s.$new]();'
           line "$__END__.$read = function() { return #{content.inspect}; };"
         end
       end

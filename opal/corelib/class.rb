@@ -4,7 +4,7 @@ class Class
   def self.new(superclass = Object, &block)
     %x{
       if (!superclass[Opal.s.$$is_class]) {
-        throw Opal.TypeError.$new("superclass must be a Class");
+        throw Opal.TypeError[Opal.s.$new]("superclass must be a Class");
       }
 
       var klass = Opal.allocate_class(nil, superclass);

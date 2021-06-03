@@ -165,6 +165,7 @@
   Opal.s('$method_added');
   Opal.s('$method_removed');
   Opal.s('$method_undefined');
+  Opal.s('$new');
   Opal.s('$singleton_method_added');
   Opal.s('$singleton_method_removed');
   Opal.s('$singleton_method_undefined');
@@ -395,12 +396,12 @@
 
     if (coerced && method) {
       coerced = coerced[Opal.s.$$class];
-      return Opal.TypeError.$new(
+      return Opal.TypeError[Opal.s.$new](
         "can't convert " + object + " into " + type +
         " (" + object + "#" + method + " gives " + coerced + ")"
       )
     } else {
-      return Opal.TypeError.$new(
+      return Opal.TypeError[Opal.s.$new](
         "no implicit conversion of " + object + " into " + type
       )
     }
@@ -645,7 +646,7 @@
       return nil;
     }
 
-    throw Opal.NameError.$new("constant "+cref+"::"+cref[Opal.s.$name]()+" not defined");
+    throw Opal.NameError[Opal.s.$new]("constant "+cref+"::"+cref[Opal.s.$name]()+" not defined");
   };
 
   // Setup some shortcuts to reduce compiled size
@@ -749,7 +750,7 @@
     if (klass) {
       // Make sure the existing constant is a class, or raise error
       if (!klass[Opal.s.$$is_class]) {
-        throw Opal.TypeError.$new(name + " is not a class");
+        throw Opal.TypeError[Opal.s.$new](name + " is not a class");
       }
 
       return klass;
@@ -758,7 +759,7 @@
 
   function ensureSuperclassMatch(klass, superclass) {
     if (klass[Opal.s.$$super] !== superclass) {
-      throw Opal.TypeError.$new("superclass mismatch for class " + klass[Opal.s.$$name]);
+      throw Opal.TypeError[Opal.s.$new]("superclass mismatch for class " + klass[Opal.s.$$name]);
     }
   }
 
@@ -865,7 +866,7 @@
 
     if (module) {
       if (!module[Opal.s.$$is_module] && module !== _Object) {
-        throw Opal.TypeError.$new(name + " is not a module");
+        throw Opal.TypeError[Opal.s.$new](name + " is not a module");
       }
     }
 
@@ -1185,7 +1186,7 @@
     var iclasses = [];
 
     if (module_ancestors.indexOf(includer) !== -1) {
-      throw Opal.ArgumentError.$new('cyclic include detected');
+      throw Opal.ArgumentError[Opal.s.$new]('cyclic include detected');
     }
 
     for (var i = 0, length = module_ancestors.length; i < length; i++) {
@@ -1282,7 +1283,7 @@
     var iclasses = [];
 
     if (module_ancestors.indexOf(prepender) !== -1) {
-      throw Opal.ArgumentError.$new('cyclic prepend detected');
+      throw Opal.ArgumentError[Opal.s.$new]('cyclic prepend detected');
     }
 
     for (var i = 0, length = module_ancestors.length; i < length; i++) {
@@ -1338,7 +1339,7 @@
         end_chain_on = Object.getPrototypeOf(end_chain_on);
       }
     } else {
-      throw Opal.RuntimeError.$new("Prepending a module multiple times is not supported");
+      throw Opal.RuntimeError[Opal.s.$new]("Prepending a module multiple times is not supported");
     }
 
     $set_proto(start_chain_after, chain.first);
@@ -1435,7 +1436,7 @@
   //
   Opal.bridge = function(native_klass, klass) {
     if (native_klass.hasOwnProperty(Opal.s.$$bridge)) {
-      throw Opal.ArgumentError.$new("already bridged");
+      throw Opal.ArgumentError[Opal.s.$new]("already bridged");
     }
 
     // constructor is a JS function with a prototype chain like:
@@ -1620,7 +1621,7 @@
     }
     inspect += meth;
 
-    throw Opal.ArgumentError.$new('[' + inspect + '] wrong number of arguments(' + actual + ' for ' + expected + ')');
+    throw Opal.ArgumentError[Opal.s.$new]('[' + inspect + '] wrong number of arguments(' + actual + ' for ' + expected + ')');
   };
 
   // Arity count error dispatcher for blocks
@@ -1632,7 +1633,7 @@
   Opal.block_ac = function(actual, expected, context) {
     var inspect = "`block in " + context + "'";
 
-    throw Opal.ArgumentError.$new(inspect + ': wrong number of arguments (' + actual + ' for ' + expected + ')');
+    throw Opal.ArgumentError[Opal.s.$new](inspect + ': wrong number of arguments (' + actual + ' for ' + expected + ')');
   };
 
   // Super dispatcher
@@ -1665,7 +1666,7 @@
 
     if (!defcheck && super_method && super_method[Opal.s.$$stub] && obj[Opal.s.$method_missing][Opal.s.$$pristine]) {
       // method_missing hasn't been explicitly defined
-      throw Opal.NoMethodError.$new('super: no superclass method `'+mid+"' for "+obj, mid);
+      throw Opal.NoMethodError[Opal.s.$new]('super: no superclass method `'+mid+"' for "+obj, mid);
     }
 
     return (super_method[Opal.s.$$stub] && !allow_stubs) ? null : super_method;
@@ -1676,11 +1677,11 @@
     var call_jsid = jsid;
 
     if (!current_func) {
-      throw Opal.RuntimeError.$new("super called outside of method");
+      throw Opal.RuntimeError[Opal.s.$new]("super called outside of method");
     }
 
     if (implicit && current_func[Opal.s.$$define_meth]) {
-      throw Opal.RuntimeError.$new("implicit argument passing of super from method defined by define_method() is not supported. Specify all arguments explicitly");
+      throw Opal.RuntimeError[Opal.s.$new]("implicit argument passing of super from method defined by define_method() is not supported. Specify all arguments explicitly");
     }
 
     if (current_func[Opal.s.$$def]) {
@@ -1717,7 +1718,7 @@
   // handles yield calls for 1 yielded arg
   Opal.yield1 = function(block, arg) {
     if (typeof(block) !== "function") {
-      throw Opal.LocalJumpError.$new("no block given");
+      throw Opal.LocalJumpError[Opal.s.$new]("no block given");
     }
 
     var has_mlhs = block[Opal.s.$$has_top_level_mlhs_arg],
@@ -1738,7 +1739,7 @@
   // handles yield for > 1 yielded arg
   Opal.yieldX = function(block, args) {
     if (typeof(block) !== "function") {
-      throw Opal.LocalJumpError.$new("no block given");
+      throw Opal.LocalJumpError[Opal.s.$new]("no block given");
     }
 
     if (block.length > 1 && args.length === 1) {
@@ -1813,12 +1814,12 @@
         return hash;
       }
       else {
-        throw Opal.TypeError.$new("Can't convert " + value[Opal.s.$$class] +
+        throw Opal.TypeError[Opal.s.$new]("Can't convert " + value[Opal.s.$$class] +
           " to Hash (" + value[Opal.s.$$class] + "#to_hash gives " + hash[Opal.s.$$class] + ")");
       }
     }
     else {
-      throw Opal.TypeError.$new("no implicit conversion of " + value[Opal.s.$$class] + " into Hash");
+      throw Opal.TypeError[Opal.s.$new]("no implicit conversion of " + value[Opal.s.$$class] + " into Hash");
     }
   };
 
@@ -1841,7 +1842,7 @@
         return ary;
       }
       else {
-        throw Opal.TypeError.$new("Can't convert " + value[Opal.s.$$class] +
+        throw Opal.TypeError[Opal.s.$new]("Can't convert " + value[Opal.s.$$class] +
           " to Array (" + value[Opal.s.$$class] + "#to_ary gives " + ary[Opal.s.$$class] + ")");
       }
     }
@@ -1865,7 +1866,7 @@
         return ary;
       }
       else {
-        throw Opal.TypeError.$new("Can't convert " + value[Opal.s.$$class] +
+        throw Opal.TypeError[Opal.s.$new]("Can't convert " + value[Opal.s.$$class] +
           " to Array (" + value[Opal.s.$$class] + "#to_a gives " + ary[Opal.s.$$class] + ")");
       }
     }
@@ -1952,7 +1953,7 @@
     } else if (typeof(method) === 'string') {
       body = recv['$'+method];
     } else {
-      throw Opal.NameError.$new("Passed method should be a string or a function");
+      throw Opal.NameError[Opal.s.$new]("Passed method should be a string or a function");
     }
 
     return Opal.send2(recv, body, method, args, block);
@@ -2068,7 +2069,7 @@
     trace(obj, jsid);
 
     if (obj[Opal.s.$$is_string] || obj[Opal.s.$$is_number]) {
-      throw Opal.TypeError.$new("can't define singleton");
+      throw Opal.TypeError[Opal.s.$new]("can't define singleton");
     }
     Opal.defn(Opal.get_singleton_class(obj), jsid, body)
   };
@@ -2080,7 +2081,7 @@
     trace(obj, jsid);
 
     if (!$has_own.call(obj[Opal.s.$$prototype], jsid)) {
-      throw Opal.NameError.$new("method '" + jsid.substr(1) + "' not defined in " + obj[Opal.s.$name]());
+      throw Opal.NameError[Opal.s.$new]("method '" + jsid.substr(1) + "' not defined in " + obj[Opal.s.$name]());
     }
 
     delete obj[Opal.s.$$prototype][jsid];
@@ -2104,7 +2105,7 @@
     expectSymbol(jsid);
 
     if (!obj[Opal.s.$$prototype][jsid] || obj[Opal.s.$$prototype][jsid][Opal.s.$$stub]) {
-      throw Opal.NameError.$new("method '" + jsid.substr(1) + "' not defined in " + obj[Opal.s.$name]());
+      throw Opal.NameError[Opal.s.$new]("method '" + jsid.substr(1) + "' not defined in " + obj[Opal.s.$name]());
     }
 
     Opal.add_stub_for(obj[Opal.s.$$prototype], jsid);
@@ -2155,7 +2156,7 @@
       }
 
       if (!is_method_body(body)) {
-        throw Opal.NameError.$new("undefined method `" + old + "' for class `" + obj[Opal.s.$name]() + "'")
+        throw Opal.NameError[Opal.s.$new]("undefined method `" + old + "' for class `" + obj[Opal.s.$name]() + "'")
       }
     }
 
@@ -2207,7 +2208,7 @@
         body = obj[Opal.s.$$prototype][native_name];
 
     if (typeof(body) !== "function" || body[Opal.s.$$stub]) {
-      throw Opal.NameError.$new("undefined native method `" + native_name + "' for class `" + obj[Opal.s.$name]() + "'")
+      throw Opal.NameError[Opal.s.$new]("undefined native method `" + native_name + "' for class `" + obj[Opal.s.$name]() + "'")
     }
 
     Opal.defn(obj, id, body);
@@ -2442,7 +2443,7 @@
 
       for (i = 0; i < length; i++) {
         if (args[i].length !== 2) {
-          throw Opal.ArgumentError.$new("value not of length 2: " + args[i][Opal.s.$inspect]());
+          throw Opal.ArgumentError[Opal.s.$new]("value not of length 2: " + args[i][Opal.s.$inspect]());
         }
 
         key = args[i][0];
@@ -2468,7 +2469,7 @@
     }
 
     if (arguments_length % 2 !== 0) {
-      throw Opal.ArgumentError.$new("odd number of arguments for Hash");
+      throw Opal.ArgumentError[Opal.s.$new]("odd number of arguments for Hash");
     }
 
     for (i = 0; i < arguments_length; i += 2) {
@@ -2672,7 +2673,7 @@
 
       if (severity === "error") {
         if (Opal.LoadError) {
-          throw Opal.LoadError.$new(message)
+          throw Opal.LoadError[Opal.s.$new](message)
         } else {
           throw message
         }
@@ -2707,7 +2708,7 @@
   // @param name [String] the canonical name of the encoding
   Opal.set_encoding = function(str, name) {
     if (typeof str === 'string')
-      throw Opal.FrozenError.$new("can't modify frozen String");
+      throw Opal.FrozenError[Opal.s.$new]("can't modify frozen String");
 
     var encoding = Opal.find_encoding(name);
 
@@ -2722,7 +2723,7 @@
   Opal.find_encoding = function(name) {
     var register = Opal.encodings;
     var encoding = register[name] || register[name.toUpperCase()];
-    if (!encoding) throw Opal.ArgumentError.$new("unknown encoding name - " + name);
+    if (!encoding) throw Opal.ArgumentError[Opal.s.$new]("unknown encoding name - " + name);
     return encoding;
   }
 
@@ -2802,7 +2803,7 @@
   Opal.const_set(_Object, 'NilClass', Opal.NilClass);
   nil = Opal.nil = new Opal.NilClass();
   nil[Opal.s.$$id] = nil_id;
-  nil.call = nil.apply = function() { throw Opal.LocalJumpError.$new('no block given'); };
+  nil.call = nil.apply = function() { throw Opal.LocalJumpError[Opal.s.$new]('no block given'); };
 
   // Errors
   Opal.breaker  = new Error('unexpected break (old)');
