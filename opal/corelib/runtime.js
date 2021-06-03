@@ -103,6 +103,7 @@
   Opal.s('$$dummy');
   Opal.s('$$eval');
   Opal.s('$$g');
+  Opal.s('$$gm');
   Opal.s('$$has_top_level_mlhs_arg');
   Opal.s('$$has_trailing_comma_in_args');
   Opal.s('$$iclass');
@@ -2566,10 +2567,10 @@
       } else {
         result = pattern[Opal.s.$$g] = new RegExp(pattern.source, 'gm' + (pattern.ignoreCase ? 'i' : ''));
       }
-    } else if (pattern.$$gm != null) {
-      result = pattern.$$gm;
+    } else if (pattern[Opal.s.$$gm] != null) {
+      result = pattern[Opal.s.$$gm];
     } else {
-      result = pattern.$$gm = new RegExp(pattern.source, 'gm' + (pattern.ignoreCase ? 'i' : ''));
+      result = pattern[Opal.s.$$gm] = new RegExp(pattern.source, 'gm' + (pattern.ignoreCase ? 'i' : ''));
     }
     result.lastIndex = null; // reset lastIndex property
     return result;
