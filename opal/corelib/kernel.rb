@@ -20,7 +20,7 @@ module Kernel
   def <=>(other)
     %x{
       // set guard for infinite recursion
-      self.$$comparable = true;
+      self[Opal.s.$$comparable] = true;
 
       var x = #{self == other};
 

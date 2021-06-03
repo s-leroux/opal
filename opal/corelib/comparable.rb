@@ -39,8 +39,8 @@ module Comparable
       }
 
       // check for infinite recursion
-      if (self.$$comparable) {
-        delete self.$$comparable;
+      if (self[Opal.s.$$comparable]) {
+        delete self[Opal.s.$$comparable];
         return false;
       }
     }
