@@ -93,6 +93,7 @@
   Opal.s('$$const_cache');
   Opal.s('$$constructor');
   Opal.s('$$cvars');
+  Opal.s('$$def');
   Opal.s('$$define_meth');
   Opal.s('$$define_methods_on');
   Opal.s('$$dummy');
@@ -1643,7 +1644,7 @@
       throw Opal.RuntimeError.$new("implicit argument passing of super from method defined by define_method() is not supported. Specify all arguments explicitly");
     }
 
-    if (current_func.$$def) {
+    if (current_func[Opal.s.$$def]) {
       call_jsid = current_func.$$jsid;
     }
 
