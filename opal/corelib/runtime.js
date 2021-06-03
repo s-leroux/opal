@@ -82,6 +82,7 @@
     };
   }
 
+  Opal.s('$$alias_of');
   Opal.s('$$ancestors');
   Opal.s('$$ancestors_cache_version');
   Opal.s('$$autoload');
@@ -2130,7 +2131,7 @@
 
     // If the body is itself an alias use the original body
     // to keep the max depth at 1.
-    if (body.$$alias_of) body = body.$$alias_of;
+    if (body[Opal.s.$$alias_of]) body = body[Opal.s.$$alias_of];
 
     // We need a wrapper because otherwise properties
     // would be overwritten on the original body.
@@ -2161,7 +2162,7 @@
     alias.$$arity           = body.$$arity;
     alias.$$parameters      = body.$$parameters;
     alias.$$source_location = body.$$source_location;
-    alias.$$alias_of        = body;
+    alias[Opal.s.$$alias_of]        = body;
     alias.$$alias_name      = name;
 
     Opal.defn(obj, id, alias);
