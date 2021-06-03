@@ -152,6 +152,7 @@
   Opal.s('$singleton_method_undefined');
   Opal.s('$pristine');
   Opal.s('$require');
+  Opal.s('$v');
   Opal.s('$$respond_to?');
   Opal.s('$$respond_to_missing?');
 
@@ -1673,13 +1674,13 @@
   // needed.
   //
   Opal.ret = function(val) {
-    Opal.returner.$v = val;
+    Opal.returner[Opal.s.$v] = val;
     throw Opal.returner;
   };
 
   // Used to break out of a block.
   Opal.brk = function(val, breaker) {
-    breaker.$v = val;
+    breaker[Opal.s.$v] = val;
     throw breaker;
   };
 

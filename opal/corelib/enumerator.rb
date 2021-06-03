@@ -116,7 +116,7 @@ class Enumerator
         }
         catch (e) {
           if (e === $breaker) {
-            return $breaker.$v;
+            return $breaker[Opal.s.$v];
           }
           else {
             throw e;

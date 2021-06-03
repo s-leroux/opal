@@ -43,7 +43,7 @@ module Opal
 
           if scope.catch_return
             unshift "try {\n"
-            line '} catch ($returner) { if ($returner === Opal.returner) { return $returner.$v }'
+            line '} catch ($returner) { if ($returner === Opal.returner) { return $returner[Opal.s.$v] }'
             push ' throw $returner; }'
           end
         end

@@ -30,7 +30,7 @@ class Proc < `Function`
           }
         } catch (err) {
           if (err === $brk) {
-            return $brk.$v
+            return $brk[Opal.s.$v]
           }
           else {
             throw err

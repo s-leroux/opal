@@ -139,7 +139,7 @@ module Opal
         if iter_has_break?
           unshift 'return '
           unshift '(function(){var $brk = Opal.new_brk(); try {'
-          line '} catch (err) { if (err === $brk) { return err.$v } else { throw err } }})()'
+          line '} catch (err) { if (err === $brk) { return err[Opal.s.$v] } else { throw err } }})()'
         end
       end
 
