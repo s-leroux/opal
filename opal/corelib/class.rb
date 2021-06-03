@@ -8,7 +8,7 @@ class Class
       }
 
       var klass = Opal.allocate_class(nil, superclass);
-      superclass.$inherited(klass);
+      superclass[Opal.s.$inherited](klass);
       #{`klass`.class_eval(&block) if block_given?}
       return klass;
     }

@@ -130,6 +130,7 @@
 
   Opal.s('$bridge');
   Opal.s('$inspect');
+  Opal.s('$inherited');
   Opal.s('$pristine');
   Opal.s('$require');
   Opal.s('$$respond_to?');
@@ -756,8 +757,8 @@
     Opal.const_set(scope, name, klass);
 
     // Call .inherited() hook with new class on the superclass
-    if (superclass.$inherited) {
-      superclass.$inherited(klass);
+    if (superclass[Opal.s.$inherited]) {
+      superclass[Opal.s.$inherited](klass);
     }
 
     if (bridged) {
