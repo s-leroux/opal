@@ -154,6 +154,7 @@
   Opal.s('$singleton_method_undefined');
   Opal.s('$pristine');
   Opal.s('$require');
+  Opal.s('$to_hash');
   Opal.s('$v');
   Opal.s('$$respond_to?');
   Opal.s('$$respond_to_missing?');
@@ -1786,7 +1787,7 @@
       return value;
     }
     else if (value[Opal.s['$respond_to?']]('to_hash', true)) {
-      var hash = value.$to_hash();
+      var hash = value[Opal.s.$to_hash]();
       if (hash[Opal.s.$$is_hash]) {
         return hash;
       }
@@ -1863,7 +1864,7 @@
     var kwargs = parameters[parameters.length - 1];
     if (kwargs != null && Opal.respond_to(kwargs, '$to_hash', true)) {
       $splice.call(parameters, parameters.length - 1, 1);
-      return kwargs.$to_hash();
+      return kwargs[Opal.s.$to_hash]();
     }
     else {
       return Opal.hash2([], {});
