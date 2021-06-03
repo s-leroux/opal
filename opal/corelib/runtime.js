@@ -102,6 +102,7 @@
   Opal.s('$$define_methods_on');
   Opal.s('$$dummy');
   Opal.s('$$eval');
+  Opal.s('$$full_name');
   Opal.s('$$g');
   Opal.s('$$gm');
   Opal.s('$$has_top_level_mlhs_arg');

@@ -564,8 +564,8 @@ class Module
 
   def name
     %x{
-      if (self.$$full_name) {
-        return self.$$full_name;
+      if (self[Opal.s.$$full_name]) {
+        return self[Opal.s.$$full_name];
       }
 
       var result = [], base = self;
@@ -587,7 +587,7 @@ class Module
         return nil;
       }
 
-      return self.$$full_name = result.join('::');
+      return self[Opal.s.$$full_name] = result.join('::');
     }
   end
 

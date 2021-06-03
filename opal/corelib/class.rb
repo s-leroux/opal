@@ -29,7 +29,7 @@ class Class
     initialize_copy(original)
     %x{
       self[Opal.s.$$name] = null;
-      self.$$full_name = null;
+      self[Opal.s.$$full_name] = null;
     }
   end
 
