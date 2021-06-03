@@ -35,10 +35,10 @@ class BasicObject
       }
 
       if (block !== nil) {
-        self.$method_missing.$$p = block;
+        self[Opal.s.$method_missing].$$p = block;
       }
 
-      return self.$method_missing.apply(self, [symbol].concat(args));
+      return self[Opal.s.$method_missing].apply(self, [symbol].concat(args));
     }
   end
 

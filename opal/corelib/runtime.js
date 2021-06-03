@@ -1529,7 +1529,7 @@
       // console.error("missing stub", method_name);
 
       // Copy any given block onto the method_missing dispatcher
-      this.$method_missing.$$p = method_missing_stub.$$p;
+      this[Opal.s.$method_missing].$$p = method_missing_stub.$$p;
 
       // Set block property to null ready for the next call (stop false-positives)
       method_missing_stub.$$p = null;
@@ -1538,7 +1538,7 @@
       var args_ary = new Array(arguments.length);
       for(var i = 0, l = args_ary.length; i < l; i++) { args_ary[i] = arguments[i]; }
 
-      return this.$method_missing.apply(this, [method_name.slice(1)].concat(args_ary));
+      return this[Opal.s.$method_missing].apply(this, [method_name.slice(1)].concat(args_ary));
     }
 
     method_missing_stub.$$stub = true;
@@ -1610,7 +1610,7 @@
       }
     }
 
-    if (!defcheck && super_method && super_method.$$stub && obj.$method_missing.$$pristine) {
+    if (!defcheck && super_method && super_method.$$stub && obj[Opal.s.$method_missing].$$pristine) {
       // method_missing hasn't been explicitly defined
       throw Opal.NoMethodError.$new('super: no superclass method `'+mid+"' for "+obj, mid);
     }
@@ -1906,8 +1906,8 @@
   };
 
   Opal.send2 = function(recv, body, method, args, block) {
-    if (body == null && method != null && recv.$method_missing) {
-      body = recv.$method_missing;
+    if (body == null && method != null && recv[Opal.s.$method_missing]) {
+      body = recv[Opal.s.$method_missing];
       args = [method].concat(args);
     }
 
@@ -2022,6 +2022,8 @@
 
   // Called from #remove_method.
   Opal.rdef = function(obj, jsid) {
+    expectSymbol(jsid);
+
     trace(obj, jsid);
 
     if (!$has_own.call(obj[Opal.s.$$prototype], jsid)) {

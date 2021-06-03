@@ -1353,7 +1353,7 @@ class String < `String`
         var body = recv[#{method_name}];
 
         if (!body) {
-          return recv.$method_missing.apply(recv, args);
+          return recv[Opal.s.$method_missing].apply(recv, args);
         }
 
         if (typeof block === 'function') {
