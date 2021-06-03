@@ -36,7 +36,7 @@ class Class
   def new(*args, &block)
     %x{
       var object = #{allocate};
-      Opal.send(object, object.$initialize, args, block);
+      Opal.send(object, object[Opal.s.$initialize], args, block);
       return object;
     }
   end
