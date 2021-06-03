@@ -141,6 +141,7 @@
   Opal.s('$$super');
 
   Opal.s('$bridge');
+  Opal.s('$const_missing');
   Opal.s('$inspect');
   Opal.s('$inherited');
   Opal.s('$method_added');
@@ -469,7 +470,7 @@
   // Call const_missing if nothing else worked
   function const_missing(cref, name, skip_missing) {
     if (!skip_missing) {
-      return (cref || _Object).$const_missing(name);
+      return (cref || _Object)[Opal.s.$const_missing](name);
     }
   }
 
