@@ -117,7 +117,7 @@ module Opal
   #     def dup
   #       %x{
   #         if (
-  #           self.$allocate[Opal.s.$$pristine] &&
+  #           self[Opal.s.$allocate][Opal.s.$$pristine] &&
   #           self.$copy_instance_variables[Opal.s.$$pristine] &&
   #           self.$initialize_dup[Opal.s.$$pristine]
   #         ) return self.slice(0);

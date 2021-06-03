@@ -155,6 +155,7 @@
   Opal.s('$$super');
   Opal.s('$$unbound');
 
+  Opal.s('$allocate');
   Opal.s('$bridge');
   Opal.s('$const_missing');
   Opal.s('$define_method');

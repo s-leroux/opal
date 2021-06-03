@@ -37,7 +37,7 @@ class Array < `Array`
       if (klass[Opal.s.$$name] === Opal.Array) {
         return obj;
       } else {
-        return klass.$allocate().$replace(#{`obj`.to_a});
+        return klass[Opal.s.$allocate]().$replace(#{`obj`.to_a});
       }
     }
 
@@ -914,7 +914,7 @@ class Array < `Array`
   def dup
     %x{
       if (self[Opal.s.$$class] === Opal.Array &&
-          self[Opal.s.$$class].$allocate[Opal.s.$$pristine] &&
+          self[Opal.s.$$class][Opal.s.$allocate][Opal.s.$$pristine] &&
           self.$copy_instance_variables[Opal.s.$$pristine] &&
           self.$initialize_dup[Opal.s.$$pristine]) {
         return self.slice(0);
