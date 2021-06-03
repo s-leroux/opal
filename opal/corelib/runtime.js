@@ -135,6 +135,7 @@
   Opal.s('$$prototype');
   Opal.s('$$root');
   Opal.s('$$singleton_of');
+  Opal.s('$$source_location');
   Opal.s('$$stub');
   Opal.s('$$super');
 
@@ -2163,7 +2164,7 @@
 
     alias[Opal.s.$$arity]           = body[Opal.s.$$arity];
     alias[Opal.s.$$parameters]      = body[Opal.s.$$parameters];
-    alias.$$source_location = body.$$source_location;
+    alias[Opal.s.$$source_location] = body[Opal.s.$$source_location];
     alias[Opal.s.$$alias_of]        = body;
     alias.$$alias_name      = name;
 

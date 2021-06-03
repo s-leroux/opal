@@ -75,7 +75,7 @@ module Opal
         end
 
         if compiler.enable_source_location?
-          push ", #{scope_name}.$$source_location = #{source_location}"
+          push ", #{scope_name}[Opal.s.$$source_location] = #{source_location}"
         end
 
         wrap_with_definition

@@ -17,7 +17,7 @@ class Method
   end
 
   def source_location
-    `#{@method}.$$source_location` || ['(eval)', 0]
+    `#{@method}[Opal.s.$$source_location]` || ['(eval)', 0]
   end
 
   def comments
@@ -81,7 +81,7 @@ class UnboundMethod
   end
 
   def source_location
-    `#{@method}.$$source_location` || ['(eval)', 0]
+    `#{@method}[Opal.s.$$source_location]` || ['(eval)', 0]
   end
 
   def comments
