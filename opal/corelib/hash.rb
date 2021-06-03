@@ -298,7 +298,7 @@ class Hash
       }
 
       self.$$by_identity = true;
-      self.$$map = identity_hash.$$map;
+      self[Opal.s.$$map] = identity_hash[Opal.s.$$map];
       self[Opal.s.$$smap] = identity_hash[Opal.s.$$smap];
       return self;
     }

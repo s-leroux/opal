@@ -124,6 +124,7 @@
   Opal.s('$$is_singleton');
   Opal.s('$$is_string');
   Opal.s('$$jsid');
+  Opal.s('$$map');
   Opal.s('$$meta');
   Opal.s('$$module');
   Opal.s('$$module_function');
@@ -2203,7 +2204,7 @@
 
   Opal.hash_init = function(hash) {
     hash[Opal.s.$$smap] = Object.create(null);
-    hash.$$map  = Object.create(null);
+    hash[Opal.s.$$map]  = Object.create(null);
     hash.$$keys = [];
   };
 
@@ -2237,14 +2238,14 @@
     var key_hash, bucket, last_bucket;
     key_hash = hash.$$by_identity ? Opal.id(key) : key.$hash();
 
-    if (!$has_own.call(hash.$$map, key_hash)) {
+    if (!$has_own.call(hash[Opal.s.$$map], key_hash)) {
       bucket = {key: key, key_hash: key_hash, value: value};
       hash.$$keys.push(bucket);
-      hash.$$map[key_hash] = bucket;
+      hash[Opal.s.$$map][key_hash] = bucket;
       return;
     }
 
-    bucket = hash.$$map[key_hash];
+    bucket = hash[Opal.s.$$map][key_hash];
 
     while (bucket) {
       if (key === bucket.key || key['$eql?'](bucket.key)) {
@@ -2274,8 +2275,8 @@
     var key_hash, bucket;
     key_hash = hash.$$by_identity ? Opal.id(key) : key.$hash();
 
-    if ($has_own.call(hash.$$map, key_hash)) {
-      bucket = hash.$$map[key_hash];
+    if ($has_own.call(hash[Opal.s.$$map], key_hash)) {
+      bucket = hash[Opal.s.$$map][key_hash];
 
       while (bucket) {
         if (key === bucket.key || key['$eql?'](bucket.key)) {
@@ -2310,11 +2311,11 @@
 
     var key_hash = key.$hash();
 
-    if (!$has_own.call(hash.$$map, key_hash)) {
+    if (!$has_own.call(hash[Opal.s.$$map], key_hash)) {
       return;
     }
 
-    var bucket = hash.$$map[key_hash], last_bucket;
+    var bucket = hash[Opal.s.$$map][key_hash], last_bucket;
 
     while (bucket) {
       if (key === bucket.key || key['$eql?'](bucket.key)) {
@@ -2334,10 +2335,10 @@
           delete last_bucket.next;
         }
         else if (bucket.next) {
-          hash.$$map[key_hash] = bucket.next;
+          hash[Opal.s.$$map][key_hash] = bucket.next;
         }
         else {
-          delete hash.$$map[key_hash];
+          delete hash[Opal.s.$$map][key_hash];
         }
 
         return value;
@@ -2360,7 +2361,7 @@
         continue;
       }
 
-      bucket = hash.$$map[hash.$$keys[i].key_hash];
+      bucket = hash[Opal.s.$$map][hash.$$keys[i].key_hash];
       last_bucket = undefined;
 
       while (bucket) {
@@ -2372,10 +2373,10 @@
             delete last_bucket.next;
           }
           else if (bucket.next) {
-            hash.$$map[hash.$$keys[i].key_hash] = bucket.next;
+            hash[Opal.s.$$map][hash.$$keys[i].key_hash] = bucket.next;
           }
           else {
-            delete hash.$$map[hash.$$keys[i].key_hash];
+            delete hash[Opal.s.$$map][hash.$$keys[i].key_hash];
           }
           break;
         }
@@ -2385,12 +2386,12 @@
 
       hash.$$keys[i].key_hash = key_hash;
 
-      if (!$has_own.call(hash.$$map, key_hash)) {
-        hash.$$map[key_hash] = hash.$$keys[i];
+      if (!$has_own.call(hash[Opal.s.$$map], key_hash)) {
+        hash[Opal.s.$$map][key_hash] = hash.$$keys[i];
         continue;
       }
 
-      bucket = hash.$$map[key_hash];
+      bucket = hash[Opal.s.$$map][key_hash];
       last_bucket = undefined;
 
       while (bucket) {
@@ -2472,7 +2473,7 @@
     var hash = new Opal.Hash();
 
     hash[Opal.s.$$smap] = smap;
-    hash.$$map  = Object.create(null);
+    hash[Opal.s.$$map]  = Object.create(null);
     hash.$$keys = keys;
 
     return hash;
