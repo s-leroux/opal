@@ -155,7 +155,7 @@ class Hash
     %x{
       var result = [];
 
-      for (var i = 0, keys = self.$$keys, length = keys.length, key, value; i < length; i++) {
+      for (var i = 0, keys = self[Opal.s.$$keys], length = keys.length, key, value; i < length; i++) {
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {

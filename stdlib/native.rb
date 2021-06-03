@@ -538,7 +538,7 @@ class Hash
            (defaults.constructor === undefined ||
              defaults.constructor === Object)) {
         var smap = self[Opal.s.$$smap],
-            keys = self.$$keys,
+            keys = self[Opal.s.$$keys],
             key, value;
 
         for (key in defaults) {
@@ -578,7 +578,7 @@ class Hash
   def to_n
     %x{
       var result = {},
-          keys = self.$$keys,
+          keys = self[Opal.s.$$keys],
           smap = self[Opal.s.$$smap],
           key, value;
 
