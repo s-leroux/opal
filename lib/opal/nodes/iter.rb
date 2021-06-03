@@ -49,7 +49,7 @@ module Opal
         # This flag on the method indicates that a block has a top level mlhs argument
         # which means that we have to expand passed array explicitly in runtime.
         if has_top_level_mlhs_arg?
-          push " #{identity}.$$has_top_level_mlhs_arg = true,"
+          push " #{identity}[Opal.s.$$has_top_level_mlhs_arg] = true,"
         end
 
         if has_trailing_comma_in_args?

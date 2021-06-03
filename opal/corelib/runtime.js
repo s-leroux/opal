@@ -101,6 +101,7 @@
   Opal.s('$$define_methods_on');
   Opal.s('$$dummy');
   Opal.s('$$eval');
+  Opal.s('$$has_top_level_mlhs_arg');
   Opal.s('$$iclass');
   Opal.s('$$iclasses');
   Opal.s('$$id');
@@ -1696,7 +1697,7 @@
       throw Opal.LocalJumpError.$new("no block given");
     }
 
-    var has_mlhs = block.$$has_top_level_mlhs_arg,
+    var has_mlhs = block[Opal.s.$$has_top_level_mlhs_arg],
         has_trailing_comma = block.$$has_trailing_comma_in_args;
 
     if (block.length > 1 || ((has_mlhs || has_trailing_comma) && block.length === 1)) {
