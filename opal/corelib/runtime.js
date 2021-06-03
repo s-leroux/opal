@@ -1641,7 +1641,7 @@
   Opal.find_super_dispatcher = function(obj, mid, current_func, defcheck, allow_stubs) {
     expectString(mid);
 
-    var jsid = '$' + mid, ancestors, super_method;
+    var jsid = Opal.s('$' + mid), ancestors, super_method;
 
     if (obj.hasOwnProperty(Opal.s.$$meta)) {
       ancestors = Opal.ancestors(obj[Opal.s.$$meta]);
