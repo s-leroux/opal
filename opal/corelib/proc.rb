@@ -15,7 +15,7 @@ class Proc < `Function`
   def call(*args, &block)
     %x{
       if (block !== nil) {
-        self.$$p = block;
+        self[Opal.s.$$p] = block;
       }
 
       var result, $brk = self.$$brk;

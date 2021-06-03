@@ -26,7 +26,7 @@ class Method
 
   def call(*args, &block)
     %x{
-      #{@method}.$$p = block;
+      #{@method}[Opal.s.$$p] = block;
 
       return #{@method}.apply(#{@receiver}, args);
     }

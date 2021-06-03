@@ -1357,7 +1357,7 @@ class String < `String`
         }
 
         if (typeof block === 'function') {
-          body.$$p = block;
+          body[Opal.s.$$p] = block;
         }
 
         if (args.length === 1) {

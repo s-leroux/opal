@@ -28,14 +28,14 @@ class BasicObject
 
       if (func) {
         if (block !== nil) {
-          func.$$p = block;
+          func[Opal.s.$$p] = block;
         }
 
         return func.apply(self, args);
       }
 
       if (block !== nil) {
-        self[Opal.s.$method_missing].$$p = block;
+        self[Opal.s.$method_missing][Opal.s.$$p] = block;
       }
 
       return self[Opal.s.$method_missing].apply(self, [symbol].concat(args));

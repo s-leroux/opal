@@ -121,6 +121,7 @@
   Opal.s('$$name');
   Opal.s('$$own_included_modules');
   Opal.s('$$own_prepended_modules');
+  Opal.s('$$p');
   Opal.s('$$prepended');
   Opal.s('$$pristine');
   Opal.s('$$prototype');
@@ -1539,10 +1540,10 @@
       // console.error("missing stub", method_name);
 
       // Copy any given block onto the method_missing dispatcher
-      this[Opal.s.$method_missing].$$p = method_missing_stub.$$p;
+      this[Opal.s.$method_missing][Opal.s.$$p] = method_missing_stub[Opal.s.$$p];
 
       // Set block property to null ready for the next call (stop false-positives)
-      method_missing_stub.$$p = null;
+      method_missing_stub[Opal.s.$$p] = null;
 
       // call method missing with correct args (remove '$' prefix on method name)
       var args_ary = new Array(arguments.length);
@@ -1921,7 +1922,7 @@
       args = [method].concat(args);
     }
 
-    if (typeof block === 'function') body.$$p = block;
+    if (typeof block === 'function') body[Opal.s.$$p] = block;
     return body.apply(recv, args);
   };
 
@@ -2123,14 +2124,14 @@
     // We need a wrapper because otherwise properties
     // would be overwritten on the original body.
     alias = function() {
-      var block = alias.$$p, args, i, ii;
+      var block = alias[Opal.s.$$p], args, i, ii;
 
       args = new Array(arguments.length);
       for(i = 0, ii = arguments.length; i < ii; i++) {
         args[i] = arguments[i];
       }
 
-      if (block != null) { alias.$$p = null }
+      if (block != null) { alias[Opal.s.$$p] = null }
 
       return Opal.send(this, body, args, block);
     };
@@ -2747,8 +2748,8 @@
   // Foward calls to define_method on the top object to Object
   function top_define_method() {
     var args = Opal.slice.call(arguments, 0, arguments.length);
-    var block = top_define_method.$$p;
-    top_define_method.$$p = null;
+    var block = top_define_method[Opal.s.$$p];
+    top_define_method[Opal.s.$$p] = null;
     return Opal.send(_Object, 'define_method', args, block)
   };
 

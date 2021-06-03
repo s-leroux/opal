@@ -64,7 +64,7 @@ class Enumerator
     %x{
       var result, index = offset;
 
-      self.$each.$$p = function() {
+      self.$each[Opal.s.$$p] = function() {
         var param = #{Opal.destructure(`arguments`)},
             value = block(param, index);
 
