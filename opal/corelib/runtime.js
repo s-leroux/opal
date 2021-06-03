@@ -1514,7 +1514,7 @@
   Opal.add_stub_for = function(prototype, stub) {
     expectSymbol(stub);
 
-    var method_missing_stub = Opal.stub_for(stub);
+    var method_missing_stub = Opal.stub_for(stub.description);
     $defineProperty(prototype, stub, method_missing_stub);
   };
 

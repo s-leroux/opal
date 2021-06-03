@@ -130,8 +130,8 @@ class Module
 
       for (var i = names.length - 1; i >= 0; i--) {
         var name = names[i],
-            id   = '$' + name,
-            ivar = Opal.ivar(name);
+            id   = Opal.s('$' + name),
+            ivar = Opal.s(Opal.ivar(name));
 
         // the closure here is needed because name will change at the next
         // cycle, I wish we could use let.
@@ -637,7 +637,7 @@ class Module
   def undef_method(*names)
     %x{
       for (var i = 0, length = names.length; i < length; i++) {
-        Opal.udef(self, "$" + names[i]);
+        Opal.udef(self, Opal.s("$" + names[i]));
       }
     }
 
