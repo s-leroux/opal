@@ -37,7 +37,7 @@ class Array < `Array`
       if (klass[Opal.s.$$name] === Opal.Array) {
         return obj;
       } else {
-        return klass[Opal.s.$allocate]().$replace(#{`obj`.to_a});
+        return klass[Opal.s.$allocate]()[Opal.s.$replace](#{`obj`.to_a});
       }
     }
 
