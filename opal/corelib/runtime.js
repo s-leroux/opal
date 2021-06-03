@@ -118,6 +118,7 @@
   Opal.s('$$is_regexp');
   Opal.s('$$is_singleton');
   Opal.s('$$is_string');
+  Opal.s('$$jsid');
   Opal.s('$$meta');
   Opal.s('$$module');
   Opal.s('$$name');
@@ -1645,7 +1646,7 @@
     }
 
     if (current_func[Opal.s.$$def]) {
-      call_jsid = current_func.$$jsid;
+      call_jsid = current_func[Opal.s.$$jsid];
     }
 
     return Opal.find_super_dispatcher(obj, call_jsid, current_func, defcheck);

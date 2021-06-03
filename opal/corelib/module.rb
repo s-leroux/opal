@@ -379,7 +379,7 @@ class Module
     %x{
       var id = '$' + name;
 
-      block.$$jsid        = name;
+      block[Opal.s.$$jsid]        = name;
       block.$$s           = null;
       block[Opal.s.$$def]         = block;
       block[Opal.s.$$define_meth] = true;
