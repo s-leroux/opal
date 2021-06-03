@@ -102,14 +102,14 @@ class Proc < `Function`
     %x{
       if (self.$$is_curried) {
         return #{[[:rest]]};
-      } else if (self.$$parameters) {
+      } else if (self[Opal.s.$$parameters]) {
         if (self[Opal.s.$$is_lambda]) {
-          return self.$$parameters;
+          return self[Opal.s.$$parameters];
         } else {
           var result = [], i, length;
 
-          for (i = 0, length = self.$$parameters.length; i < length; i++) {
-            var parameter = self.$$parameters[i];
+          for (i = 0, length = self[Opal.s.$$parameters].length; i < length; i++) {
+            var parameter = self[Opal.s.$$parameters][i];
 
             if (parameter[0] === 'req') {
               // required arguments always have name

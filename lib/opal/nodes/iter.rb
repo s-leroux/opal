@@ -37,7 +37,7 @@ module Opal
         push " #{identity}[Opal.s.$$arity] = #{arity},"
 
         if compiler.arity_check?
-          push " #{identity}.$$parameters = #{parameters_code},"
+          push " #{identity}[Opal.s.$$parameters] = #{parameters_code},"
         end
 
         # MRI expands a passed argument if the block:

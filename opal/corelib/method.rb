@@ -13,7 +13,7 @@ class Method
   end
 
   def parameters
-    `#{@method}.$$parameters`
+    `#{@method}[Opal.s.$$parameters]`
   end
 
   def source_location
@@ -52,7 +52,7 @@ class Method
       proc.$$unbound = #{@method};
       proc[Opal.s.$$is_lambda] = true;
       proc[Opal.s.$$arity] = #{@method}[Opal.s.$$arity];
-      proc.$$parameters = #{@method}.$$parameters;
+      proc[Opal.s.$$parameters] = #{@method}[Opal.s.$$parameters];
       return proc;
     }
   end
@@ -77,7 +77,7 @@ class UnboundMethod
   end
 
   def parameters
-    `#{@method}.$$parameters`
+    `#{@method}[Opal.s.$$parameters]`
   end
 
   def source_location

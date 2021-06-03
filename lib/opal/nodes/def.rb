@@ -67,7 +67,7 @@ module Opal
         push ", #{scope_name}[Opal.s.$$arity] = #{arity}"
 
         if compiler.arity_check?
-          push ", #{scope_name}.$$parameters = #{parameters_code}"
+          push ", #{scope_name}[Opal.s.$$parameters] = #{parameters_code}"
         end
 
         if compiler.parse_comments?

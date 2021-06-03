@@ -129,6 +129,7 @@
   Opal.s('$$own_included_modules');
   Opal.s('$$own_prepended_modules');
   Opal.s('$$p');
+  Opal.s('$$parameters');
   Opal.s('$$prepended');
   Opal.s('$$pristine');
   Opal.s('$$prototype');
@@ -2161,7 +2162,7 @@
     alias.displayName       = name;
 
     alias[Opal.s.$$arity]           = body[Opal.s.$$arity];
-    alias.$$parameters      = body.$$parameters;
+    alias[Opal.s.$$parameters]      = body[Opal.s.$$parameters];
     alias.$$source_location = body.$$source_location;
     alias[Opal.s.$$alias_of]        = body;
     alias.$$alias_name      = name;
