@@ -152,6 +152,7 @@
 
   Opal.s('$bridge');
   Opal.s('$const_missing');
+  Opal.s('$define_method');
   Opal.s('$hash');
   Opal.s('$inspect');
   Opal.s('$inherited');
@@ -2777,7 +2778,7 @@
   // Instantiate the main object
   Opal.top = new _Object();
   Opal.top[Opal.s.$to_s] = Opal.top[Opal.s.$inspect] = function() { return 'main' };
-  Opal.top.$define_method = top_define_method;
+  Opal.top[Opal.s.$define_method] = top_define_method;
 
   // Foward calls to define_method on the top object to Object
   function top_define_method() {
