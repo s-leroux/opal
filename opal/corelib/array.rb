@@ -2336,7 +2336,7 @@ class Array < `Array`
           if (o.$size() === Infinity) {
             others[j] = o.$take(size);
           } else {
-            others[j] = o.$to_a();
+            others[j] = o[Opal.s.$to_a]();
           }
           continue;
         }
@@ -2376,7 +2376,7 @@ class Array < `Array`
 
   def self.inherited(klass)
     %x{
-      klass[Opal.s.$$prototype].$to_a = function() {
+      klass[Opal.s.$$prototype][Opal.s.$to_a] = function() {
         return this.slice(0, this.length);
       }
     }
