@@ -119,6 +119,7 @@
   Opal.s('$$meta');
   Opal.s('$$module');
   Opal.s('$$name');
+  Opal.s('$$owner');
   Opal.s('$$own_included_modules');
   Opal.s('$$own_prepended_modules');
   Opal.s('$$p');
@@ -1605,7 +1606,7 @@
       ancestors = Opal.ancestors(obj[Opal.s.$$class]);
     }
 
-    var current_index = ancestors.indexOf(current_func.$$owner);
+    var current_index = ancestors.indexOf(current_func[Opal.s.$$owner]);
 
     for (var i = current_index + 1; i < ancestors.length; i++) {
       var ancestor = ancestors[i],
@@ -1991,7 +1992,7 @@
     expectSymbol(jsid);
 
     body.displayName = jsid;
-    body.$$owner = module;
+    body[Opal.s.$$owner] = module;
 
     var proto = module[Opal.s.$$prototype];
     if (proto.hasOwnProperty(Opal.s.$$dummy)) {

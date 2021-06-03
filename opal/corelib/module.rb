@@ -452,7 +452,7 @@ class Module
         #{raise NameError.new("undefined method `#{name}' for class `#{self.name}'", name)};
       }
 
-      return #{UnboundMethod.new(self, `meth.$$owner || #{self}`, `meth`, name)};
+      return #{UnboundMethod.new(self, `meth[Opal.s.$$owner] || #{self}`, `meth`, name)};
     }
   end
 
