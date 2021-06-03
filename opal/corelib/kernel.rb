@@ -36,7 +36,7 @@ module Kernel
     %x{
       var meth = self['$' + name];
 
-      if (!meth || meth.$$stub) {
+      if (!meth || meth[Opal.s.$$stub]) {
         #{raise NameError.new("undefined method `#{name}' for class `#{self.class}'", name)};
       }
 
@@ -589,7 +589,7 @@ module Kernel
     %x{
       var body = self['$' + name];
 
-      if (typeof(body) === "function" && !body.$$stub) {
+      if (typeof(body) === "function" && !body[Opal.s.$$stub]) {
         return true;
       }
 

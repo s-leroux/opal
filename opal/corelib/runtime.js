@@ -126,6 +126,7 @@
   Opal.s('$$prototype');
   Opal.s('$$root');
   Opal.s('$$singleton_of');
+  Opal.s('$$stub');
   Opal.s('$$super');
 
   Opal.s('$bridge');
@@ -382,7 +383,7 @@
 
     if (obj[Opal.s['$respond_to?']][Opal.s.$$pristine]) {
       if (obj[Opal.s['$respond_to_missing?']][Opal.s.$$pristine]) {
-        return typeof(body) === "function" && !body.$$stub;
+        return typeof(body) === "function" && !body[Opal.s.$$stub];
       } else {
         return Opal.send(obj, obj[Opal.s['$respond_to_missing?']], [jsid.description.substr(1), include_all]);
       }
@@ -973,11 +974,11 @@
           var method_name = prop.slice(1),
               method = proto[prop];
 
-          if (method.$$stub && exclude.indexOf(method_name) === -1) {
+          if (method[Opal.s.$$stub] && exclude.indexOf(method_name) === -1) {
             exclude.push(method_name);
           }
 
-          if (!method.$$stub && results.indexOf(method_name) === -1 && exclude.indexOf(method_name) === -1) {
+          if (!method[Opal.s.$$stub] && results.indexOf(method_name) === -1 && exclude.indexOf(method_name) === -1) {
             results.push(method_name);
           }
         }
@@ -1003,7 +1004,7 @@
       if (Opal.is_method(prop)) {
         var method = proto[prop];
 
-        if (!method.$$stub) {
+        if (!method[Opal.s.$$stub]) {
           var method_name = prop.slice(1);
           results.push(method_name);
         }
@@ -1508,7 +1509,7 @@
     for (var i = 0, length = stubs.length; i < length; i++) {
       var stub = stubs[i], existing_method = proto[stub];
 
-      if (existing_method == null || existing_method.$$stub) {
+      if (existing_method == null || existing_method[Opal.s.$$stub]) {
         Opal.add_stub_for(proto, stub);
       }
     }
@@ -1550,7 +1551,7 @@
       return this[Opal.s.$method_missing].apply(this, [method_name.slice(1)].concat(args_ary));
     }
 
-    method_missing_stub.$$stub = true;
+    method_missing_stub[Opal.s.$$stub] = true;
 
     return method_missing_stub;
   };
@@ -1619,12 +1620,12 @@
       }
     }
 
-    if (!defcheck && super_method && super_method.$$stub && obj[Opal.s.$method_missing][Opal.s.$$pristine]) {
+    if (!defcheck && super_method && super_method[Opal.s.$$stub] && obj[Opal.s.$method_missing][Opal.s.$$pristine]) {
       // method_missing hasn't been explicitly defined
       throw Opal.NoMethodError.$new('super: no superclass method `'+mid+"' for "+obj, mid);
     }
 
-    return (super_method.$$stub && !allow_stubs) ? null : super_method;
+    return (super_method[Opal.s.$$stub] && !allow_stubs) ? null : super_method;
   };
 
   // Iter dispatcher for super in a block
@@ -2009,10 +2010,10 @@
     }
 
     var singleton_of = module[Opal.s.$$singleton_of];
-    if (module.$method_added && !module.$method_added.$$stub && !singleton_of) {
+    if (module.$method_added && !module.$method_added[Opal.s.$$stub] && !singleton_of) {
       module.$method_added(jsid.substr(1));
     }
-    else if (singleton_of && singleton_of.$singleton_method_added && !singleton_of.$singleton_method_added.$$stub) {
+    else if (singleton_of && singleton_of.$singleton_method_added && !singleton_of.$singleton_method_added[Opal.s.$$stub]) {
       singleton_of.$singleton_method_added(jsid.substr(1));
     }
   };
@@ -2042,12 +2043,12 @@
     delete obj[Opal.s.$$prototype][jsid];
 
     if (obj[Opal.s.$$is_singleton]) {
-      if (obj[Opal.s.$$prototype].$singleton_method_removed && !obj[Opal.s.$$prototype].$singleton_method_removed.$$stub) {
+      if (obj[Opal.s.$$prototype].$singleton_method_removed && !obj[Opal.s.$$prototype].$singleton_method_removed[Opal.s.$$stub]) {
         obj[Opal.s.$$prototype].$singleton_method_removed(jsid.substr(1));
       }
     }
     else {
-      if (obj.$method_removed && !obj.$method_removed.$$stub) {
+      if (obj.$method_removed && !obj.$method_removed[Opal.s.$$stub]) {
         obj.$method_removed(jsid.substr(1));
       }
     }
@@ -2059,26 +2060,26 @@
 
     expectSymbol(jsid);
 
-    if (!obj[Opal.s.$$prototype][jsid] || obj[Opal.s.$$prototype][jsid].$$stub) {
+    if (!obj[Opal.s.$$prototype][jsid] || obj[Opal.s.$$prototype][jsid][Opal.s.$$stub]) {
       throw Opal.NameError.$new("method '" + jsid.substr(1) + "' not defined in " + obj[Opal.s.$name]());
     }
 
     Opal.add_stub_for(obj[Opal.s.$$prototype], jsid);
 
     if (obj[Opal.s.$$is_singleton]) {
-      if (obj[Opal.s.$$prototype].$singleton_method_undefined && !obj[Opal.s.$$prototype].$singleton_method_undefined.$$stub) {
+      if (obj[Opal.s.$$prototype].$singleton_method_undefined && !obj[Opal.s.$$prototype].$singleton_method_undefined[Opal.s.$$stub]) {
         obj[Opal.s.$$prototype].$singleton_method_undefined(jsid.substr(1));
       }
     }
     else {
-      if (obj.$method_undefined && !obj.$method_undefined.$$stub) {
+      if (obj.$method_undefined && !obj.$method_undefined[Opal.s.$$stub]) {
         obj.$method_undefined(jsid.substr(1));
       }
     }
   };
 
   function is_method_body(body) {
-    return (typeof(body) === "function" && !body.$$stub);
+    return (typeof(body) === "function" && !body[Opal.s.$$stub]);
   }
 
   Opal.alias = function(obj, name, old) {
@@ -2162,7 +2163,7 @@
     var id   = '$' + name,
         body = obj[Opal.s.$$prototype][native_name];
 
-    if (typeof(body) !== "function" || body.$$stub) {
+    if (typeof(body) !== "function" || body[Opal.s.$$stub]) {
       throw Opal.NameError.$new("undefined native method `" + native_name + "' for class `" + obj[Opal.s.$name]() + "'")
     }
 

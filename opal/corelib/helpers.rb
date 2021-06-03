@@ -137,7 +137,7 @@ module Opal
         method_name = method_names[i];
         method = owner_class[Opal.s.$$prototype]['$'+method_name];
 
-        if (method && !method.$$stub) {
+        if (method && !method[Opal.s.$$stub]) {
           method[Opal.s.$$pristine] = true;
         }
       }

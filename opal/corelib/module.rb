@@ -448,7 +448,7 @@ class Module
     %x{
       var meth = self[Opal.s.$$prototype]['$' + name];
 
-      if (!meth || meth.$$stub) {
+      if (!meth || meth[Opal.s.$$stub]) {
         #{raise NameError.new("undefined method `#{name}' for class `#{self.name}'", name)};
       }
 
@@ -539,7 +539,7 @@ class Module
   def method_defined?(method)
     %x{
       var body = self[Opal.s.$$prototype]['$' + method];
-      return (!!body) && !body.$$stub;
+      return (!!body) && !body[Opal.s.$$stub];
     }
   end
 
