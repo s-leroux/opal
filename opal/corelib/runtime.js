@@ -120,6 +120,7 @@
   Opal.s('$$own_included_modules');
   Opal.s('$$own_prepended_modules');
   Opal.s('$$prepended');
+  Opal.s('$$pristine');
   Opal.s('$$prototype');
   Opal.s('$$root');
   Opal.s('$$singleton_of');
@@ -373,8 +374,8 @@
     include_all = !!include_all;
     var body = obj[jsid];
 
-    if (obj['$respond_to?'].$$pristine) {
-      if (obj['$respond_to_missing?'].$$pristine) {
+    if (obj['$respond_to?'][Opal.s.$$pristine]) {
+      if (obj['$respond_to_missing?'][Opal.s.$$pristine]) {
         return typeof(body) === "function" && !body.$$stub;
       } else {
         return Opal.send(obj, obj['$respond_to_missing?'], [jsid.substr(1), include_all]);
@@ -1612,7 +1613,7 @@
       }
     }
 
-    if (!defcheck && super_method && super_method.$$stub && obj[Opal.s.$method_missing].$$pristine) {
+    if (!defcheck && super_method && super_method.$$stub && obj[Opal.s.$method_missing][Opal.s.$$pristine]) {
       // method_missing hasn't been explicitly defined
       throw Opal.NoMethodError.$new('super: no superclass method `'+mid+"' for "+obj, mid);
     }

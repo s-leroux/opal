@@ -117,9 +117,9 @@ module Opal
   #     def dup
   #       %x{
   #         if (
-  #           self.$allocate.$$pristine &&
-  #           self.$copy_instance_variables.$$pristine &&
-  #           self.$initialize_dup.$$pristine
+  #           self.$allocate[Opal.s.$$pristine] &&
+  #           self.$copy_instance_variables[Opal.s.$$pristine] &&
+  #           self.$initialize_dup[Opal.s.$$pristine]
   #         ) return self.slice(0);
   #       }
   #
@@ -138,7 +138,7 @@ module Opal
         method = owner_class[Opal.s.$$prototype]['$'+method_name];
 
         if (method && !method.$$stub) {
-          method.$$pristine = true;
+          method[Opal.s.$$pristine] = true;
         }
       }
     }

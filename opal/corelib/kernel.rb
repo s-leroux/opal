@@ -593,7 +593,7 @@ module Kernel
         return true;
       }
 
-      if (self['$respond_to_missing?'].$$pristine === true) {
+      if (self['$respond_to_missing?'][Opal.s.$$pristine] === true) {
         return false;
       } else {
         return #{respond_to_missing?(name, include_all)};
