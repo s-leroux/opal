@@ -102,6 +102,7 @@
   Opal.s('$$define_methods_on');
   Opal.s('$$dummy');
   Opal.s('$$eval');
+  Opal.s('$$g');
   Opal.s('$$has_top_level_mlhs_arg');
   Opal.s('$$has_trailing_comma_in_args');
   Opal.s('$$iclass');
@@ -2542,12 +2543,12 @@
     if (pattern.global) {
       return pattern; // RegExp already has the global flag
     }
-    if (pattern.$$g == null) {
-      pattern.$$g = new RegExp(pattern.source, (pattern.multiline ? 'gm' : 'g') + (pattern.ignoreCase ? 'i' : ''));
+    if (pattern[Opal.s.$$g] == null) {
+      pattern[Opal.s.$$g] = new RegExp(pattern.source, (pattern.multiline ? 'gm' : 'g') + (pattern.ignoreCase ? 'i' : ''));
     } else {
-      pattern.$$g.lastIndex = null; // reset lastIndex property
+      pattern[Opal.s.$$g].lastIndex = null; // reset lastIndex property
     }
-    return pattern.$$g;
+    return pattern[Opal.s.$$g];
   };
 
   // Create a global multiline Regexp from a RegExp object and cache the result
@@ -2560,10 +2561,10 @@
         return pattern; // RegExp already has the global and multiline flag
       }
       // we are using the $$g attribute because the Regexp is already multiline
-      if (pattern.$$g != null) {
-        result = pattern.$$g;
+      if (pattern[Opal.s.$$g] != null) {
+        result = pattern[Opal.s.$$g];
       } else {
-        result = pattern.$$g = new RegExp(pattern.source, 'gm' + (pattern.ignoreCase ? 'i' : ''));
+        result = pattern[Opal.s.$$g] = new RegExp(pattern.source, 'gm' + (pattern.ignoreCase ? 'i' : ''));
       }
     } else if (pattern.$$gm != null) {
       result = pattern.$$gm;
