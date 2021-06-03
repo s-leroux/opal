@@ -84,6 +84,7 @@
 
   Opal.s('$$ancestors');
   Opal.s('$$ancestors_cache_version');
+  Opal.s('$$base_module');
   Opal.s('$$bridge');
   Opal.s('$$cast');
   Opal.s('$$class');
@@ -535,7 +536,7 @@
 
     if (value[Opal.s.$$is_a_module]) {
       if (value[Opal.s.$$name] == null || value[Opal.s.$$name] === nil) value[Opal.s.$$name] = name;
-      if (value.$$base_module == null) value.$$base_module = cref;
+      if (value[Opal.s.$$base_module] == null) value[Opal.s.$$base_module] = cref;
     }
 
     cref[Opal.s.$$const] = (cref[Opal.s.$$const] || Object.create(null));

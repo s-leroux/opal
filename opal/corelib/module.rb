@@ -576,7 +576,7 @@ class Module
 
         result.unshift(base[Opal.s.$$name]);
 
-        base = base.$$base_module;
+        base = base[Opal.s.$$base_module];
 
         if (base === Opal.Object) {
           break;
