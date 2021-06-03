@@ -1126,7 +1126,7 @@ module Enumerable
       %x{
         var slice = nil, last_after = nil;
 
-        self.$each_cons[Opal.s.$$p] = function() {
+        self[Opal.s.$each_cons][Opal.s.$$p] = function() {
           var params = #{Opal.destructure(`arguments`)},
               before = params[0],
               after = params[1],
@@ -1147,7 +1147,7 @@ module Enumerable
           }
         }
 
-        self.$each_cons(2);
+        self[Opal.s.$each_cons](2);
 
         if (slice !== nil) {
           slice.push(last_after);

@@ -159,6 +159,7 @@
   Opal.s('$const_missing');
   Opal.s('$define_method');
   Opal.s('$each');
+  Opal.s('$each_cons');
   Opal.s('$hash');
   Opal.s('$initialize');
   Opal.s('$inspect');
