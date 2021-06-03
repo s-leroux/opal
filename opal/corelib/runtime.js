@@ -84,6 +84,7 @@
 
   Opal.s('$$ancestors');
   Opal.s('$$ancestors_cache_version');
+  Opal.s('$$autoload');
   Opal.s('$$base_module');
   Opal.s('$$bridge');
   Opal.s('$$cast');
@@ -594,8 +595,8 @@
       return old;
     }
 
-    if (cref.$$autoload != null && cref.$$autoload[name] != null) {
-      delete cref.$$autoload[name];
+    if (cref[Opal.s.$$autoload] != null && cref[Opal.s.$$autoload][name] != null) {
+      delete cref[Opal.s.$$autoload][name];
       return nil;
     }
 

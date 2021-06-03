@@ -191,9 +191,9 @@ class Module
 
   def autoload(const, path)
     %x{
-      if (self.$$autoload == null) self.$$autoload = {};
+      if (self[Opal.s.$$autoload] == null) self[Opal.s.$$autoload] = {};
       Opal.const_cache_version++;
-      self.$$autoload[#{const}] = #{path};
+      self[Opal.s.$$autoload][#{const}] = #{path};
       return nil;
     }
   end
@@ -323,8 +323,8 @@ class Module
 
   def const_missing(name)
     %x{
-      if (self.$$autoload) {
-        var file = self.$$autoload[name];
+      if (self[Opal.s.$$autoload]) {
+        var file = self[Opal.s.$$autoload][name];
 
         if (file) {
           self[Opal.s.$require](file);
