@@ -130,6 +130,7 @@
   Opal.s('$$module');
   Opal.s('$$module_function');
   Opal.s('$$name');
+  Opal.s('$$none');
   Opal.s('$$owner');
   Opal.s('$$own_included_modules');
   Opal.s('$$own_prepended_modules');
@@ -2210,7 +2211,7 @@
   };
 
   Opal.hash_clone = function(from_hash, to_hash) {
-    to_hash.$$none = from_hash.$$none;
+    to_hash[Opal.s.$$none] = from_hash[Opal.s.$$none];
     to_hash.$$proc = from_hash.$$proc;
 
     for (var i = 0, keys = from_hash[Opal.s.$$keys], smap = from_hash[Opal.s.$$smap], len = keys.length, key, value; i < len; i++) {
