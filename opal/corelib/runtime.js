@@ -93,6 +93,7 @@
   Opal.s('$$cvars');
   Opal.s('$$define_methods_on');
   Opal.s('$$dummy');
+  Opal.s('$$eval');
   Opal.s('$$iclass');
   Opal.s('$$iclasses');
   Opal.s('$$id');
@@ -101,6 +102,7 @@
   Opal.s('$$is_array');
   Opal.s('$$is_boolean');
   Opal.s('$$is_class');
+  Opal.s('$$is_enumerator');
   Opal.s('$$is_hash');
   Opal.s('$$is_integer_class');
   Opal.s('$$is_lambda');
@@ -1965,7 +1967,7 @@
       Opal.defn(Opal.Object, jsid, body)
     }
     // if instance_eval is invoked on a module/class, it sets inst_eval_mod
-    else if (!obj.$$eval && obj[Opal.s.$$is_a_module]) {
+    else if (!obj[Opal.s.$$eval] && obj[Opal.s.$$is_a_module]) {
       Opal.defn(obj, jsid, body);
     }
     else {
@@ -2084,7 +2086,7 @@
         alias;
 
     // When running inside #instance_eval the alias refers to class methods.
-    if (obj.$$eval) {
+    if (obj[Opal.s.$$eval]) {
       return Opal.alias(Opal.get_singleton_class(obj), name, old);
     }
 

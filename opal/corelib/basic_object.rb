@@ -79,12 +79,12 @@ class BasicObject
       // being done on a class/module. Cannot be compiler driven since
       // send(:instance_eval) needs to work.
       if (self[Opal.s.$$is_a_module]) {
-        self.$$eval = true;
+        self[Opal.s.$$eval] = true;
         try {
           result = block.call(self, self);
         }
         finally {
-          self.$$eval = false;
+          self[Opal.s.$$eval] = false;
         }
       }
       else {
@@ -107,12 +107,12 @@ class BasicObject
       block.$$s = null;
 
       if (self[Opal.s.$$is_a_module]) {
-        self.$$eval = true;
+        self[Opal.s.$$eval] = true;
         try {
           result = block.apply(self, args);
         }
         finally {
-          self.$$eval = false;
+          self[Opal.s.$$eval] = false;
         }
       }
       else {
