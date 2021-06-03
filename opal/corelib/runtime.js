@@ -121,6 +121,7 @@
   Opal.s('$$jsid');
   Opal.s('$$meta');
   Opal.s('$$module');
+  Opal.s('$$module_function');
   Opal.s('$$name');
   Opal.s('$$owner');
   Opal.s('$$own_included_modules');
@@ -2004,7 +2005,7 @@
     $defineProperty(proto, jsid, body);
 
     if (module[Opal.s.$$is_module]) {
-      if (module.$$module_function) {
+      if (module[Opal.s.$$module_function]) {
         Opal.defs(module, jsid, body)
       }
 

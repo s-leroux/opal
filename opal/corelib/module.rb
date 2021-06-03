@@ -546,7 +546,7 @@ class Module
   def module_function(*methods)
     %x{
       if (methods.length === 0) {
-        self.$$module_function = true;
+        self[Opal.s.$$module_function] = true;
       }
       else {
         for (var i = 0, length = methods.length; i < length; i++) {
