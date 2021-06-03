@@ -380,7 +380,7 @@ class Module
       var id = '$' + name;
 
       block[Opal.s.$$jsid]        = name;
-      block.$$s           = null;
+      block[Opal.s.$$s]           = null;
       block[Opal.s.$$def]         = block;
       block[Opal.s.$$define_meth] = true;
 
@@ -505,12 +505,12 @@ class Module
     end
 
     %x{
-      var old = block.$$s,
+      var old = block[Opal.s.$$s],
           result;
 
-      block.$$s = null;
+      block[Opal.s.$$s] = null;
       result = block.apply(self, [self]);
-      block.$$s = old;
+      block[Opal.s.$$s] = old;
 
       return result;
     }
@@ -524,11 +524,11 @@ class Module
         #{raise LocalJumpError, 'no block given'}
       }
 
-      var block_self = block.$$s, result;
+      var block_self = block[Opal.s.$$s], result;
 
-      block.$$s = null;
+      block[Opal.s.$$s] = null;
       result = block.apply(self, args);
-      block.$$s = block_self;
+      block[Opal.s.$$s] = block_self;
 
       return result;
     }

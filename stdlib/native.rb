@@ -94,14 +94,14 @@ module Native
           return block.apply(self, #{args});
         }
 
-        var self_ = block.$$s;
-        block.$$s = null;
+        var self_ = block[Opal.s.$$s];
+        block[Opal.s.$$s] = null;
 
         try {
           return block.apply(#{instance}, #{args});
         }
         finally {
-          block.$$s = self_;
+          block[Opal.s.$$s] = self_;
         }
       }
     }

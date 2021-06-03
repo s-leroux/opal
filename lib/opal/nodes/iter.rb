@@ -17,7 +17,7 @@ module Opal
 
         in_scope do
           identity = scope.identify!
-          add_temp "self = #{identity}.$$s == null ? this : #{identity}.$$s"
+          add_temp "self = #{identity}[Opal.s.$$s] == null ? this : #{identity}[Opal.s.$$s]"
 
           inline_params = process(inline_args)
 
@@ -32,7 +32,7 @@ module Opal
         unshift to_vars
 
         unshift "(#{identity} = function(", inline_params, '){'
-        push "}, #{identity}.$$s = self,"
+        push "}, #{identity}[Opal.s.$$s] = self,"
         push " #{identity}.$$brk = $brk," if contains_break?
         push " #{identity}[Opal.s.$$arity] = #{arity},"
 

@@ -145,6 +145,7 @@
   Opal.s('$$proc');
   Opal.s('$$prototype');
   Opal.s('$$root');
+  Opal.s('$$s');
   Opal.s('$$singleton_of');
   Opal.s('$$smap');
   Opal.s('$$source_location');

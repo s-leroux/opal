@@ -70,10 +70,10 @@ class BasicObject
     end
 
     %x{
-      var old = block.$$s,
+      var old = block[Opal.s.$$s],
           result;
 
-      block.$$s = null;
+      block[Opal.s.$$s] = null;
 
       // Need to pass $$eval so that method definitions know if this is
       // being done on a class/module. Cannot be compiler driven since
@@ -91,7 +91,7 @@ class BasicObject
         result = block.call(self, self);
       }
 
-      block.$$s = old;
+      block[Opal.s.$$s] = old;
 
       return result;
     }
@@ -101,10 +101,10 @@ class BasicObject
     ::Kernel.raise ::ArgumentError, 'no block given' unless block
 
     %x{
-      var block_self = block.$$s,
+      var block_self = block[Opal.s.$$s],
           result;
 
-      block.$$s = null;
+      block[Opal.s.$$s] = null;
 
       if (self[Opal.s.$$is_a_module]) {
         self[Opal.s.$$eval] = true;
@@ -119,7 +119,7 @@ class BasicObject
         result = block.apply(self, args);
       }
 
-      block.$$s = block_self;
+      block[Opal.s.$$s] = block_self;
 
       return result;
     }
