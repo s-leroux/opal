@@ -70,7 +70,7 @@ class Hash
       Opal.hash_init(hash);
 
       hash[Opal.s.$$none] = nil;
-      hash.$$proc = nil;
+      hash[Opal.s.$$proc] = nil;
 
       return hash;
     }
@@ -86,7 +86,7 @@ class Hash
         #{raise ArgumentError, 'wrong number of arguments (1 for 0)'}
       }
       self[Opal.s.$$none] = (defaults === undefined ? nil : defaults);
-      self.$$proc = block;
+      self[Opal.s.$$proc] = block;
 
       return self;
     }
@@ -310,8 +310,8 @@ class Hash
 
   def default(key = undefined)
     %x{
-      if (key !== undefined && self.$$proc !== nil && self.$$proc !== undefined) {
-        return self.$$proc.$call(self, key);
+      if (key !== undefined && self[Opal.s.$$proc] !== nil && self[Opal.s.$$proc] !== undefined) {
+        return self[Opal.s.$$proc].$call(self, key);
       }
       if (self[Opal.s.$$none] === undefined) {
         return nil;
@@ -322,7 +322,7 @@ class Hash
 
   def default=(object)
     %x{
-      self.$$proc = nil;
+      self[Opal.s.$$proc] = nil;
       self[Opal.s.$$none] = object;
 
       return object;
@@ -331,8 +331,8 @@ class Hash
 
   def default_proc
     %x{
-      if (self.$$proc !== undefined) {
-        return self.$$proc;
+      if (self[Opal.s.$$proc] !== undefined) {
+        return self[Opal.s.$$proc];
       }
       return nil;
     }
@@ -351,7 +351,7 @@ class Hash
       }
 
       self[Opal.s.$$none] = nil;
-      self.$$proc = proc;
+      self[Opal.s.$$proc] = proc;
 
       return default_proc;
     }

@@ -138,6 +138,7 @@
   Opal.s('$$parameters');
   Opal.s('$$prepended');
   Opal.s('$$pristine');
+  Opal.s('$$proc');
   Opal.s('$$prototype');
   Opal.s('$$root');
   Opal.s('$$singleton_of');
@@ -2212,7 +2213,7 @@
 
   Opal.hash_clone = function(from_hash, to_hash) {
     to_hash[Opal.s.$$none] = from_hash[Opal.s.$$none];
-    to_hash.$$proc = from_hash.$$proc;
+    to_hash[Opal.s.$$proc] = from_hash[Opal.s.$$proc];
 
     for (var i = 0, keys = from_hash[Opal.s.$$keys], smap = from_hash[Opal.s.$$smap], len = keys.length, key, value; i < len; i++) {
       key = keys[i];
