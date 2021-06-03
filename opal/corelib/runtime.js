@@ -167,6 +167,7 @@
   Opal.s('$to_ary');
   Opal.s('$to_hash');
   Opal.s('$v');
+  Opal.s('$warn');
   Opal.s('$$respond_to?');
   Opal.s('$$respond_to_missing?');
 
@@ -2585,7 +2586,7 @@
       part = parts[i];
       if (part instanceof RegExp) {
         if (part.ignoreCase !== ignoreCase)
-          Opal.Kernel.$warn(
+          Opal.Kernel[Opal.s.$warn](
             "ignore case doesn't match for " + part.source[Opal.s.$inspect](),
             Opal.hash({uplevel: 1})
           )
