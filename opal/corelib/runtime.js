@@ -82,6 +82,7 @@
     };
   }
 
+  Opal.s('$$alias_name');
   Opal.s('$$alias_of');
   Opal.s('$$ancestors');
   Opal.s('$$ancestors_cache_version');
@@ -2166,7 +2167,7 @@
     alias[Opal.s.$$parameters]      = body[Opal.s.$$parameters];
     alias[Opal.s.$$source_location] = body[Opal.s.$$source_location];
     alias[Opal.s.$$alias_of]        = body;
-    alias.$$alias_name      = name;
+    alias[Opal.s.$$alias_name]      = name;
 
     Opal.defn(obj, id, alias);
 
