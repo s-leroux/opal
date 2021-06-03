@@ -102,6 +102,7 @@
   Opal.s('$$dummy');
   Opal.s('$$eval');
   Opal.s('$$has_top_level_mlhs_arg');
+  Opal.s('$$has_trailing_comma_in_args');
   Opal.s('$$iclass');
   Opal.s('$$iclasses');
   Opal.s('$$id');
@@ -1698,7 +1699,7 @@
     }
 
     var has_mlhs = block[Opal.s.$$has_top_level_mlhs_arg],
-        has_trailing_comma = block.$$has_trailing_comma_in_args;
+        has_trailing_comma = block[Opal.s.$$has_trailing_comma_in_args];
 
     if (block.length > 1 || ((has_mlhs || has_trailing_comma) && block.length === 1)) {
       arg = Opal.to_ary(arg);

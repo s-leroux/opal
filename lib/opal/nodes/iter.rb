@@ -53,7 +53,7 @@ module Opal
         end
 
         if has_trailing_comma_in_args?
-          push " #{identity}.$$has_trailing_comma_in_args = true,"
+          push " #{identity}[Opal.s.$$has_trailing_comma_in_args] = true,"
         end
 
         push " #{identity})"
