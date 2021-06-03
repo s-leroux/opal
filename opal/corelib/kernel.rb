@@ -574,7 +574,7 @@ module Kernel
         }
 
         if (max % 1 !== 0) {
-          max = max.$to_i();
+          max = max[Opal.s.$to_i]();
         }
 
         if (max === 0) {
