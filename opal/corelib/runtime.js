@@ -139,7 +139,9 @@
   Opal.s('$inspect');
   Opal.s('$inherited');
   Opal.s('$method_added');
+  Opal.s('$method_removed');
   Opal.s('$singleton_method_added');
+  Opal.s('$singleton_method_removed');
   Opal.s('$pristine');
   Opal.s('$require');
   Opal.s('$$respond_to?');
@@ -2051,13 +2053,13 @@
     delete obj[Opal.s.$$prototype][jsid];
 
     if (obj[Opal.s.$$is_singleton]) {
-      if (obj[Opal.s.$$prototype].$singleton_method_removed && !obj[Opal.s.$$prototype].$singleton_method_removed[Opal.s.$$stub]) {
-        obj[Opal.s.$$prototype].$singleton_method_removed(jsid.substr(1));
+      if (obj[Opal.s.$$prototype][Opal.s.$singleton_method_removed] && !obj[Opal.s.$$prototype][Opal.s.$singleton_method_removed][Opal.s.$$stub]) {
+        obj[Opal.s.$$prototype][Opal.s.$singleton_method_removed](jsid.description.substr(1));
       }
     }
     else {
-      if (obj.$method_removed && !obj.$method_removed[Opal.s.$$stub]) {
-        obj.$method_removed(jsid.substr(1));
+      if (obj[Opal.s.$method_removed] && !obj[Opal.s.$method_removed][Opal.s.$$stub]) {
+        obj[Opal.s.$method_removed](jsid.substr(1));
       }
     }
   };
