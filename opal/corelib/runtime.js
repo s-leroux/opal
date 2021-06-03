@@ -90,6 +90,7 @@
   Opal.s('$$autoload');
   Opal.s('$$base_module');
   Opal.s('$$bridge');
+  Opal.s('$$by_identity');
   Opal.s('$$cast');
   Opal.s('$$class');
   Opal.s('$$const');
@@ -2239,7 +2240,7 @@
     }
 
     var key_hash, bucket, last_bucket;
-    key_hash = hash.$$by_identity ? Opal.id(key) : key.$hash();
+    key_hash = hash[Opal.s.$$by_identity] ? Opal.id(key) : key.$hash();
 
     if (!$has_own.call(hash[Opal.s.$$map], key_hash)) {
       bucket = {key: key, key_hash: key_hash, value: value};
@@ -2276,7 +2277,7 @@
     }
 
     var key_hash, bucket;
-    key_hash = hash.$$by_identity ? Opal.id(key) : key.$hash();
+    key_hash = hash[Opal.s.$$by_identity] ? Opal.id(key) : key.$hash();
 
     if ($has_own.call(hash[Opal.s.$$map], key_hash)) {
       bucket = hash[Opal.s.$$map][key_hash];

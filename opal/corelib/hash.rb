@@ -284,9 +284,9 @@ class Hash
     %x{
       var i, ii, key, keys = self[Opal.s.$$keys], identity_hash;
 
-      if (self.$$by_identity) return self;
+      if (self[Opal.s.$$by_identity]) return self;
       if (self[Opal.s.$$keys].length === 0) {
-        self.$$by_identity = true
+        self[Opal.s.$$by_identity] = true
         return self;
       }
 
@@ -297,7 +297,7 @@ class Hash
         Opal.hash_put(identity_hash, key, Opal.hash_get(self, key));
       }
 
-      self.$$by_identity = true;
+      self[Opal.s.$$by_identity] = true;
       self[Opal.s.$$map] = identity_hash[Opal.s.$$map];
       self[Opal.s.$$smap] = identity_hash[Opal.s.$$smap];
       return self;
@@ -305,7 +305,7 @@ class Hash
   end
 
   def compare_by_identity?
-    `self.$$by_identity === true`
+    `self[Opal.s.$$by_identity] === true`
   end
 
   def default(key = undefined)
