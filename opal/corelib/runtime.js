@@ -123,6 +123,8 @@
   Opal.s('$$singleton_of');
   Opal.s('$$super');
 
+  Opal.s('$bridge');
+  Opal.s('$pristine');
   Opal.s('$require');
 
   // Minify common function calls
@@ -2074,9 +2076,9 @@
 
     trace(obj, name, old);
 
-    var id     = '$' + name,
-        old_id = '$' + old,
-        body   = obj[Opal.s.$$prototype]['$' + old],
+    var id     = Opal.s('$' + name),
+        old_id = Opal.s('$' + old),
+        body   = obj[Opal.s.$$prototype][old_id],
         alias;
 
     // When running inside #instance_eval the alias refers to class methods.
