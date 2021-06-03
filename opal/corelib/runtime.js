@@ -138,6 +138,7 @@
   Opal.s('$bridge');
   Opal.s('$inspect');
   Opal.s('$inherited');
+  Opal.s('$method_added');
   Opal.s('$pristine');
   Opal.s('$require');
   Opal.s('$$respond_to?');
@@ -2016,8 +2017,8 @@
     }
 
     var singleton_of = module[Opal.s.$$singleton_of];
-    if (module.$method_added && !module.$method_added[Opal.s.$$stub] && !singleton_of) {
-      module.$method_added(jsid.substr(1));
+    if (module[Opal.s.$method_added] && !module[Opal.s.$method_added][Opal.s.$$stub] && !singleton_of) {
+      module[Opal.s.$method_added](jsid.substr(1));
     }
     else if (singleton_of && singleton_of.$singleton_method_added && !singleton_of.$singleton_method_added[Opal.s.$$stub]) {
       singleton_of.$singleton_method_added(jsid.substr(1));
