@@ -1,10 +1,10 @@
 # NOTE: run bin/format-filters after changing this file
 opal_filter "BigDecimal" do
-  fails "BidDecimal#hash two BigDecimal objects with numerically equal values should have the same hash value" # Exception: self.$BigDecimal(...).$hash is not a function
-  fails "BidDecimal#hash two BigDecimal objects with the same value should have the same hash for NaNs" # Exception: self.$BigDecimal(...).$hash is not a function
-  fails "BidDecimal#hash two BigDecimal objects with the same value should have the same hash for infinite values" # Exception: self.$BigDecimal(...).$hash is not a function
-  fails "BidDecimal#hash two BigDecimal objects with the same value should have the same hash for ordinary values" # Exception: self.$BigDecimal(...).$hash is not a function
-  fails "BidDecimal#hash two BigDecimal objects with the same value should have the same hash for zero values" # Exception: self.$BigDecimal(...).$hash is not a function
+  fails "BidDecimal#hash two BigDecimal objects with numerically equal values should have the same hash value" # Exception: self.$BigDecimal(...)[Opal.s.$hash] is not a function
+  fails "BidDecimal#hash two BigDecimal objects with the same value should have the same hash for NaNs" # Exception: self.$BigDecimal(...)[Opal.s.$hash] is not a function
+  fails "BidDecimal#hash two BigDecimal objects with the same value should have the same hash for infinite values" # Exception: self.$BigDecimal(...)[Opal.s.$hash] is not a function
+  fails "BidDecimal#hash two BigDecimal objects with the same value should have the same hash for ordinary values" # Exception: self.$BigDecimal(...)[Opal.s.$hash] is not a function
+  fails "BidDecimal#hash two BigDecimal objects with the same value should have the same hash for zero values" # Exception: self.$BigDecimal(...)[Opal.s.$hash] is not a function
   fails "BigDecimal constants defines a VERSION value" # Expected false to be true
   fails "BigDecimal constants exception-related constants has a EXCEPTION_ALL value" # NameError: uninitialized constant BigDecimal::EXCEPTION_ALL
   fails "BigDecimal constants exception-related constants has a EXCEPTION_INFINITY value" # NameError: uninitialized constant BigDecimal::EXCEPTION_INFINITY

@@ -150,6 +150,7 @@
 
   Opal.s('$bridge');
   Opal.s('$const_missing');
+  Opal.s('$hash');
   Opal.s('$inspect');
   Opal.s('$inherited');
   Opal.s('$method_added');
@@ -2240,7 +2241,7 @@
     }
 
     var key_hash, bucket, last_bucket;
-    key_hash = hash[Opal.s.$$by_identity] ? Opal.id(key) : key.$hash();
+    key_hash = hash[Opal.s.$$by_identity] ? Opal.id(key) : key[Opal.s.$hash]();
 
     if (!$has_own.call(hash[Opal.s.$$map], key_hash)) {
       bucket = {key: key, key_hash: key_hash, value: value};
@@ -2277,7 +2278,7 @@
     }
 
     var key_hash, bucket;
-    key_hash = hash[Opal.s.$$by_identity] ? Opal.id(key) : key.$hash();
+    key_hash = hash[Opal.s.$$by_identity] ? Opal.id(key) : key[Opal.s.$hash]();
 
     if ($has_own.call(hash[Opal.s.$$map], key_hash)) {
       bucket = hash[Opal.s.$$map][key_hash];
@@ -2313,7 +2314,7 @@
       return value;
     }
 
-    var key_hash = key.$hash();
+    var key_hash = key[Opal.s.$hash]();
 
     if (!$has_own.call(hash[Opal.s.$$map], key_hash)) {
       return;
@@ -2359,7 +2360,7 @@
         continue;
       }
 
-      key_hash = hash[Opal.s.$$keys][i].key.$hash();
+      key_hash = hash[Opal.s.$$keys][i].key[Opal.s.$hash]();
 
       if (key_hash === hash[Opal.s.$$keys][i].key_hash) {
         continue;

@@ -582,9 +582,9 @@ class Hash
           key = keys[i];
 
           if (key[Opal.s.$$is_string]) {
-            result.push([key, self[Opal.s.$$smap][key].$hash()]);
+            result.push([key, self[Opal.s.$$smap][key][Opal.s.$hash]()]);
           } else {
-            result.push([key.key_hash, key.value.$hash()]);
+            result.push([key.key_hash, key.value[Opal.s.$hash]()]);
           }
         }
 

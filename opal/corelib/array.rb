@@ -1234,7 +1234,7 @@ class Array < `Array`
 
         for (i = 0; i < self.length; i++) {
           item = self[i];
-          result.push(item.$hash());
+          result.push(item[Opal.s.$hash]());
         }
 
         return result.join(',');
