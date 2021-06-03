@@ -110,8 +110,8 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
-          other_value = other.$$smap[key];
+          value = self[Opal.s.$$smap][key];
+          other_value = other[Opal.s.$$smap][key];
         } else {
           value = key.value;
           other_value = Opal.hash_get(other, key.key);
@@ -199,7 +199,7 @@ class Hash
 
         if (key[Opal.s.$$is_string]) {
           if (#{`key` == object}) {
-            return [key, self.$$smap[key]];
+            return [key, self[Opal.s.$$smap][key]];
           }
         } else {
           if (#{`key.key` == object}) {
@@ -238,7 +238,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -261,7 +261,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -299,7 +299,7 @@ class Hash
 
       self.$$by_identity = true;
       self.$$map = identity_hash.$$map;
-      self.$$smap = identity_hash.$$smap;
+      self[Opal.s.$$smap] = identity_hash[Opal.s.$$smap];
       return self;
     }
   end
@@ -381,7 +381,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -427,7 +427,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -463,7 +463,7 @@ class Hash
       for (var i = 0, keys = self.$$keys, length = keys.length, key; i < length; i++) {
         key = keys[i];
 
-        block(key[Opal.s.$$is_string] ? self.$$smap[key] : key.value);
+        block(key[Opal.s.$$is_string] ? self[Opal.s.$$smap][key] : key.value);
       }
 
       return self;
@@ -510,7 +510,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -544,7 +544,7 @@ class Hash
       for (var i = 0, keys = self.$$keys, length = keys.length, key; i < length; i++) {
         key = keys[i];
 
-        if (#{`(key[Opal.s.$$is_string] ? self.$$smap[key] : key.value)` == value}) {
+        if (#{`(key[Opal.s.$$is_string] ? self[Opal.s.$$smap][key] : key.value)` == value}) {
           return true;
         }
       }
@@ -582,7 +582,7 @@ class Hash
           key = keys[i];
 
           if (key[Opal.s.$$is_string]) {
-            result.push([key, self.$$smap[key].$hash()]);
+            result.push([key, self[Opal.s.$$smap][key].$hash()]);
           } else {
             result.push([key.key_hash, key.value.$hash()]);
           }
@@ -606,7 +606,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -666,7 +666,7 @@ class Hash
           key = keys[i];
 
           if (key[Opal.s.$$is_string]) {
-            value = self.$$smap[key];
+            value = self[Opal.s.$$smap][key];
           } else {
             value = key.value;
             key = key.key;
@@ -693,7 +693,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -714,7 +714,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -778,7 +778,7 @@ class Hash
             key = other_keys[j];
 
             if (key[Opal.s.$$is_string]) {
-              other_value = other.$$smap[key];
+              other_value = other[Opal.s.$$smap][key];
             } else {
               other_value = key.value;
               key = key.key;
@@ -791,7 +791,7 @@ class Hash
             key = other_keys[j];
 
             if (key[Opal.s.$$is_string]) {
-              other_value = other.$$smap[key];
+              other_value = other[Opal.s.$$smap][key];
             } else {
               other_value = key.value;
               key = key.key;
@@ -819,7 +819,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -851,7 +851,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -878,7 +878,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -909,7 +909,7 @@ class Hash
         key = other_keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          other_value = other.$$smap[key];
+          other_value = other[Opal.s.$$smap][key];
         } else {
           other_value = key.value;
           key = key.key;
@@ -938,7 +938,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -965,7 +965,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -1034,7 +1034,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -1092,7 +1092,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -1118,7 +1118,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -1144,7 +1144,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -1167,7 +1167,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          value = self.$$smap[key];
+          value = self[Opal.s.$$smap][key];
         } else {
           value = key.value;
           key = key.key;
@@ -1196,7 +1196,7 @@ class Hash
         key = keys[i];
 
         if (key[Opal.s.$$is_string]) {
-          result.push(self.$$smap[key]);
+          result.push(self[Opal.s.$$smap][key]);
         } else {
           result.push(key.value);
         }

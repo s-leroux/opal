@@ -17,14 +17,14 @@ describe 'Hash' do
     end
 
     it 'stores values directly as objects in the `smap` object by their corresponding string key' do
-      `Object.keys(#@h.$$smap).length`.should == 2
-      `#@h.$$smap['a']`.should == 123
-      `#@h.$$smap['b']`.should == 456
+      `Object.keys(#@h[Opal.s.$$smap]).length`.should == 2
+      `#@h[Opal.s.$$smap]['a']`.should == 123
+      `#@h[Opal.s.$$smap]['b']`.should == 456
 
       @h['c'] = 789
 
-      `Object.keys(#@h.$$smap).length`.should == 3
-      `#@h.$$smap['c']`.should == 789
+      `Object.keys(#@h[Opal.s.$$smap]).length`.should == 3
+      `#@h[Opal.s.$$smap]['c']`.should == 789
     end
 
     it 'does not use the `map` object' do
@@ -96,19 +96,19 @@ describe 'Hash' do
     end
 
     it 'does not use the `smap` object' do
-      `Object.keys(#@h.$$smap).length`.should == 0
+      `Object.keys(#@h[Opal.s.$$smap]).length`.should == 0
 
       @h[Object.new] = 789
 
-      `Object.keys(#@h.$$smap).length`.should == 0
+      `Object.keys(#@h[Opal.s.$$smap]).length`.should == 0
     end
 
     it 'uses the `smap` object when a string key is added' do
-      `Object.keys(#@h.$$smap).length`.should == 0
+      `Object.keys(#@h[Opal.s.$$smap]).length`.should == 0
 
       @h['c'] = 789
 
-      `Object.keys(#@h.$$smap).length`.should == 1
+      `Object.keys(#@h[Opal.s.$$smap]).length`.should == 1
     end
 
     it 'allows multiple keys that #hash to the same value to be stored in the Hash' do
@@ -197,13 +197,13 @@ describe 'Hash' do
 
       `Opal.hasOwnProperty.call(#@hash.$$map, 'hhh')`.should == true
       `Opal.hasOwnProperty.call(#@hash.$$map, #{@obj1.hash})`.should == true
-      `Opal.hasOwnProperty.call(#@hash.$$smap, 'a')`.should == true
-      `Opal.hasOwnProperty.call(#@hash.$$smap, 'b')`.should == true
-      `Opal.hasOwnProperty.call(#@hash.$$smap, 'c')`.should == true
+      `Opal.hasOwnProperty.call(#@hash[Opal.s.$$smap], 'a')`.should == true
+      `Opal.hasOwnProperty.call(#@hash[Opal.s.$$smap], 'b')`.should == true
+      `Opal.hasOwnProperty.call(#@hash[Opal.s.$$smap], 'c')`.should == true
 
       `#@hash.$$keys.length`.should == 8
       `Object.keys(#@hash.$$map).length`.should == 2
-      `Object.keys(#@hash.$$smap).length`.should == 3
+      `Object.keys(#@hash[Opal.s.$$smap]).length`.should == 3
 
       `#@hash.$$keys[0].key`.should == @mock1
       `#@hash.$$keys[1]`.should == 'a'
@@ -224,7 +224,7 @@ describe 'Hash' do
 
       `#@hash.$$keys.length`.should == 7
       `Object.keys(#@hash.$$map).length`.should == 2
-      `Object.keys(#@hash.$$smap).length`.should == 3
+      `Object.keys(#@hash[Opal.s.$$smap]).length`.should == 3
 
       `#@hash.$$keys[0].key`.should == @mock1
       `#@hash.$$keys[1]`.should == 'a'
@@ -243,7 +243,7 @@ describe 'Hash' do
 
       `#@hash.$$keys.length`.should == 6
       `Object.keys(#@hash.$$map).length`.should == 2
-      `Object.keys(#@hash.$$smap).length`.should == 3
+      `Object.keys(#@hash[Opal.s.$$smap]).length`.should == 3
 
       `#@hash.$$keys[0].key`.should == @mock1
       `#@hash.$$keys[1]`.should == 'a'
@@ -260,7 +260,7 @@ describe 'Hash' do
 
       `#@hash.$$keys.length`.should == 5
       `Object.keys(#@hash.$$map).length`.should == 2
-      `Object.keys(#@hash.$$smap).length`.should == 3
+      `Object.keys(#@hash[Opal.s.$$smap]).length`.should == 3
 
       `#@hash.$$keys[0]`.should == 'a'
       `#@hash.$$keys[1]`.should == 'b'
@@ -275,7 +275,7 @@ describe 'Hash' do
 
       `#@hash.$$keys.length`.should == 4
       `Object.keys(#@hash.$$map).length`.should == 1
-      `Object.keys(#@hash.$$smap).length`.should == 3
+      `Object.keys(#@hash[Opal.s.$$smap]).length`.should == 3
 
       `#@hash.$$keys[0]`.should == 'a'
       `#@hash.$$keys[1]`.should == 'b'
@@ -288,7 +288,7 @@ describe 'Hash' do
 
       `#@hash.$$keys.length`.should == 3
       `Object.keys(#@hash.$$map).length`.should == 0
-      `Object.keys(#@hash.$$smap).length`.should == 3
+      `Object.keys(#@hash[Opal.s.$$smap]).length`.should == 3
 
       `#@hash.$$keys[0]`.should == 'a'
       `#@hash.$$keys[1]`.should == 'b'
@@ -300,40 +300,40 @@ describe 'Hash' do
 
       `#@hash.$$keys.length`.should == 2
       `Object.keys(#@hash.$$map).length`.should == 0
-      `Object.keys(#@hash.$$smap).length`.should == 2
+      `Object.keys(#@hash[Opal.s.$$smap]).length`.should == 2
 
       `#@hash.$$keys[0]`.should == 'a'
       `#@hash.$$keys[1]`.should == 'c'
-      `#@hash.$$smap['a']`.should == 'abc'
-      `#@hash.$$smap['b'] === undefined`.should == true
-      `#@hash.$$smap['c']`.should == 'ghi'
+      `#@hash[Opal.s.$$smap]['a']`.should == 'abc'
+      `#@hash[Opal.s.$$smap]['b'] === undefined`.should == true
+      `#@hash[Opal.s.$$smap]['c']`.should == 'ghi'
 
       @hash.delete 'c'
 
       `#@hash.$$keys.length`.should == 1
       `Object.keys(#@hash.$$map).length`.should == 0
-      `Object.keys(#@hash.$$smap).length`.should == 1
+      `Object.keys(#@hash[Opal.s.$$smap]).length`.should == 1
 
       `#@hash.$$keys[0]`.should == 'a'
-      `#@hash.$$smap['a']`.should == 'abc'
-      `#@hash.$$smap['b'] === undefined`.should == true
-      `#@hash.$$smap['c'] === undefined`.should == true
+      `#@hash[Opal.s.$$smap]['a']`.should == 'abc'
+      `#@hash[Opal.s.$$smap]['b'] === undefined`.should == true
+      `#@hash[Opal.s.$$smap]['c'] === undefined`.should == true
 
       @hash.delete 'a'
 
       `#@hash.$$keys.length`.should == 0
       `Object.keys(#@hash.$$map).length`.should == 0
-      `Object.keys(#@hash.$$smap).length`.should == 0
+      `Object.keys(#@hash[Opal.s.$$smap]).length`.should == 0
 
-      `#@hash.$$smap['a'] === undefined`.should == true
-      `#@hash.$$smap['b'] === undefined`.should == true
-      `#@hash.$$smap['c'] === undefined`.should == true
+      `#@hash[Opal.s.$$smap]['a'] === undefined`.should == true
+      `#@hash[Opal.s.$$smap]['b'] === undefined`.should == true
+      `#@hash[Opal.s.$$smap]['c'] === undefined`.should == true
 
       `Opal.hasOwnProperty.call(#@hash.$$map, 'hhh')`.should == false
       `Opal.hasOwnProperty.call(#@hash.$$map, #{@obj1.hash})`.should == false
-      `Opal.hasOwnProperty.call(#@hash.$$smap, 'a')`.should == false
-      `Opal.hasOwnProperty.call(#@hash.$$smap, 'b')`.should == false
-      `Opal.hasOwnProperty.call(#@hash.$$smap, 'c')`.should == false
+      `Opal.hasOwnProperty.call(#@hash[Opal.s.$$smap], 'a')`.should == false
+      `Opal.hasOwnProperty.call(#@hash[Opal.s.$$smap], 'b')`.should == false
+      `Opal.hasOwnProperty.call(#@hash[Opal.s.$$smap], 'c')`.should == false
     end
   end
 end

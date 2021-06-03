@@ -138,6 +138,7 @@
   Opal.s('$$prototype');
   Opal.s('$$root');
   Opal.s('$$singleton_of');
+  Opal.s('$$smap');
   Opal.s('$$source_location');
   Opal.s('$$stub');
   Opal.s('$$super');
@@ -1888,7 +1889,7 @@
     var keys      = [],
         map       = {},
         key           ,
-        given_map = given_args.$$smap;
+        given_map = given_args[Opal.s.$$smap];
 
     for (key in given_map) {
       if (!used_args[key]) {
@@ -2201,7 +2202,7 @@
   // ------
 
   Opal.hash_init = function(hash) {
-    hash.$$smap = Object.create(null);
+    hash[Opal.s.$$smap] = Object.create(null);
     hash.$$map  = Object.create(null);
     hash.$$keys = [];
   };
@@ -2210,7 +2211,7 @@
     to_hash.$$none = from_hash.$$none;
     to_hash.$$proc = from_hash.$$proc;
 
-    for (var i = 0, keys = from_hash.$$keys, smap = from_hash.$$smap, len = keys.length, key, value; i < len; i++) {
+    for (var i = 0, keys = from_hash.$$keys, smap = from_hash[Opal.s.$$smap], len = keys.length, key, value; i < len; i++) {
       key = keys[i];
 
       if (key[Opal.s.$$is_string]) {
@@ -2226,10 +2227,10 @@
 
   Opal.hash_put = function(hash, key, value) {
     if (key[Opal.s.$$is_string]) {
-      if (!$has_own.call(hash.$$smap, key)) {
+      if (!$has_own.call(hash[Opal.s.$$smap], key)) {
         hash.$$keys.push(key);
       }
-      hash.$$smap[key] = value;
+      hash[Opal.s.$$smap][key] = value;
       return;
     }
 
@@ -2264,8 +2265,8 @@
 
   Opal.hash_get = function(hash, key) {
     if (key[Opal.s.$$is_string]) {
-      if ($has_own.call(hash.$$smap, key)) {
-        return hash.$$smap[key];
+      if ($has_own.call(hash[Opal.s.$$smap], key)) {
+        return hash[Opal.s.$$smap][key];
       }
       return;
     }
@@ -2291,7 +2292,7 @@
     if (key[Opal.s.$$is_string]) {
       if (typeof key !== "string") key = key.valueOf();
 
-      if (!$has_own.call(hash.$$smap, key)) {
+      if (!$has_own.call(hash[Opal.s.$$smap], key)) {
         return;
       }
 
@@ -2302,8 +2303,8 @@
         }
       }
 
-      value = hash.$$smap[key];
-      delete hash.$$smap[key];
+      value = hash[Opal.s.$$smap][key];
+      delete hash[Opal.s.$$smap][key];
       return value;
     }
 
@@ -2470,7 +2471,7 @@
   Opal.hash2 = function(keys, smap) {
     var hash = new Opal.Hash();
 
-    hash.$$smap = smap;
+    hash[Opal.s.$$smap] = smap;
     hash.$$map  = Object.create(null);
     hash.$$keys = keys;
 

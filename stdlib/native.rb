@@ -537,7 +537,7 @@ class Hash
       if (defaults != null &&
            (defaults.constructor === undefined ||
              defaults.constructor === Object)) {
-        var smap = self.$$smap,
+        var smap = self[Opal.s.$$smap],
             keys = self.$$keys,
             key, value;
 
@@ -579,7 +579,7 @@ class Hash
     %x{
       var result = {},
           keys = self.$$keys,
-          smap = self.$$smap,
+          smap = self[Opal.s.$$smap],
           key, value;
 
       for (var i = 0, length = keys.length; i < length; i++) {
