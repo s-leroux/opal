@@ -182,10 +182,10 @@ opal_filter "BigDecimal" do
   fails "BigDecimal#to_s can return a leading space for values > 0"
   fails "BigDecimal#to_s can use conventional floating point notation"
   fails "BigDecimal#to_s can use engineering notation"
-  fails "BigDecimal#to_s does not add an exponent for zero values" # Exception: self.$BigDecimal(...).$to_s is not a function
+  fails "BigDecimal#to_s does not add an exponent for zero values" # Exception: self.$BigDecimal(...)[Opal.s.$to_s] is not a function
   fails "BigDecimal#to_s inserts a space every n chars, if integer n is supplied"
   fails "BigDecimal#to_s removes trailing spaces in floating point notation"
-  fails "BigDecimal#to_s return type is of class String" # Exception: self.bigdec.$to_s is not a function
+  fails "BigDecimal#to_s return type is of class String" # Exception: self.bigdec[Opal.s.$to_s] is not a function
   fails "BigDecimal#to_s returns a String in US-ASCII encoding when Encoding.default_internal is nil" # NoMethodError: undefined method `default_internal' for Encoding
   fails "BigDecimal#to_s returns a String in US-ASCII encoding when Encoding.default_internal is not nil" # NoMethodError: undefined method `default_internal' for Encoding
   fails "BigDecimal#to_s starts with + if + is supplied and value is positive"

@@ -164,6 +164,7 @@
   Opal.s('$pristine');
   Opal.s('$require');
   Opal.s('$to_a');
+  Opal.s('$to_s');
   Opal.s('$to_ary');
   Opal.s('$to_hash');
   Opal.s('$v');
@@ -2760,7 +2761,7 @@
 
   // Forward .toString() to #to_s
   $defineProperty(_Object[Opal.s.$$prototype], 'toString', function() {
-    var to_s = this.$to_s();
+    var to_s = this[Opal.s.$to_s]();
     if (to_s[Opal.s.$$is_string] && typeof(to_s) === 'object') {
       // a string created using new String('string')
       return to_s.valueOf();
@@ -2775,7 +2776,7 @@
 
   // Instantiate the main object
   Opal.top = new _Object();
-  Opal.top.$to_s = Opal.top[Opal.s.$inspect] = function() { return 'main' };
+  Opal.top[Opal.s.$to_s] = Opal.top[Opal.s.$inspect] = function() { return 'main' };
   Opal.top.$define_method = top_define_method;
 
   // Foward calls to define_method on the top object to Object
