@@ -127,8 +127,11 @@
   Opal.s('$$super');
 
   Opal.s('$bridge');
+  Opal.s('$inspect');
   Opal.s('$pristine');
   Opal.s('$require');
+  Opal.s('$$respond_to?');
+  Opal.s('$$respond_to_missing?');
 
   // Minify common function calls
   var $has_own   = Object.hasOwnProperty;
@@ -188,7 +191,7 @@
       return obj.toString();
     }
     else {
-      return obj.$inspect();
+      return obj[Opal.s.$inspect]();
     }
   };
 
@@ -359,7 +362,7 @@
   Opal.coerce_to = function(object, type, method, args) {
     if (type['$==='](object)) return object;
 
-    if (!object['$respond_to?'](method)) {
+    if (!object[Opal.s['$respond_to?']](method)) {
       throw Opal.type_error(object, type);
     }
 
@@ -374,14 +377,14 @@
     include_all = !!include_all;
     var body = obj[jsid];
 
-    if (obj['$respond_to?'][Opal.s.$$pristine]) {
-      if (obj['$respond_to_missing?'][Opal.s.$$pristine]) {
+    if (obj[Opal.s['$respond_to?']][Opal.s.$$pristine]) {
+      if (obj[Opal.s['$respond_to_missing?']][Opal.s.$$pristine]) {
         return typeof(body) === "function" && !body.$$stub;
       } else {
-        return Opal.send(obj, obj['$respond_to_missing?'], [jsid.substr(1), include_all]);
+        return Opal.send(obj, obj[Opal.s['$respond_to_missing?']], [jsid.description.substr(1), include_all]);
       }
     } else {
-      return Opal.send(obj, obj['$respond_to?'], [jsid.substr(1), include_all]);
+      return Opal.send(obj, obj[Opal.s['$respond_to?']], [jsid.description.substr(1), include_all]);
     }
   }
 
@@ -1757,7 +1760,7 @@
     if (value[Opal.s.$$is_hash]) {
       return value;
     }
-    else if (value['$respond_to?']('to_hash', true)) {
+    else if (value[Opal.s['$respond_to?']]('to_hash', true)) {
       var hash = value.$to_hash();
       if (hash[Opal.s.$$is_hash]) {
         return hash;
@@ -1782,7 +1785,7 @@
     if (value[Opal.s.$$is_array]) {
       return value;
     }
-    else if (value['$respond_to?']('to_ary', true)) {
+    else if (value[Opal.s['$respond_to?']]('to_ary', true)) {
       var ary = value.$to_ary();
       if (ary === nil) {
         return [value];
@@ -1806,7 +1809,7 @@
       // A splatted array must be copied
       return value.slice();
     }
-    else if (value['$respond_to?']('to_a', true)) {
+    else if (value[Opal.s['$respond_to?']]('to_a', true)) {
       var ary = value.$to_a();
       if (ary === nil) {
         return [value];
@@ -2392,7 +2395,7 @@
 
       for (i = 0; i < length; i++) {
         if (args[i].length !== 2) {
-          throw Opal.ArgumentError.$new("value not of length 2: " + args[i].$inspect());
+          throw Opal.ArgumentError.$new("value not of length 2: " + args[i][Opal.s.$inspect]());
         }
 
         key = args[i][0];
@@ -2546,7 +2549,7 @@
       if (part instanceof RegExp) {
         if (part.ignoreCase !== ignoreCase)
           Opal.Kernel.$warn(
-            "ignore case doesn't match for " + part.source.$inspect(),
+            "ignore case doesn't match for " + part.source[Opal.s.$inspect](),
             Opal.hash({uplevel: 1})
           )
 
@@ -2734,7 +2737,7 @@
 
   // Instantiate the main object
   Opal.top = new _Object();
-  Opal.top.$to_s = Opal.top.$inspect = function() { return 'main' };
+  Opal.top.$to_s = Opal.top[Opal.s.$inspect] = function() { return 'main' };
   Opal.top.$define_method = top_define_method;
 
   // Foward calls to define_method on the top object to Object

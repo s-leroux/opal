@@ -80,7 +80,7 @@ opal_filter "BigDecimal" do
   fails "BigDecimal#frac returns 0 if the value is an integer"
   fails "BigDecimal#frac returns a BigDecimal"
   fails "BigDecimal#frac returns the fractional part of the absolute value"
-  fails "BigDecimal#inspect does not add an exponent for zero values" # Exception: self.$BigDecimal(...).$inspect is not a function
+  fails "BigDecimal#inspect does not add an exponent for zero values" # Exception: self.$BigDecimal(...)[Opal.s.$inspect] is not a function
   fails "BigDecimal#inspect encloses information in angle brackets"
   fails "BigDecimal#inspect is comma separated list of three items"
   fails "BigDecimal#inspect last part is number of significant digits"

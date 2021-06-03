@@ -116,7 +116,7 @@ module Opal
         meth_tmp = scope.new_temp
         push "(((#{meth_tmp} = #{recv_value_tmp}#{mid}) && !#{meth_tmp}.$$stub)"
 
-        push " || #{recv_value_tmp}['$respond_to_missing?']('#{method_name}'))"
+        push " || #{recv_value_tmp}[Opal.s['$respond_to_missing?']]('#{method_name}'))"
 
         args.each do |arg|
           case arg.type

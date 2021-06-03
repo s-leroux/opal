@@ -135,7 +135,7 @@ class BasicObject
   end
 
   def method_missing(symbol, *args, &block)
-    message = if `self.$inspect && !self.$inspect.$$stub`
+    message = if `self[Opal.s.$inspect] && !self[Opal.s.$inspect].$$stub`
                 "undefined method `#{symbol}' for #{inspect}:#{`self[Opal.s.$$class]`}"
               else
                 "undefined method `#{symbol}' for #{`self[Opal.s.$$class]`}"

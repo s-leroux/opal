@@ -15,7 +15,7 @@ module Comparable
       #{
         case `rhs`
         when nil, true, false, Integer, Float
-          `class_name = rhs.$inspect()`
+          `class_name = rhs[Opal.s.$inspect]()`
         else
           `class_name = rhs[Opal.s.$$class]`
         end

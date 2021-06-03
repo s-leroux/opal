@@ -672,7 +672,7 @@ class Hash
             key = key.key;
           }
 
-          result.push(key.$inspect() + '=>' + value.$inspect());
+          result.push(key[Opal.s.$inspect]() + '=>' + value[Opal.s.$inspect]());
         }
 
         return '{' + result.join(', ') + '}';
