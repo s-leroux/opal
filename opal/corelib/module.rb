@@ -364,7 +364,7 @@ class Module
                 method
 
               when Method
-                `#{method.to_proc}.$$unbound`
+                `#{method.to_proc}[Opal.s.$$unbound]`
 
               when UnboundMethod
                 ->(*args) {

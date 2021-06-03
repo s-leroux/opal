@@ -150,6 +150,7 @@
   Opal.s('$$source_location');
   Opal.s('$$stub');
   Opal.s('$$super');
+  Opal.s('$$unbound');
 
   Opal.s('$bridge');
   Opal.s('$const_missing');
