@@ -34,7 +34,7 @@ module Kernel
 
   def method(name)
     %x{
-      var meth = self['$' + name];
+      var meth = self[Opal.s('$' + name)];
 
       if (!meth || meth[Opal.s.$$stub]) {
         #{raise NameError.new("undefined method `#{name}' for class `#{self.class}'", name)};
@@ -587,7 +587,7 @@ module Kernel
 
   def respond_to?(name, include_all = false)
     %x{
-      var body = self['$' + name];
+      var body = self[Opal.s('$' + name)];
 
       if (typeof(body) === "function" && !body[Opal.s.$$stub]) {
         return true;

@@ -85,7 +85,7 @@ module Opal
         operators.each do |op|
           name = Nodes::CallNode::OPERATORS[op]
           line "function $rb_#{name}(lhs, rhs) {"
-          line "  return (typeof(lhs) === 'number' && typeof(rhs) === 'number') ? lhs #{op} rhs : lhs['$#{op}'](rhs);"
+          line "  return (typeof(lhs) === 'number' && typeof(rhs) === 'number') ? lhs #{op} rhs : lhs[Opal.s['$#{op}']](rhs);"
           line '}'
         end
       end

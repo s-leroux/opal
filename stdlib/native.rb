@@ -611,7 +611,7 @@ end
 class Class
   def native_alias(new_jsid, existing_mid)
     %x{
-      var aliased = #{self}.prototype['$' + #{existing_mid}];
+      var aliased = #{self}.prototype[Opal.s('$' + #{existing_mid})];
       if (!aliased) {
         #{raise NameError.new("undefined method `#{existing_mid}' for class `#{inspect}'", existing_mid)};
       }

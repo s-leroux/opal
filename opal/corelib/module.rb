@@ -165,8 +165,8 @@ class Module
 
       for (var i = names.length - 1; i >= 0; i--) {
         var name = names[i],
-            id   = '$' + name + '=',
-            ivar = Opal.ivar(name);
+            id   = Opal.s('$' + name + '='),
+            ivar = Opal.s(Opal.ivar(name));
 
         // the closure here is needed because name will change at the next
         // cycle, I wish we could use let.
@@ -377,7 +377,7 @@ class Module
               end
 
     %x{
-      var id = '$' + name;
+      var id = Opal.s('$' + name);
 
       block[Opal.s.$$jsid]        = name;
       block[Opal.s.$$s]           = null;
@@ -446,7 +446,7 @@ class Module
 
   def instance_method(name)
     %x{
-      var meth = self[Opal.s.$$prototype]['$' + name];
+      var meth = self[Opal.s.$$prototype][Opal.s('$' + name)];
 
       if (!meth || meth[Opal.s.$$stub]) {
         #{raise NameError.new("undefined method `#{name}' for class `#{self.name}'", name)};
@@ -538,7 +538,7 @@ class Module
 
   def method_defined?(method)
     %x{
-      var body = self[Opal.s.$$prototype]['$' + method];
+      var body = self[Opal.s.$$prototype][Opal.s('$' + method)];
       return (!!body) && !body[Opal.s.$$stub];
     }
   end
@@ -551,7 +551,7 @@ class Module
       else {
         for (var i = 0, length = methods.length; i < length; i++) {
           var meth = methods[i],
-              id   = '$' + meth,
+              id   = Opal.s('$' + meth),
               func = self[Opal.s.$$prototype][id];
 
           Opal.defs(self, id, func);

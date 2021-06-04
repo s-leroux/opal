@@ -24,7 +24,7 @@ class BasicObject
 
   def __send__(symbol, *args, &block)
     %x{
-      var func = self['$' + symbol]
+      var func = self[Opal.s('$' + symbol)]
 
       if (func) {
         if (block !== nil) {

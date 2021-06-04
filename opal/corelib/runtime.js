@@ -163,6 +163,12 @@
   Opal.s('$$super');
   Opal.s('$$unbound');
 
+  Opal.s('$===');
+  Opal.s('$+');
+  Opal.s('$-');
+  Opal.s('$<');
+  Opal.s('$>');
+
   Opal.s('$allocate');
   Opal.s('$bridge');
   Opal.s('$call');
@@ -435,7 +441,7 @@
   };
 
   Opal.coerce_to = function(object, type, method, args) {
-    if (type['$==='](object)) return object;
+    if (type[Opal.s['$===']](object)) return object;
 
     if (!object[Opal.s['$respond_to?']](method)) {
       throw Opal.type_error(object, type);
@@ -1978,7 +1984,7 @@
       body = method;
       method = null;
     } else if (typeof(method) === 'string') {
-      body = recv['$'+method];
+      body = recv[Opal.s('$'+method)];
     } else {
       throw Opal.NameError[Opal.s.$new]("Passed method should be a string or a function");
     }
@@ -2231,7 +2237,7 @@
   Opal.alias_native = function(obj, name, native_name) {
     trace(obj, name, native_name);
 
-    var id   = '$' + name,
+    var id   = Opal.s('$' + name),
         body = obj[Opal.s.$$prototype][native_name];
 
     if (typeof(body) !== "function" || body[Opal.s.$$stub]) {

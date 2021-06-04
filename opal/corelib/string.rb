@@ -1338,7 +1338,7 @@ class String < `String`
   end
 
   def to_proc
-    method_name = '$' + `self.valueOf()`
+    method_name = Opal.s('$' + `self.valueOf()`)
 
     proc do |*args, &block|
       %x{
