@@ -173,6 +173,7 @@
   Opal.s('$method_removed');
   Opal.s('$method_undefined');
   Opal.s('$new');
+  Opal.s('$object_id');
   Opal.s('$singleton_method_added');
   Opal.s('$singleton_method_removed');
   Opal.s('$singleton_method_undefined');

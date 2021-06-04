@@ -1210,7 +1210,7 @@ class Array < `Array`
     %x{
       var top = ($hash_ids === undefined),
           result = ['A'],
-          hash_id = self.$object_id(),
+          hash_id = self[Opal.s.$object_id](),
           item, i, key;
 
       try {

@@ -556,7 +556,7 @@ class Hash
   def hash
     %x{
       var top = (Opal.hash_ids === undefined),
-          hash_id = self.$object_id(),
+          hash_id = self[Opal.s.$object_id](),
           result = ['Hash'],
           key, item;
 
@@ -648,7 +648,7 @@ class Hash
   def inspect
     %x{
       var top = (inspect_ids === undefined),
-          hash_id = self.$object_id(),
+          hash_id = self[Opal.s.$object_id](),
           result = [];
 
       try {
