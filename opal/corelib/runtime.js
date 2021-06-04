@@ -90,6 +90,7 @@
   Opal.s('$$autoload');
   Opal.s('$$base_module');
   Opal.s('$$bridge');
+  Opal.s('$$brk');
   Opal.s('$$by_identity');
   Opal.s('$$cast');
   Opal.s('$$class');

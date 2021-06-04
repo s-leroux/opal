@@ -18,7 +18,7 @@ class Proc < `Function`
         self[Opal.s.$$p] = block;
       }
 
-      var result, $brk = self.$$brk;
+      var result, $brk = self[Opal.s.$$brk];
 
       if ($brk) {
         try {
