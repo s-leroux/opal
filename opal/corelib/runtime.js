@@ -100,6 +100,7 @@
   Opal.s('$$const_cache');
   Opal.s('$$constructor');
   Opal.s('$$cvars');
+  Opal.s('$$data');
   Opal.s('$$def');
   Opal.s('$$define_meth');
   Opal.s('$$define_methods_on');
