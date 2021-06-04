@@ -916,7 +916,7 @@ class Array < `Array`
       if (self[Opal.s.$$class] === Opal.Array &&
           self[Opal.s.$$class][Opal.s.$allocate][Opal.s.$$pristine] &&
           self[Opal.s.$copy_instance_variables][Opal.s.$$pristine] &&
-          self.$initialize_dup[Opal.s.$$pristine]) {
+          self[Opal.s.$initialize_dup][Opal.s.$$pristine]) {
         return self.slice(0);
       }
     }

@@ -165,6 +165,7 @@
   Opal.s('$each_cons');
   Opal.s('$hash');
   Opal.s('$initialize');
+  Opal.s('$initialize_dup');
   Opal.s('$inspect');
   Opal.s('$inherited');
   Opal.s('$keys');
