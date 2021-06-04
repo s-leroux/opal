@@ -181,7 +181,7 @@ class Hash
         return value;
       }
 
-      return self.$default(key);
+      return self[Opal.s.$default](key);
     }
   end
 
@@ -1002,7 +1002,7 @@ class Hash
         return [key, Opal.hash_delete(self, key)];
       }
 
-      return self.$default(nil);
+      return self[Opal.s.$default](nil);
     }
   end
 

@@ -160,6 +160,7 @@
   Opal.s('$class');
   Opal.s('$const_missing');
   Opal.s('$copy_instance_variables');
+  Opal.s('$default');
   Opal.s('$define_method');
   Opal.s('$each');
   Opal.s('$each_cons');
