@@ -36,10 +36,10 @@ class Hash
           if (!argv[i][Opal.s.$$is_array]) continue;
           switch(argv[i].length) {
           case 1:
-            hash.$store(argv[i][0], nil);
+            hash[Opal.s.$store](argv[i][0], nil);
             break;
           case 2:
-            hash.$store(argv[i][0], argv[i][1]);
+            hash[Opal.s.$store](argv[i][0], argv[i][1]);
             break;
           default:
             #{raise ArgumentError, "invalid number of elements (#{`argv[i].length`} for 1..2)"}
@@ -56,7 +56,7 @@ class Hash
       hash = #{allocate};
 
       for (i = 0; i < argc; i += 2) {
-        hash.$store(argv[i], argv[i + 1]);
+        hash[Opal.s.$store](argv[i], argv[i + 1]);
       }
 
       return hash;
