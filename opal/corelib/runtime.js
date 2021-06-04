@@ -94,6 +94,7 @@
   Opal.s('$$by_identity');
   Opal.s('$$cast');
   Opal.s('$$class');
+  Opal.s('$$comments');
   Opal.s('$$comparable');
   Opal.s('$$const');
   Opal.s('$$const_cache');

@@ -21,7 +21,7 @@ class Method
   end
 
   def comments
-    `#{@method}.$$comments` || []
+    `#{@method}[Opal.s.$$comments]` || []
   end
 
   def call(*args, &block)
@@ -85,7 +85,7 @@ class UnboundMethod
   end
 
   def comments
-    `#{@method}.$$comments` || []
+    `#{@method}[Opal.s.$$comments]` || []
   end
 
   def bind(object)

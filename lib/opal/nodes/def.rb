@@ -71,7 +71,7 @@ module Opal
         end
 
         if compiler.parse_comments?
-          push ", #{scope_name}.$$comments = #{comments_code}"
+          push ", #{scope_name}[Opal.s.$$comments] = #{comments_code}"
         end
 
         if compiler.enable_source_location?
