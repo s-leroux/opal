@@ -198,6 +198,7 @@
   Opal.s('$to_hash');
   Opal.s('$v');
   Opal.s('$warn');
+  Opal.s('$write');
   Opal.s('$$respond_to?');
   Opal.s('$$respond_to_missing?');
 
