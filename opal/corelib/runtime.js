@@ -182,6 +182,7 @@
   Opal.s('$replace');
   Opal.s('$require');
   Opal.s('$size');
+  Opal.s('$take');
   Opal.s('$to_a');
   Opal.s('$to_i');
   Opal.s('$to_int');

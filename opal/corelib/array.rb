@@ -2334,7 +2334,7 @@ class Array < `Array`
         }
         if (o[Opal.s.$$is_enumerator]) {
           if (o[Opal.s.$size]() === Infinity) {
-            others[j] = o.$take(size);
+            others[j] = o[Opal.s.$take](size);
           } else {
             others[j] = o[Opal.s.$to_a]();
           }
