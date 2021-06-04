@@ -149,7 +149,7 @@ class Proc < `Function`
         }
 
         if (length >= arity) {
-          return self.$call.apply(self, args);
+          return self[Opal.s.$call].apply(self, args);
         }
 
         result = function () {

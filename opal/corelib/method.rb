@@ -48,7 +48,7 @@ class Method
 
   def to_proc
     %x{
-      var proc = self.$call.bind(self);
+      var proc = self[Opal.s.$call].bind(self);
       proc[Opal.s.$$unbound] = #{@method};
       proc[Opal.s.$$is_lambda] = true;
       proc[Opal.s.$$arity] = #{@method}[Opal.s.$$arity];

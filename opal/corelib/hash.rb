@@ -311,7 +311,7 @@ class Hash
   def default(key = undefined)
     %x{
       if (key !== undefined && self[Opal.s.$$proc] !== nil && self[Opal.s.$$proc] !== undefined) {
-        return self[Opal.s.$$proc].$call(self, key);
+        return self[Opal.s.$$proc][Opal.s.$call](self, key);
       }
       if (self[Opal.s.$$none] === undefined) {
         return nil;

@@ -157,6 +157,7 @@
 
   Opal.s('$allocate');
   Opal.s('$bridge');
+  Opal.s('$call');
   Opal.s('$class');
   Opal.s('$const_missing');
   Opal.s('$copy_instance_variables');
