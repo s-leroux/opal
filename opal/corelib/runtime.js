@@ -181,6 +181,7 @@
   Opal.s('$rand');
   Opal.s('$replace');
   Opal.s('$require');
+  Opal.s('$size');
   Opal.s('$to_a');
   Opal.s('$to_i');
   Opal.s('$to_int');

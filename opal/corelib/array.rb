@@ -2333,7 +2333,7 @@ class Array < `Array`
           continue;
         }
         if (o[Opal.s.$$is_enumerator]) {
-          if (o.$size() === Infinity) {
+          if (o[Opal.s.$size]() === Infinity) {
             others[j] = o.$take(size);
           } else {
             others[j] = o[Opal.s.$to_a]();
