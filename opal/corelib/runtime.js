@@ -159,6 +159,7 @@
   Opal.s('$bridge');
   Opal.s('$class');
   Opal.s('$const_missing');
+  Opal.s('$copy_instance_variables');
   Opal.s('$define_method');
   Opal.s('$each');
   Opal.s('$each_cons');
