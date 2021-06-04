@@ -117,6 +117,7 @@
   Opal.s('$$is_array');
   Opal.s('$$is_boolean');
   Opal.s('$$is_class');
+  Opal.s('$$is_curried');
   Opal.s('$$is_enumerator');
   Opal.s('$$is_hash');
   Opal.s('$$is_integer_class');

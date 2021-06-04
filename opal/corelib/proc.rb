@@ -80,7 +80,7 @@ class Proc < `Function`
 
   def arity
     %x{
-      if (self.$$is_curried) {
+      if (self[Opal.s.$$is_curried]) {
         return -1;
       } else {
         return self[Opal.s.$$arity];
@@ -89,18 +89,18 @@ class Proc < `Function`
   end
 
   def source_location
-    `if (self.$$is_curried) { return nil; }`
+    `if (self[Opal.s.$$is_curried]) { return nil; }`
     nil
   end
 
   def binding
-    `if (self.$$is_curried) { #{raise ArgumentError, "Can't create Binding"} }`
+    `if (self[Opal.s.$$is_curried]) { #{raise ArgumentError, "Can't create Binding"} }`
     nil
   end
 
   def parameters
     %x{
-      if (self.$$is_curried) {
+      if (self[Opal.s.$$is_curried]) {
         return #{[[:rest]]};
       } else if (self[Opal.s.$$parameters]) {
         if (self[Opal.s.$$is_lambda]) {
@@ -144,7 +144,7 @@ class Proc < `Function`
             length = args.length,
             result;
 
-        if (length > arity && self[Opal.s.$$is_lambda] && !self.$$is_curried) {
+        if (length > arity && self[Opal.s.$$is_lambda] && !self[Opal.s.$$is_curried]) {
           #{raise ArgumentError, "wrong number of arguments (#{`length`} for #{`arity`})"}
         }
 
@@ -157,13 +157,13 @@ class Proc < `Function`
             args.concat($slice.call(arguments)));
         }
         result[Opal.s.$$is_lambda] = self[Opal.s.$$is_lambda];
-        result.$$is_curried = true;
+        result[Opal.s.$$is_curried] = true;
 
         return result;
       };
 
       curried[Opal.s.$$is_lambda] = self[Opal.s.$$is_lambda];
-      curried.$$is_curried = true;
+      curried[Opal.s.$$is_curried] = true;
       return curried;
     }
   end
