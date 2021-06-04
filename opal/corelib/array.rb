@@ -175,7 +175,7 @@ class Array < `Array`
         $hash_put(hash, other[i], true);
       }
 
-      return hash.$keys();
+      return hash[Opal.s.$keys]();
     }
   end
 
