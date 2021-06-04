@@ -195,6 +195,7 @@
   Opal.s('$to_a');
   Opal.s('$to_i');
   Opal.s('$to_int');
+  Opal.s('$to_path');
   Opal.s('$to_s');
   Opal.s('$to_ary');
   Opal.s('$to_hash');
