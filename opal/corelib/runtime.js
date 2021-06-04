@@ -134,6 +134,7 @@
   Opal.s('$$is_string');
   Opal.s('$$jsid');
   Opal.s('$$keys');
+  Opal.s('$$keyword_init');
   Opal.s('$$map');
   Opal.s('$$meta');
   Opal.s('$$module');

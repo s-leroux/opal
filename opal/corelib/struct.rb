@@ -33,7 +33,7 @@ class Struct
     end
 
     klass.module_eval(&block) if block
-    `klass.$$keyword_init = keyword_init`
+    `klass[Opal.s.$$keyword_init] = keyword_init`
 
     if const_name
       Struct.const_set(const_name, klass)
@@ -75,7 +75,7 @@ class Struct
   end
 
   def initialize(*args)
-    if `#{self.class}.$$keyword_init`
+    if `#{self.class}[Opal.s.$$keyword_init]`
       kwargs = args.last || {}
 
       if args.length > 1 || `(args.length === 1 && !kwargs[Opal.s.$$is_hash])`
