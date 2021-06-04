@@ -74,12 +74,14 @@
       if (typeof Opal.s[name] !== 'undefined') return Opal.s[name];
       return Opal.s[name] = Symbol(name);
     };
+    Opal.getOwnProperties = Object.getOwnPropertySymbols;
   }
   else {
     Opal.s = function(name) {
       if (typeof Opal.s[name] !== 'undefined') return Opal.s[name];
       return Opal.s[name] = name;
     };
+    Opal.getOwnProperties = Opal.getOwnPropertyNames;
   }
 
   Opal.s('$$alias_name');
@@ -1034,7 +1036,7 @@
         proto = proto[Opal.s.$$define_methods_on];
       }
 
-      var props = Object.getOwnPropertyNames(proto);
+      var props = Opal.getOwnProperties(proto);
 
       for (var j = 0, ll = props.length; j < ll; j++) {
         var prop = props[j];
@@ -1065,7 +1067,7 @@
       proto = proto[Opal.s.$$define_methods_on];
     }
 
-    var props = Object.getOwnPropertyNames(proto);
+    var props = Opal.getOwnProperties(proto);
 
     for (var i = 0, length = props.length; i < length; i++) {
       var prop = props[i];
@@ -1378,7 +1380,7 @@
 
   function flush_methods_in(module) {
     var proto = module[Opal.s.$$prototype],
-        props = Object.getOwnPropertyNames(proto);
+        props = Opal.getOwnProperties(proto);
 
     for (var i = 0; i < props.length; i++) {
       var prop = props[i];
@@ -1407,7 +1409,7 @@
       proto = proto[Opal.s.$$define_methods_on];
     }
 
-    var props = Object.getOwnPropertyNames(proto),
+    var props = Opal.getOwnProperties(proto),
         length = props.length, i;
 
     for (i = 0; i < length; i++) {

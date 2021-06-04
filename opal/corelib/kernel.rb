@@ -133,7 +133,7 @@ module Kernel
       if (other.hasOwnProperty(Opal.s.$$meta)) {
         var other_singleton_class = Opal.get_singleton_class(other);
         var self_singleton_class = Opal.get_singleton_class(self);
-        names = Object.getOwnPropertyNames(other_singleton_class[Opal.s.$$prototype]);
+        names = Opal.getOwnProperties(other_singleton_class[Opal.s.$$prototype]);
 
         for (i = 0, length = names.length; i < length; i++) {
           name = names[i];
@@ -149,7 +149,7 @@ module Kernel
         );
       }
 
-      for (i = 0, names = Object.getOwnPropertyNames(other), length = names.length; i < length; i++) {
+      for (i = 0, names = Opal.getOwnProperties(other), length = names.length; i < length; i++) {
         name = names[i];
         if (name.charAt(0) === '$' && name.charAt(1) !== '$' && other.hasOwnProperty(name)) {
           self[name] = other[name];
