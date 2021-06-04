@@ -178,6 +178,7 @@
   Opal.s('$singleton_method_removed');
   Opal.s('$singleton_method_undefined');
   Opal.s('$pristine');
+  Opal.s('$rand');
   Opal.s('$replace');
   Opal.s('$require');
   Opal.s('$to_a');

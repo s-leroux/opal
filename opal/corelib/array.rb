@@ -1976,7 +1976,7 @@ class Array < `Array`
 
       while (i) {
         if (randgen) {
-          j = randgen.$rand(i).$to_int();
+          j = randgen[Opal.s.$rand](i).$to_int();
 
           if (j < 0) {
             #{raise RangeError, "random number too small #{`j`}"}

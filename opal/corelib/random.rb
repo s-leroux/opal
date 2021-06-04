@@ -83,7 +83,7 @@ class Random
           length++;
         }
 
-        return self.$rand(length) + min;
+        return self[Opal.s.$rand](length) + min;
       }
 
       if (limit == null) {
