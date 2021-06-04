@@ -189,6 +189,7 @@
   Opal.s('$rand');
   Opal.s('$replace');
   Opal.s('$require');
+  Opal.s('$rng');
   Opal.s('$size');
   Opal.s('$store');
   Opal.s('$take');
