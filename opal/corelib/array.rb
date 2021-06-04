@@ -361,7 +361,7 @@ class Array < `Array`
       }
 
       result = self.slice(from, to);
-      return toArraySubclass(result, self.$class());
+      return toArraySubclass(result, self[Opal.s.$class]());
     }
 
     function $array_slice_index_length(self, index, length) {
@@ -394,7 +394,7 @@ class Array < `Array`
 
         result = self.slice(index, index + length);
       }
-      return toArraySubclass(result, self.$class());
+      return toArraySubclass(result, self[Opal.s.$class]());
     }
   }
 

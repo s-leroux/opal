@@ -157,6 +157,7 @@
 
   Opal.s('$allocate');
   Opal.s('$bridge');
+  Opal.s('$class');
   Opal.s('$const_missing');
   Opal.s('$define_method');
   Opal.s('$each');
