@@ -170,7 +170,7 @@ class Proc < `Function`
 
   def dup
     %x{
-      var original_proc = self.$$original_proc || self,
+      var original_proc = self[Opal.s.$$original_proc] || self,
           proc = function () {
             return original_proc.apply(this, arguments);
           };

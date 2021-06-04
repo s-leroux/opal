@@ -139,6 +139,7 @@
   Opal.s('$$name');
   Opal.s('$$nesting');
   Opal.s('$$none');
+  Opal.s('$$original_proc');
   Opal.s('$$owner');
   Opal.s('$$own_included_modules');
   Opal.s('$$own_prepended_modules');
