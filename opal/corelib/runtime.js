@@ -1808,7 +1808,7 @@
       else if (candidate === Opal.JS.Error) {
         return candidate;
       }
-      else if (candidate['$==='](exception)) {
+      else if (candidate[Opal.s['$===']](exception)) {
         return candidate;
       }
     }
