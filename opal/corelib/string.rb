@@ -1338,7 +1338,7 @@ class String < `String`
   end
 
   def to_proc
-    method_name = Opal.s('$' + `self.valueOf()`)
+    method_name = '$' + `self.valueOf()`
 
     proc do |*args, &block|
       %x{
@@ -1350,7 +1350,7 @@ class String < `String`
 
         if (recv == null) recv = nil;
 
-        var body = recv[#{method_name}];
+        var body = recv[Opal.s(#{method_name})];
 
         if (!body) {
           return recv[Opal.s.$method_missing].apply(recv, args);
