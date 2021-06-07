@@ -393,7 +393,7 @@ class Module
   def remove_method(*names)
     %x{
       for (var i = 0, length = names.length; i < length; i++) {
-        Opal.rdef(self, "$" + names[i]);
+        Opal.rdef(self, Opal.s["$" + names[i]]);
       }
     }
 

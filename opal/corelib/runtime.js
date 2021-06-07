@@ -185,7 +185,113 @@
     }
   };
 
+  //
+  // String -> Symbol transition helpers
+  //
+
+  var __trace_last_id = 0;
+  var __trace_msg_count = 0;
+  try {
+    var __trace_show = !!(process.env.TRACE || "");
+  }
+  catch(e) {
+    __trace_show = false;
+  }
+
+  try {
+    var __trace_stop = (process.env.BREAKAT || "").split(/,\s*/);
+  }
+  catch(e) {
+    __trace_stop = [];
+  }
+
+  function dumpStackFrame() {
+    var i;
+    var e = {};
+
+    Error.captureStackTrace(e, dumpStackFrame);
+    
+    e = e.stack.split('\n');
+    for(i = 2; i < e.length; ++i) {
+      console.error(e[i]);
+    }
+    console.error("\n");
+  }
+
+  function trace(object, property) {
+    var e = {};
+    var target = "undefined";
+    var msgid = (__trace_msg_count++).toString();
+
+    if (__trace_show) {
+      if (object && (target = object.__trace_id) === undefined) {
+        target = (object.__trace_id = __trace_last_id++).toString();
+      }
+
+      if (property !== undefined) { 
+        console.error(msgid+":" , property.toString(), "of", target);
+      }
+      else {
+        console.error(msgid+":", "property is undefined");
+        debugger;
+      }
+     
+      dumpStackFrame();
+    }
+
+    if (__trace_stop.indexOf(msgid) >= 0) {
+      debugger;
+    }
+  }
+
+  // Ensure `id` is a valid identifier. That is a String not starting by "$" or
+  // a Symbol starting by "$"
+  function expectIdentifier(id) {
+    var msg;
+
+    if (typeof id === "string") {
+      if (id.startsWith("$")) {
+        msg = `${id} should be a symbol, not a string`;
+        console.error(msg); dumpStackFrame(); debugger; throw new Opal.TypeError(msg);
+      }
+    }
+    else if (typeof id === "symbol") {
+      if (!id.description.startsWith("$")) {
+        msg = `${id.toString()} should be a string, not a symbol`;
+        console.error(msg); dumpStackFrame(); debugger; throw new Opal.TypeError(msg);
+      }
+    }
+    else {
+      msg = `${id.toString()} should be a symbol or a string`;
+      console.error(msg); dumpStackFrame(); debugger; throw new Opal.TypeError(msg);
+    }
+  }
+
+  function expectSymbol(id) {
+    var msg;
+
+    if (typeof id !== "symbol") {
+      msg = `${id.toString()} should be a symbol`;
+      console.error(msg); dumpStackFrame(); debugger; throw new Opal.TypeError(msg);
+    }
+  }
+
+  function expectString(id) {
+    var msg;
+
+    if (typeof id !== "string") {
+      msg = `${id.toString()} should be a string`;
+      console.error(msg); dumpStackFrame(); debugger; throw new Opal.TypeError(msg);
+    }
+  }
+
+  //
+  // iEnd of String -> Symbol transition helpers
+  //
+
   function $defineProperty(object, name, initialValue) {
+    trace(object, name);
+
     if (typeof(name) === "undefined") {
       throw new Opal.TypeError("'undefined' is not a valid property name");
     }
@@ -283,6 +389,8 @@
 
   // Get the constant in the scope of the current cref
   function const_get_name(cref, name) {
+    trace(cref, name);
+
     if (cref) return cref[Opal.s.$$const][name];
   }
 
@@ -407,6 +515,8 @@
   // Register the constant on a cref and opportunistically set the name of
   // unnamed classes/modules.
   Opal.const_set = function(cref, name, value) {
+    trace(cref, name);
+
     if (cref == null || cref === '::') cref = _Object;
 
     if (value[Opal.s.$$is_a_module]) {
@@ -459,6 +569,8 @@
 
   // Remove a constant from a cref.
   Opal.const_remove = function(cref, name) {
+    trace(cref, name);
+
     Opal.const_cache_version++;
 
     if (cref[Opal.s.$$const][name] != null) {
@@ -1402,6 +1514,7 @@
 
     function method_missing_stub() {
       /* jshint validthis: true */
+      // console.error("missing stub", method_name);
 
       // Copy any given block onto the method_missing dispatcher
       this.$method_missing.$$p = method_missing_stub.$$p;
@@ -1830,6 +1943,8 @@
   // @return [null]
   //
   Opal.def = function(obj, jsid, body) {
+    trace(obj, jsid);
+
     // Special case for a method definition in the
     // top-level namespace
     if (obj === Opal.top) {
@@ -1885,6 +2000,8 @@
 
   // Called from #remove_method.
   Opal.rdef = function(obj, jsid) {
+    trace(obj, jsid);
+
     if (!$has_own.call(obj[Opal.s.$$prototype], jsid)) {
       throw Opal.NameError.$new("method '" + jsid.substr(1) + "' not defined in " + obj.$name());
     }
@@ -1998,6 +2115,8 @@
   };
 
   Opal.alias_native = function(obj, name, native_name) {
+    trace(obj, name, native_name);
+
     var id   = '$' + name,
         body = obj[Opal.s.$$prototype][native_name];
 
