@@ -206,6 +206,7 @@
   Opal.s('$to_int');
   Opal.s('$to_path');
   Opal.s('$to_s');
+  Opal.s('$to_str');
   Opal.s('$to_ary');
   Opal.s('$to_hash');
   Opal.s('$v');
@@ -1917,7 +1918,7 @@
   //
   Opal.extract_kwargs = function(parameters) {
     var kwargs = parameters[parameters.length - 1];
-    if (kwargs != null && Opal.respond_to(kwargs, '$to_hash', true)) {
+    if (kwargs != null && Opal.respond_to(kwargs, Opal.s.$to_hash, true)) {
       $splice.call(parameters, parameters.length - 1, 1);
       return kwargs[Opal.s.$to_hash]();
     }

@@ -119,7 +119,7 @@ class String < `String`
       if (other[Opal.s.$$is_string]) {
         return self.toString() === other.toString();
       }
-      if ($respond_to(other, '$to_str')) {
+      if ($respond_to(other, Opal.s.$to_str)) {
         return #{other == self};
       }
       return false;
