@@ -2549,7 +2549,10 @@
   Opal.ivar = function(name) {
     if (
         // properties
+        name === "arguments" ||
         name === "constructor" ||
+        name === "callee" ||
+        name === "caller" ||
         name === "displayName" ||
         name === "__count__" ||
         name === "__noSuchMethod__" ||
