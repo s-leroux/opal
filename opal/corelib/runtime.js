@@ -361,6 +361,8 @@
   }
 
   Opal.respond_to = function(obj, jsid, include_all) {
+    expectSymbol(jsid);
+
     if (obj == null || !obj[Opal.s.$$class]) return false;
     include_all = !!include_all;
     var body = obj[jsid];
@@ -933,6 +935,8 @@
   };
 
   Opal.is_method = function(prop) {
+    expectSymbol(prop);
+
     return (prop[0] === '$' && prop[1] !== '$');
   };
 
@@ -1504,6 +1508,8 @@
   // @param stub [String] stub name to add (e.g. "$foo")
   // @return [undefined]
   Opal.add_stub_for = function(prototype, stub) {
+    expectSymbol(stub);
+
     var method_missing_stub = Opal.stub_for(stub);
     $defineProperty(prototype, stub, method_missing_stub);
   };
@@ -1574,6 +1580,8 @@
 
   // Super dispatcher
   Opal.find_super_dispatcher = function(obj, mid, current_func, defcheck, allow_stubs) {
+    expectString(mid);
+
     var jsid = '$' + mid, ancestors, super_method;
 
     if (obj.hasOwnProperty(Opal.s.$$meta)) {
@@ -1963,6 +1971,10 @@
 
   // Define method on a module or class (see Opal.def).
   Opal.defn = function(module, jsid, body) {
+    trace(module, jsid);
+
+    expectSymbol(jsid);
+
     body.displayName = jsid;
     body.$$owner = module;
 
@@ -1994,6 +2006,10 @@
 
   // Define a singleton method on the given object (see Opal.def).
   Opal.defs = function(obj, jsid, body) {
+    expectSymbol(jsid);
+
+    trace(obj, jsid);
+
     if (obj[Opal.s.$$is_string] || obj[Opal.s.$$is_number]) {
       throw Opal.TypeError.$new("can't define singleton");
     }
@@ -2024,6 +2040,10 @@
 
   // Called from #undef_method.
   Opal.udef = function(obj, jsid) {
+    trace(obj, jsid);
+
+    expectSymbol(jsid);
+
     if (!obj[Opal.s.$$prototype][jsid] || obj[Opal.s.$$prototype][jsid].$$stub) {
       throw Opal.NameError.$new("method '" + jsid.substr(1) + "' not defined in " + obj.$name());
     }
@@ -2047,6 +2067,11 @@
   }
 
   Opal.alias = function(obj, name, old) {
+    expectString(name);
+    expectString(old);
+
+    trace(obj, name, old);
+
     var id     = '$' + name,
         old_id = '$' + old,
         body   = obj[Opal.s.$$prototype]['$' + old],
