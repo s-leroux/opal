@@ -1030,7 +1030,8 @@
   Opal.is_method = function(prop) {
     expectSymbol(prop);
 
-    return (prop[0] === '$' && prop[1] !== '$');
+    var name = prop.description;
+    return (name[0] === '$' && name[1] !== '$');
   };
 
   Opal.instance_methods = function(mod) {
@@ -1050,7 +1051,7 @@
         var prop = props[j];
 
         if (Opal.is_method(prop)) {
-          var method_name = prop.slice(1),
+          var method_name = prop.description.slice(1),
               method = proto[prop];
 
           if (method[Opal.s.$$stub] && exclude.indexOf(method_name) === -1) {
@@ -1084,7 +1085,7 @@
         var method = proto[prop];
 
         if (!method[Opal.s.$$stub]) {
-          var method_name = prop.slice(1);
+          var method_name = prop.description.slice(1);
           results.push(method_name);
         }
       }
