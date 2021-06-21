@@ -168,6 +168,7 @@
   Opal.s('$-');
   Opal.s('$<');
   Opal.s('$>');
+  Opal.s('$[]');
 
   Opal.s('$allocate');
   Opal.s('$bridge');
