@@ -202,6 +202,7 @@
   Opal.s('$rng');
   Opal.s('$size');
   Opal.s('$store');
+  Opal.s('$strftime');
   Opal.s('$take');
   Opal.s('$to_a');
   Opal.s('$to_i');
