@@ -164,6 +164,7 @@
   Opal.s('$$unbound');
 
   Opal.s('$===');
+  Opal.s('$<=>');
   Opal.s('$+');
   Opal.s('$-');
   Opal.s('$<');

@@ -34,7 +34,7 @@ module Comparable
     return true if equal?(other)
 
     %x{
-      if (self["$<=>"] == Opal.Kernel["$<=>"]) {
+      if (self[Opal.s["$<=>"]] == Opal.Kernel[Opal.s["$<=>"]]) {
         return false;
       }
 
