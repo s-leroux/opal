@@ -151,7 +151,7 @@ module Kernel
 
       for (i = 0, names = Opal.getOwnProperties(other), length = names.length; i < length; i++) {
         name = names[i];
-        if (name.charAt(0) === '$' && name.charAt(1) !== '$' && other.hasOwnProperty(name)) {
+        if (name.description.charAt(0) === '$' && name.description.charAt(1) !== '$' && other.hasOwnProperty(name)) {
           self[name] = other[name];
         }
       }
