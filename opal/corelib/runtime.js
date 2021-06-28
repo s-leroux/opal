@@ -2132,7 +2132,7 @@
     }
     else {
       if (obj[Opal.s.$method_removed] && !obj[Opal.s.$method_removed][Opal.s.$$stub]) {
-        obj[Opal.s.$method_removed](jsid.substr(1));
+        obj[Opal.s.$method_removed](jsid.description.substr(1));
       }
     }
   };
@@ -2144,7 +2144,7 @@
     expectSymbol(jsid);
 
     if (!obj[Opal.s.$$prototype][jsid] || obj[Opal.s.$$prototype][jsid][Opal.s.$$stub]) {
-      throw Opal.NameError[Opal.s.$new]("method '" + jsid.substr(1) + "' not defined in " + obj[Opal.s.$name]());
+      throw Opal.NameError[Opal.s.$new]("method '" + jsid.description.substr(1) + "' not defined in " + obj[Opal.s.$name]());
     }
 
     Opal.add_stub_for(obj[Opal.s.$$prototype], jsid);
