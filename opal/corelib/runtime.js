@@ -180,6 +180,7 @@
   Opal.s('$define_method');
   Opal.s('$each');
   Opal.s('$each_cons');
+  Opal.s('$eql?');
   Opal.s('$hash');
   Opal.s('$initialize');
   Opal.s('$initialize_dup');
@@ -2302,7 +2303,7 @@
     bucket = hash[Opal.s.$$map][key_hash];
 
     while (bucket) {
-      if (key === bucket.key || key['$eql?'](bucket.key)) {
+      if (key === bucket.key || key[Opal.s['$eql?']](bucket.key)) {
         last_bucket = undefined;
         bucket.value = value;
         break;
@@ -2333,7 +2334,7 @@
       bucket = hash[Opal.s.$$map][key_hash];
 
       while (bucket) {
-        if (key === bucket.key || key['$eql?'](bucket.key)) {
+        if (key === bucket.key || key[Opal.s['$eql?']](bucket.key)) {
           return bucket.value;
         }
         bucket = bucket.next;
@@ -2372,7 +2373,7 @@
     var bucket = hash[Opal.s.$$map][key_hash], last_bucket;
 
     while (bucket) {
-      if (key === bucket.key || key['$eql?'](bucket.key)) {
+      if (key === bucket.key || key[Opal.s['$eql?']](bucket.key)) {
         value = bucket.value;
 
         for (i = 0; i < length; i++) {

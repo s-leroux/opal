@@ -117,7 +117,7 @@ class Hash
           other_value = Opal.hash_get(other, key.key);
         }
 
-        if (other_value === undefined || !value['$eql?'](other_value)) {
+        if (other_value === undefined || !value[Opal.s['$eql?']](other_value)) {
           return false;
         }
       }
