@@ -143,13 +143,13 @@ module Opal
 
       def handle_pre_match
         with_temp do |tmp|
-          push "((#{tmp} = $gvars['~']) === nil ? nil : #{tmp}.$pre_match())"
+          push "((#{tmp} = $gvars['~']) === nil ? nil : #{tmp}[Opal.s.$pre_match]())"
         end
       end
 
       def handle_post_match
         with_temp do |tmp|
-          push "((#{tmp} = $gvars['~']) === nil ? nil : #{tmp}.$post_match())"
+          push "((#{tmp} = $gvars['~']) === nil ? nil : #{tmp}[Opal.s.$post_match]())"
         end
       end
     end

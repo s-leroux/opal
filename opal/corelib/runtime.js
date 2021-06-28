@@ -197,6 +197,8 @@
   Opal.s('$singleton_method_added');
   Opal.s('$singleton_method_removed');
   Opal.s('$singleton_method_undefined');
+  Opal.s('$pre_match');
+  Opal.s('$post_match');
   Opal.s('$pristine');
   Opal.s('$raise');
   Opal.s('$rand');
