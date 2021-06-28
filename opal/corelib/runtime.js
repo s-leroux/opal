@@ -2124,7 +2124,7 @@
     trace(obj, jsid);
 
     if (!$has_own.call(obj[Opal.s.$$prototype], jsid)) {
-      throw Opal.NameError[Opal.s.$new]("method '" + jsid.substr(1) + "' not defined in " + obj[Opal.s.$name]());
+      throw Opal.NameError[Opal.s.$new]("method '" + jsid.description.substr(1) + "' not defined in " + obj[Opal.s.$name]());
     }
 
     delete obj[Opal.s.$$prototype][jsid];
