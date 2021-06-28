@@ -271,6 +271,7 @@
     var msg;
 
     if (typeof id !== "symbol") {
+      debugger;
       msg = `${id.toString()} should be a symbol`;
       console.error(msg); dumpStackFrame(); debugger; throw new Opal.TypeError(msg);
     }
@@ -280,6 +281,7 @@
     var msg;
 
     if (typeof id !== "string") {
+      debugger;
       msg = `${id.toString()} should be a string`;
       console.error(msg); dumpStackFrame(); debugger; throw new Opal.TypeError(msg);
     }
