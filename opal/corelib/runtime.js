@@ -187,6 +187,7 @@
   Opal.s('$inspect');
   Opal.s('$inherited');
   Opal.s('$keys');
+  Opal.s('$merge');
   Opal.s('$method_added');
   Opal.s('$method_removed');
   Opal.s('$method_undefined');
