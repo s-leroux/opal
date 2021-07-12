@@ -102,7 +102,7 @@ module Opal
       def compile_end_construct
         if content = compiler.eof_content
           line 'var $__END__ = Opal.Object[Opal.s.$new]();'
-          line "$__END__.$read = function() { return #{content.inspect}; };"
+          line "$__END__[Opal.s.$read] = function() { return #{content.inspect}; };"
         end
       end
 

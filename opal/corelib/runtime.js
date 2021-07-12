@@ -202,6 +202,7 @@
   Opal.s('$pristine');
   Opal.s('$raise');
   Opal.s('$rand');
+  Opal.s('$read');
   Opal.s('$replace');
   Opal.s('$require');
   Opal.s('$rng');
